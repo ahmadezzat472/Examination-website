@@ -8,14 +8,21 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style type="text/tailwindcss">
       @theme {
-        --color-primary: #0d9488;
-        --color-primary-hover: #0f766e;
-        --color-primary-soft: #ccfbf1;
-        --color-secondary: #f43f5e;
-        --color-background: #f8fafc;
-        --color-surface: #ffffff;
-        --color-text-main: #0f172a;
-        --color-text-muted: #64748b;
+        /* Primary & Accent */
+        --color-primary: #14b8a6; /* Teal */
+        --color-secondary: #f43f5e; /* Pink / Finish button */
+
+        /* Light Mode */
+        --color-background-light: #f3f4f6;
+        --color-surface-light: #ffffff;
+        --color-text-light: #1f2937;
+        --color-muted-light: #6b7280;
+
+        /* Dark Mode */
+        --color-background-dark: #131522;
+        --color-surface-dark: #1c1f33;
+        --color-text-dark: #e2e8f0;
+        --color-muted-dark: #94a3b8;
 
         --font-sans: "Inter", sans-serif;
 
@@ -26,9 +33,42 @@
       }
     </style>
   </head>
-  <body>
-    <main class="bg-primary min-h-screen text-secondary">
-      <section class="text-primary-hover bg-secondary">Exam</section>
+  <body class="min-h-screen">
+    <nav
+      class="bg-surface-light shadow-card rounded-b-xl p-4 border-b-2 border-secondary sticky top-0 z-10"
+    >
+      <div class="flex justify-between items-center w-full">
+        <a href="/"> Logo </a>
+        <div class="flex items-center gap-3">
+          <span>timer</span>
+          <div>icon</div>
+        </div>
+      </div>
+      <div class="h-[1.5px] bg-background-light my-2"></div>
+      <div class="flex justify-center gap-5 items-center w-full text-sm">
+        <div>Q <span class="font-bold">24</span></div>
+        <div>Ans <span class="font-bold text-primary">24</span></div>
+        <div>Review <span class="font-bold text-[#159]">24</span></div>
+        <div>Skip <span class="font-bold text-secondary">24</span></div>
+      </div>
+    </nav>
+    <main class="bg-background-light p-5 h-screen flex gap-5">
+      <aside class="w-1/4 bg-red-100">
+        <!-- questions -->
+        <div class="bg-surface-light shadow-card rounded-xl p-4">
+          <h2 class="font-bold text-xl mb-5 text-muted-light">Questions</h2>
+          <ul class="flex gap-3">
+            <li>
+              <a
+                class="w-10 h-10 text-sm font-bold hover:bg-gray-200 transition duration-300 bg-background-light rounded-full border-2 border-gray-200 flex items-center justify-center"
+                href=""
+                >1</a
+              >
+            </li>
+          </ul>
+        </div>
+      </aside>
+      <section class="w-3/4 bg-red-500">adsvs</section>
     </main>
   </body>
 </html>
