@@ -1,0 +1,23 @@
+/* Custom Radio Button Styles */
+.custom-radio:checked + div {
+  border-color: var(--color-primary, #14b8a6);
+  background-color: rgba(20, 184, 166, 0.08);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
+}
+
+.custom-radio:checked + div .radio-indicator {
+  background-color: var(--color-primary, #14b8a6);
+  border-color: var(--color-primary, #14b8a6);
+  color: #ffffff;
+}
+
+.custom-radio:focus-visible + div {
+  outline: 2px solid var(--color-primary, #14b8a6);
+  outline-offset: 2px;
+}
+
+/* Smooth transitions */
+.custom-radio + div,
+.custom-radio + div .radio-indicator {
+  transition: all 0.2s ease-in-out;
+}
