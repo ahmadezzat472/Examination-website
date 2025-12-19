@@ -3,32 +3,131 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Exam - Frontend Examination System</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/exam.css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style type="text/tailwindcss">
       @theme {
-        --color-primary: #0d9488;
-        --color-primary-hover: #0f766e;
-        --color-primary-soft: #ccfbf1;
-        --color-secondary: #f43f5e;
-        --color-background: #f8fafc;
-        --color-surface: #ffffff;
-        --color-text-main: #0f172a;
-        --color-text-muted: #64748b;
+        /* Primary Color */
+        --color-primary-50: #ecfdf6;
+        --color-primary-100: #ccfbf5;
+        --color-primary-200: #99f6ea;
+        --color-primary-300: #5eead4;
+        --color-primary-400: #2dd4bf;
+        --color-primary: #14b8a6;
+        --color-primary-500: #14b8a6;
+        --color-primary-600: #0d9488;
+        --color-primary-700: #0f766e;
+        --color-primary-800: #115e59;
+        --color-primary-900: #134e4a;
 
+        /* Secondary Color */
+        --color-secondary: #f43f5e;
+        --color-secondary-hover: #e11d48;
+
+        /* Status Colors */
+        --color-success: #10b981;
+        --color-warning: #f59e0b;
+        --color-danger: #ef4444;
+
+        /* Light Mode */
+        --color-background: #f3f4f6; /* the background for the entire page ya 3lolooo */
+        --color-surface: #ffffff; /* the background for cards, headers, nav. ya 3loloooo */
+        --color-text-light: #1f2937;
+        --color-text-muted: #64748b;
+        --color-border: #e5e7eb;
+
+        /* Dark Mode */
+        --color-background-dark: #131522;
+        --color-surface-dark: #1c1f33;
+        --color-text-dark: #e2e8f0;
+        --color-muted-dark: #94a3b8;
+
+        /* Font Family */
         --font-sans: "Inter", sans-serif;
 
-        --shadow-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.05);
-        --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.02),
-          0 2px 4px -1px rgba(0, 0, 0, 0.02);
-        --shadow-glow: 0 0 15px rgba(13, 148, 136, 0.3);
+        /* Shadows */
+        --shadow-navbar: 0 1px 3px rgba(0, 0, 0, 0.05);
       }
     </style>
   </head>
-  <body>
-    <main class="bg-primary min-h-screen text-secondary">
-      <section class="text-primary-hover bg-secondary">Exam</section>
-    </main>
+  <body class="min-h-screen bg-background">
+    <div class="flex flex-col min-h-screen pb-24">
+      <!-- Header -->
+      <header class="sticky top-0 z-50 bg-surface shadow-navbar">
+        <div class="max-w-8xl mx-auto w-full px-8 max-md:px-4 py-4">
+          <!-- Top -->
+          <div class="flex items-center justify-between mb-3">
+            <a href="/" class="flex items-center gap-1.5">
+              <div
+                class="flex h-8 w-8 items-center justify-center rounded-lg border-2 border-primary bg-primary/5"
+              >
+                <i class="fa-solid fa-meteor text-primary text-sm"></i>
+              </div>
+              <span class="text-lg font-bold"
+                >Ali<span class="text-2xl text-primary font-bold">z</span
+                >at</span
+              >
+            </a>
+            <div class="flex items-center gap-4">
+              <!-- Timer -->
+              <div
+                class="flex items-center gap-2 px-2 py-1 rounded-lg bg-primary/10 border border-primary/20"
+              >
+                <i class="fa-solid fa-clock text-primary text-sm"></i>
+                <span
+                  class="text-primary-700 text-md font-bold"
+                  id="timer-display"
+                  >45:30</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="h-px bg-border my-2"></div>
+
+          <!-- bottom -->
+          <div
+            class="flex items-center justify-center gap-10 text-xs text-text-muted pt-2"
+          >
+            <div class="flex items-center gap-1">
+              <span>Questions:</span>
+              <span class="text-text-main font-semibold">24</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <i class="fa-solid fa-circle-check text-primary text-sm"></i>
+              <span>Answered:</span>
+              <span class="text-primary font-semibold">18</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <i class="fa-solid fa-bookmark text-warning text-sm"></i>
+              <span>Marked:</span>
+              <span class="text-warning font-semibold">5</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <i class="fa-solid fa-hourglass-half text-text-muted text-sm"></i>
+              <span>Remaining:</span>
+              <span class="text-text-main font-semibold">6</span>
+            </div>
+          </div>
+
+          <!-- Progress Bar -->
+          <div class="mt-2 h-1.5 bg-border rounded-full overflow-hidden">
+            <div
+              class="h-full bg-primary transition-all duration-300 rounded-full"
+              style="width: 75%"
+            ></div>
+          </div>
+        </div>
+      </header>
+    </div>
   </body>
 </html>
