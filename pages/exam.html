@@ -76,79 +76,77 @@
   </head>
   <body class="min-h-screen bg-background">
     <!-- Header -->
-    <header class="relative">
-      <div class="fixed top-0 right-0 left-0 z-50 bg-surface shadow-navbar">
-        <div class="max-w-8xl mx-auto w-full px-8 max-md:px-4 py-4">
-          <!-- Top -->
-          <div class="flex items-center justify-between">
-            <a href="/" class="flex items-center gap-1.5 group">
-              <div
-                class="flex h-8 w-8 items-center justify-center rounded-lg border-2 border-primary bg-primary/5 group-hover:bg-primary/100 transition-colors duration-300"
-              >
-                <i
-                  class="fa-solid fa-meteor text-primary group-hover:text-white text-sm transition-colors duration-300"
-                ></i>
-              </div>
+    <header class="fixed top-0 right-0 left-0 z-50 bg-surface shadow-navbar">
+      <div class="max-w-8xl mx-auto w-full px-8 max-md:px-4 py-4">
+        <!-- Top -->
+        <div class="flex items-center justify-between">
+          <a href="/" class="flex items-center gap-1.5 group">
+            <div
+              class="flex h-8 w-8 items-center justify-center rounded-lg border-2 border-primary bg-primary/5 group-hover:bg-primary/100 transition-colors duration-300"
+            >
+              <i
+                class="fa-solid fa-meteor text-primary group-hover:text-white text-sm transition-colors duration-300"
+              ></i>
+            </div>
+            <span
+              class="text-lg font-bold group-hover:text-primary-600 transition-all duration-300"
+              >Ali<span
+                class="text-2xl text-primary-600 group-hover:text-black font-bold"
+                >z</span
+              >at</span
+            >
+          </a>
+          <div class="flex items-center gap-2">
+            <button
+              class="text-sm flex items-center gap-2 px-2 py-1 rounded-lg hover:bg-secondary/10 border border-secondary/20 hover:text-secondary shadow-md shadow-secondary/10 bg-secondary-hover text-white font-bold transition-all duration-300 active:scale-95"
+              type="button"
+              title="Submit Exam"
+              id="submit-exam"
+            >
+              Finish
+            </button>
+            <div
+              class="flex items-center gap-2 px-2 py-1 rounded-lg bg-primary/10 border border-primary/20 shadow-md shadow-primary/10"
+            >
+              <i class="fa-solid fa-clock text-primary text-sm"></i>
               <span
-                class="text-lg font-bold group-hover:text-primary-600 transition-all duration-300"
-                >Ali<span
-                  class="text-2xl text-primary-600 group-hover:text-black font-bold"
-                  >z</span
-                >at</span
+                class="text-primary-700 text-sm font-bold"
+                id="timer-display"
+                >45:30</span
               >
-            </a>
-            <div class="flex items-center gap-2">
-              <button
-                aria-label="Submit Exam"
-                class="text-sm flex items-center gap-2 px-2 py-1 rounded-lg hover:bg-secondary/10 border border-secondary/20 hover:text-secondary shadow-md shadow-secondary/10 bg-secondary-hover text-white font-bold transition-all duration-300 active:scale-95"
-                type="button"
-                title="Submit Exam"
-              >
-                Finish
-              </button>
-              <div
-                class="flex items-center gap-2 px-2 py-1 rounded-lg bg-primary/10 border border-primary/20 shadow-md shadow-primary/10"
-              >
-                <i class="fa-solid fa-clock text-primary text-sm"></i>
-                <span
-                  class="text-primary-700 text-sm font-bold"
-                  id="timer-display"
-                  >45:30</span
-                >
-              </div>
             </div>
           </div>
-          <!-- Divider -->
-          <div class="h-px bg-border my-3"></div>
-          <!-- bottom -->
-          <div
-            class="grid grid-cols-2 md:md:grid-cols-4 items-center gap-5 text-xs text-muted"
-          >
-            <div class="flex items-center justify-center gap-1">
-              <span>Questions:</span>
-              <span class="text-muted font-semibold">24</span>
-            </div>
-            <div class="flex items-center justify-center gap-1">
-              <i class="fa-solid fa-circle-check text-primary text-sm"></i>
-              <span>Answered:</span>
-              <span class="text-primary font-semibold">18</span>
-            </div>
-            <div class="flex items-center justify-center gap-1">
-              <i class="fa-solid fa-bookmark text-warning text-sm"></i>
-              <span>Marked:</span>
-              <span class="text-warning font-semibold">5</span>
-            </div>
-            <div class="flex items-center justify-center gap-1">
-              <i class="fa-solid fa-hourglass-half text-muted text-sm"></i>
-              <span>Remaining:</span>
-              <span class="text-gray-900 font-semibold">6</span>
-            </div>
+        </div>
+        <!-- Divider -->
+        <div class="h-px bg-border my-3"></div>
+        <!-- bottom -->
+        <div
+          class="grid grid-cols-2 md:md:grid-cols-4 items-center gap-5 text-xs text-muted"
+        >
+          <div class="flex items-center justify-center gap-1">
+            <span>Questions:</span>
+            <span class="text-muted font-semibold">24</span>
+          </div>
+          <div class="flex items-center justify-center gap-1">
+            <i class="fa-solid fa-circle-check text-primary text-sm"></i>
+            <span>Answered:</span>
+            <span class="text-primary font-semibold">18</span>
+          </div>
+          <div class="flex items-center justify-center gap-1">
+            <i class="fa-solid fa-bookmark text-warning text-sm"></i>
+            <span>Marked:</span>
+            <span class="text-warning font-semibold">5</span>
+          </div>
+          <div class="flex items-center justify-center gap-1">
+            <i class="fa-solid fa-hourglass-half text-muted text-sm"></i>
+            <span>Remaining:</span>
+            <span class="text-gray-900 font-semibold">6</span>
           </div>
         </div>
       </div>
       <!-- Progress Bar -->
       <div
-        class="h-1 bg-primary transition-all duration-300 rounded-full absolute left-0 right-50 bottom-0 z-50"
+        class="h-1 bg-primary transition-all duration-300 rounded-full"
         id="progress-bar"
         style="width: 75%"
       ></div>
@@ -414,5 +412,7 @@ int main()
 
       <!-- Fixed Bottom Navigation Bar -->
     </main>
+
+    <script src="/js/exam.js"></script>
   </body>
 </html>
