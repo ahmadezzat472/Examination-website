@@ -14,7 +14,17 @@
     <link rel="stylesheet" href="/css/global.css" />
     <link rel="stylesheet" href="/css/exam.css" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
+    <script src="/js/tailwind-config.js"></script>
+    <style type="text/tailwindcss">
+      .current-question {
+        @apply bg-primary text-white shadow-lg shadow-primary/30 ring-2 ring-primary/20;
+      }
+
+      .answered-question {
+        @apply border-primary-400 text-primary-700 hover:bg-primary-400;
+      }
+    </style>
+    <!-- <script>
       tailwind.config = {
         theme: {
           extend: {
@@ -58,24 +68,28 @@
           },
         },
       };
-    </script>
+    </script> -->
   </head>
   <body class="min-h-screen bg-background">
-    <!-- <div class="flex flex-col min-h-screen pb-24"> -->
     <!-- Header -->
-    <div class="relative">
-      <header class="sticky top-0 z-50 bg-surface shadow-navbar">
+    <header class="relative">
+      <div class="sticky top-0 z-50 bg-surface shadow-navbar">
         <div class="max-w-8xl mx-auto w-full px-8 max-md:px-4 py-4">
           <!-- Top -->
-          <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center justify-between mb-3 group">
             <a href="/" class="flex items-center gap-1.5">
               <div
-                class="flex h-8 w-8 items-center justify-center rounded-lg border-2 border-primary bg-primary/5"
+                class="flex h-8 w-8 items-center justify-center rounded-lg border-2 border-primary bg-primary/5 group-hover:bg-primary/100 transition-colors duration-300"
               >
-                <i class="fa-solid fa-meteor text-primary text-sm"></i>
+                <i
+                  class="fa-solid fa-meteor text-primary group-hover:text-white text-sm transition-colors duration-300"
+                ></i>
               </div>
-              <span class="text-lg font-bold"
-                >Ali<span class="text-2xl text-primary font-bold">z</span
+              <span
+                class="text-lg font-bold group-hover:text-primary-600 transition-all duration-300"
+                >Ali<span
+                  class="text-2xl text-primary-600 group-hover:text-black font-bold"
+                  >z</span
                 >at</span
               >
             </a>
@@ -93,40 +107,41 @@
               </div>
             </div>
           </div>
+          <!-- Divider -->
           <div class="h-px bg-border my-2"></div>
           <!-- bottom -->
           <div
-            class="flex items-center justify-center gap-10 text-xs text-muted pt-2"
+            class="grid grid-cols-2 md:md:grid-cols-4 items-center gap-5 text-xs text-muted pt-2"
           >
-            <div class="flex items-center gap-1">
+            <div class="flex items-center justify-center gap-1">
               <span>Questions:</span>
               <span class="text-muted font-semibold">24</span>
             </div>
-            <div class="flex items-center gap-1">
+            <div class="flex items-center justify-center gap-1">
               <i class="fa-solid fa-circle-check text-primary text-sm"></i>
               <span>Answered:</span>
               <span class="text-primary font-semibold">18</span>
             </div>
-            <div class="flex items-center gap-1">
+            <div class="flex items-center justify-center gap-1">
               <i class="fa-solid fa-bookmark text-warning text-sm"></i>
               <span>Marked:</span>
               <span class="text-warning font-semibold">5</span>
             </div>
-            <div class="flex items-center gap-1">
+            <div class="flex items-center justify-center gap-1">
               <i class="fa-solid fa-hourglass-half text-muted text-sm"></i>
               <span>Remaining:</span>
               <span class="text-gray-900 font-semibold">6</span>
             </div>
           </div>
         </div>
-      </header>
+      </div>
       <!-- Progress Bar -->
       <div
         class="h-1 bg-primary transition-all duration-300 rounded-full absolute left-0 right-50 bottom-0 z-50"
         id="progress-bar"
         style="width: 75%"
       ></div>
-    </div>
+    </header>
 
     <main class="max-w-8xl mx-auto w-full px-8 max-md:px-4 py-4 flex gap-6">
       <!-- Sidebar: Question Navigation -->
@@ -136,18 +151,21 @@
           <div
             class="bg-surface rounded-xl shadow-card border border-border p-5"
           >
-            <h2 class="text-sm font-semibold mb-4">Question Navigation</h2>
-            <div class="grid grid-cols-6 gap-2">
+            <div class="flex gap-2 items-center mb-4 font-semibold">
+              <i class="fa-solid fa-circle-question text-primary text-lg"></i>
+              <h2 class="text-sm">Question Navigation</h2>
+            </div>
+            <div class="grid grid-cols-6 gap-2 font-semibold text-sm">
               <!-- Current Question -->
               <button
-                class="current-question w-10 h-10 rounded-lg border font-semibold text-sm flex items-center justify-center shadow-lg shadow-primary/30 ring-2 ring-primary/20"
+                class="current-question w-10 h-10 rounded-lg border flex items-center justify-center"
                 title="Current Question"
               >
                 21
               </button>
               <!-- Answered Questions -->
               <button
-                class="answered-question w-10 h-10 rounded-lg border-2 font-semibold text-sm flex items-center justify-center bg-primary-50 hover:bg-primary-100 transition-colors"
+                class="answered-question w-10 h-10 rounded-lg border-2 flex items-center justify-center bg-primary-50 hover:bg-primary-100 transition-colors"
                 title="Answered"
               >
                 1
@@ -155,7 +173,7 @@
 
               <!-- Marked Questions -->
               <button
-                class="w-10 h-10 rounded-lg border-2 border-warning text-warning font-semibold text-sm flex items-center justify-center bg-warning/5 hover:bg-warning/10 transition-colors"
+                class="w-10 h-10 rounded-lg border-2 border-warning text-warning font-semibold text-sm flex items-center justify-center bg-warning/5 hover:bg-warning/20 transition-colors"
                 title="Marked for Review"
               >
                 3
@@ -163,7 +181,7 @@
 
               <!-- Unanswered Questions -->
               <button
-                class="w-10 h-10 rounded-lg border border-border text-muted font-medium text-sm flex items-center justify-center bg-surface hover:bg-border hover:border-primary/50 transition-colors"
+                class="w-10 h-10 rounded-lg border-2 border-gray-300 text-muted font-medium flex items-center justify-center bg-surface hover:bg-border transition-colors"
                 title="Not Answered"
               >
                 4
@@ -187,34 +205,32 @@
               <button
                 class="px-3 py-1.5 rounded-lg border-2 border-warning text-warning text-xs font-semibold bg-warning/5 hover:bg-warning/10 transition-colors"
               >
-                Q3
+                3
               </button>
               <button
                 class="px-3 py-1.5 rounded-lg border-2 border-warning text-warning text-xs font-semibold bg-warning/5 hover:bg-warning/10 transition-colors"
               >
-                Q7
+                7
               </button>
               <button
                 class="px-3 py-1.5 rounded-lg border-2 border-warning text-warning text-xs font-semibold bg-warning/5 hover:bg-warning/10 transition-colors"
               >
-                Q15
+                15
               </button>
               <button
                 class="px-3 py-1.5 rounded-lg border-2 border-warning text-warning text-xs font-semibold bg-warning/5 hover:bg-warning/10 transition-colors"
               >
-                Q19
+                19
               </button>
               <button
                 class="px-3 py-1.5 rounded-lg border-2 border-warning text-warning text-xs font-semibold bg-warning/5 hover:bg-warning/10 transition-colors"
               >
-                Q22
+                22
               </button>
             </div>
           </div>
         </div>
       </aside>
     </main>
-
-    <!-- </div> -->
   </body>
 </html>
