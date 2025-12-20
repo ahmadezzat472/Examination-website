@@ -23,6 +23,10 @@
       .answered-question {
         @apply border-primary-400 text-primary-700 hover:bg-primary-400;
       }
+
+      .input:checked + div {
+        @apply border-primary bg-primary/5;
+      }
     </style>
     <!-- <script>
       tailwind.config = {
@@ -73,11 +77,11 @@
   <body class="min-h-screen bg-background">
     <!-- Header -->
     <header class="relative">
-      <div class="sticky top-0 z-50 bg-surface shadow-navbar">
+      <div class="fixed top-0 right-0 left-0 z-50 bg-surface shadow-navbar">
         <div class="max-w-8xl mx-auto w-full px-8 max-md:px-4 py-4">
           <!-- Top -->
-          <div class="flex items-center justify-between mb-3 group">
-            <a href="/" class="flex items-center gap-1.5">
+          <div class="flex items-center justify-between">
+            <a href="/" class="flex items-center gap-1.5 group">
               <div
                 class="flex h-8 w-8 items-center justify-center rounded-lg border-2 border-primary bg-primary/5 group-hover:bg-primary/100 transition-colors duration-300"
               >
@@ -93,14 +97,21 @@
                 >at</span
               >
             </a>
-            <div class="flex items-center gap-4">
-              <!-- Timer -->
+            <div class="flex items-center gap-2">
+              <button
+                aria-label="Submit Exam"
+                class="text-sm flex items-center gap-2 px-2 py-1 rounded-lg hover:bg-secondary/10 border border-secondary/20 hover:text-secondary shadow-md shadow-secondary/10 bg-secondary-hover text-white font-bold transition-all duration-300 active:scale-95"
+                type="button"
+                title="Submit Exam"
+              >
+                Finish
+              </button>
               <div
-                class="flex items-center gap-2 px-2 py-1 rounded-lg bg-primary/10 border border-primary/20"
+                class="flex items-center gap-2 px-2 py-1 rounded-lg bg-primary/10 border border-primary/20 shadow-md shadow-primary/10"
               >
                 <i class="fa-solid fa-clock text-primary text-sm"></i>
                 <span
-                  class="text-primary-700 text-md font-bold"
+                  class="text-primary-700 text-sm font-bold"
                   id="timer-display"
                   >45:30</span
                 >
@@ -108,10 +119,10 @@
             </div>
           </div>
           <!-- Divider -->
-          <div class="h-px bg-border my-2"></div>
+          <div class="h-px bg-border my-3"></div>
           <!-- bottom -->
           <div
-            class="grid grid-cols-2 md:md:grid-cols-4 items-center gap-5 text-xs text-muted pt-2"
+            class="grid grid-cols-2 md:md:grid-cols-4 items-center gap-5 text-xs text-muted"
           >
             <div class="flex items-center justify-center gap-1">
               <span>Questions:</span>
@@ -143,10 +154,12 @@
       ></div>
     </header>
 
-    <main class="max-w-8xl mx-auto w-full px-8 max-md:px-4 py-4 flex gap-6">
-      <!-- Sidebar: Question Navigation -->
+    <main
+      class="max-w-8xl mx-auto w-full px-8 max-md:px-4 pb-8 flex gap-6 pt-32"
+    >
+      <!-- Sidebar -->
       <aside class="w-80 shrink-0">
-        <div class="sticky top-24 space-y-4">
+        <div class="sticky top-32 space-y-4">
           <!-- Questions -->
           <div
             class="bg-surface rounded-xl shadow-card border border-border p-5"
@@ -229,6 +242,28 @@
               </button>
             </div>
           </div>
+
+          <div
+            class="bg-surface rounded-xl shadow-card border border-border p-5"
+          >
+            <div class="flex items-center justify-between gap-3">
+              <button
+                class="flex py-1 flex-1 items-center justify-center gap-2 rounded-xl bg-primary text-white px-4 text-sm font-bold shadow-lg shadow-primary/30 hover:bg-primary-hover transition-all active:scale-95"
+                type="button"
+              >
+                <i class="fa-solid fa-chevron-left text-sm"></i>
+                Previous
+              </button>
+
+              <button
+                class="flex py-1 flex-1 items-center justify-center gap-2 rounded-xl bg-primary text-white px-4 text-sm font-bold shadow-lg shadow-primary/30 hover:bg-primary-hover transition-all active:scale-95"
+                type="button"
+              >
+                Next
+                <i class="fa-solid fa-chevron-right text-sm"></i>
+              </button>
+            </div>
+          </div>
         </div>
       </aside>
 
@@ -237,29 +272,22 @@
         <div
           class="bg-surface rounded-2xl shadow-card border border-border p-6 md:p-8 relative overflow-hidden"
         >
-          <!-- Decorative Background Element -->
-          <div
-            class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none"
-          ></div>
-
           <div class="relative z-10">
             <!-- Question Header -->
             <div class="mb-6">
-              <div class="flex items-start gap-3 mb-4">
+              <div class="flex items-center gap-3 mb-4">
                 <span
-                  class="flex-shrink-0 w-8 h-8 rounded-lg bg-primary/10 text-primary font-bold text-sm flex items-center justify-center"
+                  class="w-8 h-8 rounded-lg bg-primary/20 text-primary font-bold text-sm flex items-center justify-center"
                   >21</span
                 >
-                <h2
-                  class="text-xl font-semibold text-text-main leading-relaxed"
-                >
+                <h2 class="text-xl font-semibold text-text-main">
                   Guess the output of the following program:
                 </h2>
               </div>
 
               <!-- Code Block -->
               <div
-                class="bg-slate-900 rounded-lg p-4 font-mono text-sm text-gray-200 border-l-4 border-primary overflow-x-auto shadow-inner"
+                class="bg-slate-900 rounded-lg p-4 text-sm text-gray-200 border-l-4 border-primary overflow-x-auto shadow-card"
               >
                 <pre class="m-0"><code>#include&lt;stdio.h&gt;
 int main()
@@ -284,10 +312,50 @@ int main()
                   value="a"
                 />
                 <div
-                  class="flex items-center gap-4 p-4 rounded-xl border-2 border-border bg-surface transition-all duration-200 hover:border-primary/50 hover:shadow-sm group-hover:bg-primary/5"
+                  class="flex items-center gap-4 px-4 py-3 rounded-xl border-2 border-border bg-surface transition-all duration-200 hover:border-primary/50 hover:shadow-sm group-hover:bg-primary/5"
                 >
                   <span
-                    class="radio-indicator flex-shrink-0 w-8 h-8 rounded-lg bg-surface border-2 border-border text-text-muted font-semibold text-sm flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors"
+                    class="radio-indicator w-8 h-8 rounded-lg bg-surface border-2 border-border text-text-muted font-semibold text-sm flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors"
+                    >A</span
+                  >
+                  <span
+                    class="text-base font-medium text-text-muted group-hover:text-text-main transition-colors"
+                    >x and y are not equal</span
+                  >
+                </div>
+              </label>
+              <label class="cursor-pointer group relative block">
+                <input
+                  class="custom-radio sr-only"
+                  name="q21"
+                  type="radio"
+                  value="a"
+                />
+                <div
+                  class="flex items-center gap-4 px-4 py-3 rounded-xl border-2 border-border bg-surface transition-all duration-200 hover:border-primary/50 hover:shadow-sm group-hover:bg-primary/5"
+                >
+                  <span
+                    class="radio-indicator w-8 h-8 rounded-lg bg-surface border-2 border-border text-text-muted font-semibold text-sm flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors"
+                    >A</span
+                  >
+                  <span
+                    class="text-base font-medium text-text-muted group-hover:text-text-main transition-colors"
+                    >x and y are not equal</span
+                  >
+                </div>
+              </label>
+              <label class="cursor-pointer group relative block">
+                <input
+                  class="custom-radio sr-only"
+                  name="q21"
+                  type="radio"
+                  value="a"
+                />
+                <div
+                  class="flex items-center gap-4 px-4 py-3 rounded-xl border-2 border-border bg-surface transition-all duration-200 hover:border-primary/50 hover:shadow-sm group-hover:bg-primary/5"
+                >
+                  <span
+                    class="radio-indicator w-8 h-8 rounded-lg bg-surface border-2 border-border text-text-muted font-semibold text-sm flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors"
                     >A</span
                   >
                   <span
@@ -302,34 +370,13 @@ int main()
                   class="custom-radio sr-only"
                   name="q21"
                   type="radio"
-                  value="b"
-                  checked
-                />
-                <div
-                  class="flex items-center gap-4 p-4 rounded-xl border-2 border-primary bg-primary/5 transition-all duration-200 shadow-sm"
-                >
-                  <span
-                    class="radio-indicator flex-shrink-0 w-8 h-8 rounded-lg bg-primary border-2 border-primary text-white font-semibold text-sm flex items-center justify-center shadow-sm"
-                    >B</span
-                  >
-                  <span class="text-base font-medium text-text-main"
-                    >x and y are equal</span
-                  >
-                </div>
-              </label>
-
-              <label class="cursor-pointer group relative block">
-                <input
-                  class="custom-radio sr-only"
-                  name="q21"
-                  type="radio"
                   value="c"
                 />
                 <div
-                  class="flex items-center gap-4 p-4 rounded-xl border-2 border-border bg-surface transition-all duration-200 hover:border-primary/50 hover:shadow-sm group-hover:bg-primary/5"
+                  class="flex items-center gap-4 px-4 py-3 rounded-xl border-2 border-border bg-surface transition-all duration-200 hover:border-primary/50 hover:shadow-sm group-hover:bg-primary/5"
                 >
                   <span
-                    class="radio-indicator flex-shrink-0 w-8 h-8 rounded-lg bg-surface border-2 border-border text-text-muted font-semibold text-sm flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors"
+                    class="radio-indicator w-8 h-8 rounded-lg bg-surface border-2 border-border text-text-muted font-semibold text-sm flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors"
                     >C</span
                   >
                   <span
@@ -338,66 +385,34 @@ int main()
                   >
                 </div>
               </label>
-
-              <label class="cursor-pointer group relative block">
-                <input
-                  class="custom-radio sr-only"
-                  name="q21"
-                  type="radio"
-                  value="d"
-                />
-                <div
-                  class="flex items-center gap-4 p-4 rounded-xl border-2 border-border bg-surface transition-all duration-200 hover:border-primary/50 hover:shadow-sm group-hover:bg-primary/5"
-                >
-                  <span
-                    class="radio-indicator flex-shrink-0 w-8 h-8 rounded-lg bg-surface border-2 border-border text-text-muted font-semibold text-sm flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors"
-                    >D</span
-                  >
-                  <span
-                    class="text-base font-medium text-text-muted group-hover:text-text-main transition-colors"
-                    >Syntax error</span
-                  >
-                </div>
-              </label>
             </div>
 
             <!-- Mark for Review Checkbox -->
             <label
-              class="flex items-center gap-3 cursor-pointer group w-fit select-none"
+              class="flex items-center gap-3 cursor-pointer group w-fit ml-1"
             >
               <div class="relative flex items-center">
                 <input
-                  class="peer h-5 w-5 cursor-pointer appearance-none rounded-md border-2 border-border bg-surface transition-all checked:border-warning checked:bg-warning hover:border-warning/70"
+                  class="peer h-5 w-5 cursor-pointer appearance-none rounded-md border-2 border-gray-500 bg-surface transition-all checked:border-warning checked:bg-warning hover:border-warning"
                   type="checkbox"
                   id="mark-review"
                 />
-                <span
-                  class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 peer-checked:opacity-100"
-                >
-                  <svg
-                    class="h-3.5 w-3.5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      clip-rule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      fill-rule="evenodd"
-                    ></path>
-                  </svg>
-                </span>
+                <i
+                  class="fa-solid fa-check text-xs absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white"
+                ></i>
               </div>
               <span
                 class="text-sm font-medium text-text-muted group-hover:text-text-main transition-colors flex items-center gap-2"
               >
-                <i class="fa-solid fa-bookmark text-sm"></i>
+                <i class="fa-solid fa-bookmark text-sm text-warning"></i>
                 Mark for review
               </span>
             </label>
           </div>
         </div>
       </section>
+
+      <!-- Fixed Bottom Navigation Bar -->
     </main>
   </body>
 </html>
