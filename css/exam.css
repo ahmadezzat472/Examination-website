@@ -21,3 +21,22 @@
 .custom-radio + div .radio-indicator {
   transition: all 0.2s ease-in-out;
 }
+
+.current-question {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.answered-question {
+  border-color: var(--color-primary-500);
+  background-color: var(--color-primary-50);
+  color: var(--color-primary-700);
+}
+
+.answered-question:hover {
+  background-color: var(--color-primary-100);
+}
+
+button {
+  cursor: pointer;
+}

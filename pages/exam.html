@@ -13,55 +13,57 @@
     />
     <link rel="stylesheet" href="/css/global.css" />
     <link rel="stylesheet" href="/css/exam.css" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <style type="text/tailwindcss">
-      @theme {
-        /* Primary Color */
-        --color-primary-50: #ecfdf6;
-        --color-primary-100: #ccfbf5;
-        --color-primary-200: #99f6ea;
-        --color-primary-300: #5eead4;
-        --color-primary-400: #2dd4bf;
-        --color-primary: #14b8a6;
-        --color-primary-500: #14b8a6;
-        --color-primary-600: #0d9488;
-        --color-primary-700: #0f766e;
-        --color-primary-800: #115e59;
-        --color-primary-900: #134e4a;
-
-        /* Secondary Color */
-        --color-secondary: #f43f5e;
-        --color-secondary-hover: #e11d48;
-
-        /* Status Colors */
-        --color-success: #10b981;
-        --color-warning: #f59e0b;
-        --color-danger: #ef4444;
-
-        /* Light Mode */
-        --color-background: #f3f4f6; /* the background for the entire page ya 3lolooo */
-        --color-surface: #ffffff; /* the background for cards, headers, nav. ya 3loloooo */
-        --color-text-light: #1f2937;
-        --color-text-muted: #64748b;
-        --color-border: #e5e7eb;
-
-        /* Dark Mode */
-        --color-background-dark: #131522;
-        --color-surface-dark: #1c1f33;
-        --color-text-dark: #e2e8f0;
-        --color-muted-dark: #94a3b8;
-
-        /* Font Family */
-        --font-sans: "Inter", sans-serif;
-
-        /* Shadows */
-        --shadow-navbar: 0 1px 3px rgba(0, 0, 0, 0.05);
-      }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              // Primary Colors
+              primary: {
+                50: '#ecfdf6',
+                100: '#ccfbf5',
+                200: '#99f6ea',
+                300: '#5eead4',
+                400: '#2dd4bf',
+                500: '#14b8a6',
+                DEFAULT: '#14b8a6',
+                600: '#0d9488',
+                700: '#0f766e',
+                800: '#115e59',
+                900: '#134e4a',
+              },
+              // Secondary Colors
+              secondary: {
+                DEFAULT: '#f43f5e',
+                hover: '#e11d48',
+              },
+              // Status Colors
+              success: '#10b981',
+              warning: '#f59e0b',
+              danger: '#ef4444',
+              // Custom Semantic Colors (use as bg-background, text-muted, etc.)
+              background: '#f3f4f6',
+              surface: '#ffffff',
+              muted: '#64748b', // For text-muted
+              border: '#e5e7eb',
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            boxShadow: {
+              navbar: '0 1px 3px rgba(0, 0, 0, 0.05)',
+              card: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+            },
+          },
+        },
+      };
+    </script>
   </head>
   <body class="min-h-screen bg-background">
-    <div class="flex flex-col min-h-screen pb-24">
-      <!-- Header -->
+    <!-- <div class="flex flex-col min-h-screen pb-24"> -->
+    <!-- Header -->
+    <div class="relative">
       <header class="sticky top-0 z-50 bg-surface shadow-navbar">
         <div class="max-w-8xl mx-auto w-full px-8 max-md:px-4 py-4">
           <!-- Top -->
@@ -91,16 +93,14 @@
               </div>
             </div>
           </div>
-
           <div class="h-px bg-border my-2"></div>
-
           <!-- bottom -->
           <div
-            class="flex items-center justify-center gap-10 text-xs text-text-muted pt-2"
+            class="flex items-center justify-center gap-10 text-xs text-muted pt-2"
           >
             <div class="flex items-center gap-1">
               <span>Questions:</span>
-              <span class="text-text-main font-semibold">24</span>
+              <span class="text-muted font-semibold">24</span>
             </div>
             <div class="flex items-center gap-1">
               <i class="fa-solid fa-circle-check text-primary text-sm"></i>
@@ -113,21 +113,108 @@
               <span class="text-warning font-semibold">5</span>
             </div>
             <div class="flex items-center gap-1">
-              <i class="fa-solid fa-hourglass-half text-text-muted text-sm"></i>
+              <i class="fa-solid fa-hourglass-half text-muted text-sm"></i>
               <span>Remaining:</span>
-              <span class="text-text-main font-semibold">6</span>
+              <span class="text-gray-900 font-semibold">6</span>
             </div>
-          </div>
-
-          <!-- Progress Bar -->
-          <div class="mt-2 h-1.5 bg-border rounded-full overflow-hidden">
-            <div
-              class="h-full bg-primary transition-all duration-300 rounded-full"
-              style="width: 75%"
-            ></div>
           </div>
         </div>
       </header>
+      <!-- Progress Bar -->
+      <div
+        class="h-1 bg-primary transition-all duration-300 rounded-full absolute left-0 right-50 bottom-0 z-50"
+        id="progress-bar"
+        style="width: 75%"
+      ></div>
     </div>
+
+    <main class="max-w-8xl mx-auto w-full px-8 max-md:px-4 py-4 flex gap-6">
+      <!-- Sidebar: Question Navigation -->
+      <aside class="w-80 shrink-0">
+        <div class="sticky top-24 space-y-4">
+          <!-- Questions -->
+          <div
+            class="bg-surface rounded-xl shadow-card border border-border p-5"
+          >
+            <h2 class="text-sm font-semibold mb-4">Question Navigation</h2>
+            <div class="grid grid-cols-6 gap-2">
+              <!-- Current Question -->
+              <button
+                class="current-question w-10 h-10 rounded-lg border font-semibold text-sm flex items-center justify-center shadow-lg shadow-primary/30 ring-2 ring-primary/20"
+                title="Current Question"
+              >
+                21
+              </button>
+              <!-- Answered Questions -->
+              <button
+                class="answered-question w-10 h-10 rounded-lg border-2 font-semibold text-sm flex items-center justify-center bg-primary-50 hover:bg-primary-100 transition-colors"
+                title="Answered"
+              >
+                1
+              </button>
+
+              <!-- Marked Questions -->
+              <button
+                class="w-10 h-10 rounded-lg border-2 border-warning text-warning font-semibold text-sm flex items-center justify-center bg-warning/5 hover:bg-warning/10 transition-colors"
+                title="Marked for Review"
+              >
+                3
+              </button>
+
+              <!-- Unanswered Questions -->
+              <button
+                class="w-10 h-10 rounded-lg border border-border text-muted font-medium text-sm flex items-center justify-center bg-surface hover:bg-border hover:border-primary/50 transition-colors"
+                title="Not Answered"
+              >
+                4
+              </button>
+            </div>
+          </div>
+
+          <!-- Marked Questions Summary -->
+          <div
+            class="bg-surface rounded-xl shadow-card border border-border p-5"
+          >
+            <div class="flex items-center gap-2 mb-4">
+              <i class="fa-solid fa-bookmark text-warning text-lg"></i>
+              <h2 class="text-sm font-semibold">Marked for Review</h2>
+              <span
+                class="ml-auto text-xs bg-warning/10 text-warning px-2 py-0.5 rounded-full font-semibold"
+                >5</span
+              >
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <button
+                class="px-3 py-1.5 rounded-lg border-2 border-warning text-warning text-xs font-semibold bg-warning/5 hover:bg-warning/10 transition-colors"
+              >
+                Q3
+              </button>
+              <button
+                class="px-3 py-1.5 rounded-lg border-2 border-warning text-warning text-xs font-semibold bg-warning/5 hover:bg-warning/10 transition-colors"
+              >
+                Q7
+              </button>
+              <button
+                class="px-3 py-1.5 rounded-lg border-2 border-warning text-warning text-xs font-semibold bg-warning/5 hover:bg-warning/10 transition-colors"
+              >
+                Q15
+              </button>
+              <button
+                class="px-3 py-1.5 rounded-lg border-2 border-warning text-warning text-xs font-semibold bg-warning/5 hover:bg-warning/10 transition-colors"
+              >
+                Q19
+              </button>
+              <button
+                class="px-3 py-1.5 rounded-lg border-2 border-warning text-warning text-xs font-semibold bg-warning/5 hover:bg-warning/10 transition-colors"
+              >
+                Q22
+              </button>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- </div> -->
   </body>
 </html>
