@@ -3,7 +3,7 @@ tailwind.config = {
     extend: {
       colors: {
         /* =========================
-          Primary Colors
+        Primary Colors
         ========================= */
         primary: {
           50: "#ecfdf6",
@@ -23,7 +23,7 @@ tailwind.config = {
         },
 
         /* =========================
-           Secondary Colors
+        Secondary Colors
         ========================= */
         secondary: {
           DEFAULT: "#f43f5e",
@@ -31,14 +31,14 @@ tailwind.config = {
         },
 
         /* =========================
-           Status Colors
+        Status Colors
         ========================= */
         success: "#10b981",
         warning: "#f59e0b",
         danger: "#ef4444",
 
         /* =========================
-           Light Mode
+        Light Mode
         ========================= */
         background: "#f3f4f6",
         surface: "#ffffff",
@@ -47,7 +47,7 @@ tailwind.config = {
         border: "#e5e7eb",
 
         /* =========================
-           Dark Mode
+        Dark Mode
         ========================= */
         "background-dark": "#131522",
         "surface-dark": "#1c1f33",
