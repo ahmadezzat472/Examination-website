@@ -1,7 +1,7 @@
-@import "tailwindcss/preflight";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+/* Import CSS Variables */
+@import "./tailwind-config.css";
 
+/* Custom Utilities */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -9,3 +9,6 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
