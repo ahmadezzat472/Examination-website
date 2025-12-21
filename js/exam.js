@@ -1,8 +1,20 @@
 import { courses } from "./data.js";
 
+//** ---------------------------------------------------- select element ----------------------------------------------------
+
 let submitExam = document.querySelector("#submit-exam");
 
-// timer display -------------------------------------------
+let questionsNavigation = document.querySelector("#questions-navigation");
+let prevBtn = document.querySelector("#prev-btn");
+let nextBtn = document.querySelector("#next-btn");
+
+let questionNumber = document.querySelector("#question-number");
+let questionText = document.querySelector("#question-text");
+let questionBox = document.querySelector("#question-box");
+let questionCode = document.querySelector("#question-code");
+
+//** ---------------------------------------------------- timer display ----------------------------------------------------
+
 let timerDisplay = document.querySelector("#timer-display");
 let timeoutOverlay = document.querySelector(".timeout-overlay");
 let hourglassIcon = document.querySelector(".fa-hourglass-end");
@@ -40,25 +52,79 @@ function timeDown() {
 const timer = setInterval(timeDown, 1000);
 timeDown();
 
-// questions ----------------------------------------------------
+//** ---------------------------------------------------- questions ----------------------------------------------------
+
+let currentQuestionIndex = 0;
+
+//** fetch course data */
 const searchParams = window.location.search;
 const params = new URLSearchParams(searchParams);
 const courseName = params.get("course");
 const courseLevel = params.get("level");
 const courseData = courses[courseName][courseLevel];
+const questionsLength = courseData.length;
 
-let currentQuestion = courseData[0].id;
-console.log(courseData);
+//** handle navigation questions and prev & next btn */
+function displayNavigationQuestion() {
+  let currentQuestion = courseData[currentQuestionIndex].id;
+  courseData.forEach((item) => {
+    questionsNavigation.innerHTML += `
+      <button
+        class="current-question w-10 h-10 rounded-lg border flex items-center justify-center"
+        title=${currentQuestion == item.id ? `current` : item.status}
+        id="${item.id}"
+      >
+        ${item.id}
+      </button>`;
+  });
+}
 
-let questionsNavigation = document.querySelector("#questions-navigation");
-courseData.forEach((item) => {
-  questionsNavigation.innerHTML += `<button
-                class="current-question w-10 h-10 rounded-lg border flex items-center justify-center"
-                title=${currentQuestion == item.id ? `current` : item.status}
-              >
-                ${item.id}
-              </button>`;
-});
+function updateNextPrevBehavior() {
+  prevBtn.disabled = currentQuestionIndex === 0;
+  prevBtn.classList.toggle("opacity-50", prevBtn.disabled);
+  prevBtn.classList.toggle("cursor-not-allowed", prevBtn.disabled);
 
-let marked = [];
-let answered = [];
+  nextBtn.disabled = currentQuestionIndex === questionsLength - 1;
+  nextBtn.classList.toggle("opacity-50", nextBtn.disabled);
+  nextBtn.classList.toggle("cursor-not-allowed", nextBtn.disabled);
+}
+
+function updateQuestionArea() {
+  const currentQuestion = courseData[currentQuestionIndex];
+
+  questionNumber.textContent = currentQuestion.id;
+  questionText.textContent = currentQuestion.text;
+
+  if (currentQuestion.code) {
+    questionCode.classList.remove("hidden");
+    console.log(currentQuestion.code);
+
+    questionCode.innerHTML = `
+      <pre class="m-0"><code>${currentQuestion.code}</code></pre>
+    `;
+  } else {
+    questionCode.classList.add("hidden");
+    questionCode.innerHTML = "";
+  }
+}
+
+function renderQuestions() {
+  questionsNavigation.innerHTML = "";
+  displayNavigationQuestion();
+  updateNextPrevBehavior();
+  updateQuestionArea();
+}
+
+function nextQuestion() {
+  currentQuestionIndex++;
+  renderQuestions();
+}
+
+function prevQuestion() {
+  currentQuestionIndex--;
+  renderQuestions();
+}
+
+nextBtn.addEventListener("click", nextQuestion);
+prevBtn.addEventListener("click", prevQuestion);
+renderQuestions();

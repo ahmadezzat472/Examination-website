@@ -70,6 +70,37 @@ export const courses = {
       {
         id: 2,
         text: "What is the average time complexity of Quick Sort?",
+        code: `int main()
+{ int x = 10;
+  float y = 10.0;
+  if(x == y)
+  printf("x and y are equal");
+  else
+  printf("x and y are not equal");
+  return 0; 
+}`,
+        status: "answered", // answered - marked
+        answers: [
+          { id: 1, text: "O(n²)", isCorrect: false },
+          { id: 2, text: "O(n log n)", isCorrect: true },
+          { id: 3, text: "O(log n)", isCorrect: false },
+          { id: 4, text: "O(n)", isCorrect: false },
+        ],
+      },
+      {
+        id: 3,
+        text: "What is the average time complexity of Quick Sort?",
+        status: "answered", // answered - marked
+        answers: [
+          { id: 1, text: "O(n²)", isCorrect: false },
+          { id: 2, text: "O(n log n)", isCorrect: true },
+          { id: 3, text: "O(log n)", isCorrect: false },
+          { id: 4, text: "O(n)", isCorrect: false },
+        ],
+      },
+      {
+        id: 4,
+        text: "What is the average time complexity of Quick Sort?",
         status: "answered", // answered - marked
         answers: [
           { id: 1, text: "O(n²)", isCorrect: false },
