@@ -1,0 +1,130 @@
+import { courses } from "./data.js";
+
+//** ---------------------------------------------------- select element ----------------------------------------------------
+
+let submitExam = document.querySelector("#submit-exam");
+
+let questionsNavigation = document.querySelector("#questions-navigation");
+let prevBtn = document.querySelector("#prev-btn");
+let nextBtn = document.querySelector("#next-btn");
+
+let questionNumber = document.querySelector("#question-number");
+let questionText = document.querySelector("#question-text");
+let questionBox = document.querySelector("#question-box");
+let questionCode = document.querySelector("#question-code");
+
+//** ---------------------------------------------------- timer display ----------------------------------------------------
+
+let timerDisplay = document.querySelector("#timer-display");
+let timeoutOverlay = document.querySelector(".timeout-overlay");
+let hourglassIcon = document.querySelector(".fa-hourglass-end");
+
+let totalSeconds = 30 * 60; // 30 minutes
+
+function timeDown() {
+  const minutes = Math.floor(totalSeconds / 60); // get only the minutes
+  const seconds = totalSeconds % 60; // get the remaining seconds from the minutes
+
+  timerDisplay.innerHTML = `${minutes.toString().padStart(2, "0")}:${seconds
+    .toString()
+    .padStart(2, "0")}`;
+
+  if (totalSeconds <= 0) {
+    clearInterval(timer);
+
+    document.body.classList.add("overflow-hidden");
+    timeoutOverlay.classList.replace("hidden", "flex");
+
+    const toggleIcons = setInterval(() => {
+      hourglassIcon.classList.toggle("fa-hourglass-start");
+      hourglassIcon.classList.toggle("fa-hourglass-end");
+    }, 500);
+
+    setTimeout(() => {
+      clearInterval(toggleIcons);
+      location.replace("/pages/timeout.html");
+    }, 3000);
+  }
+
+  totalSeconds--;
+}
+
+const timer = setInterval(timeDown, 1000);
+timeDown();
+
+//** ---------------------------------------------------- questions ----------------------------------------------------
+
+let currentQuestionIndex = 0;
+
+//** fetch course data */
+const searchParams = window.location.search;
+const params = new URLSearchParams(searchParams);
+const courseName = params.get("course");
+const courseLevel = params.get("level");
+const courseData = courses[courseName][courseLevel];
+const questionsLength = courseData.length;
+
+//** handle navigation questions and prev & next btn */
+function displayNavigationQuestion() {
+  let currentQuestion = courseData[currentQuestionIndex].id;
+  courseData.forEach((item) => {
+    questionsNavigation.innerHTML += `
+      <button
+        class="current-question w-10 h-10 rounded-lg border flex items-center justify-center"
+        title=${currentQuestion == item.id ? `current` : item.status}
+        id="${item.id}"
+      >
+        ${item.id}
+      </button>`;
+  });
+}
+
+function updateNextPrevBehavior() {
+  prevBtn.disabled = currentQuestionIndex === 0;
+  prevBtn.classList.toggle("opacity-50", prevBtn.disabled);
+  prevBtn.classList.toggle("cursor-not-allowed", prevBtn.disabled);
+
+  nextBtn.disabled = currentQuestionIndex === questionsLength - 1;
+  nextBtn.classList.toggle("opacity-50", nextBtn.disabled);
+  nextBtn.classList.toggle("cursor-not-allowed", nextBtn.disabled);
+}
+
+function updateQuestionArea() {
+  const currentQuestion = courseData[currentQuestionIndex];
+
+  questionNumber.textContent = currentQuestion.id;
+  questionText.textContent = currentQuestion.text;
+
+  if (currentQuestion.code) {
+    questionCode.classList.remove("hidden");
+    console.log(currentQuestion.code);
+
+    questionCode.innerHTML = `
+      <pre class="m-0"><code>${currentQuestion.code}</code></pre>
+    `;
+  } else {
+    questionCode.classList.add("hidden");
+    questionCode.innerHTML = "";
+  }
+}
+
+function renderQuestions() {
+  questionsNavigation.innerHTML = "";
+  displayNavigationQuestion();
+  updateNextPrevBehavior();
+  updateQuestionArea();
+}
+
+function nextQuestion() {
+  currentQuestionIndex++;
+  renderQuestions();
+}
+
+function prevQuestion() {
+  currentQuestionIndex--;
+  renderQuestions();
+}
+
+nextBtn.addEventListener("click", nextQuestion);
+prevBtn.addEventListener("click", prevQuestion);
+renderQuestions();

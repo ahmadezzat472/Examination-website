@@ -16,11 +16,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/js/tailwind-config.js"></script>
     <style type="text/tailwindcss">
-      .current-question {
+      button[title="current"] {
         @apply bg-primary text-white shadow-lg shadow-primary/30 ring-2 ring-primary/20;
       }
 
-      .answered-question {
+      button[title="answered"] {
         @apply border-primary-400 text-primary-700 hover:bg-primary-400;
       }
 
@@ -75,80 +75,76 @@
     </script> -->
   </head>
   <body class="min-h-screen bg-background">
-    <!-- Header -->
-    <header class="relative">
-      <div class="fixed top-0 right-0 left-0 z-50 bg-surface shadow-navbar">
-        <div class="max-w-8xl mx-auto w-full px-8 max-md:px-4 py-4">
-          <!-- Top -->
-          <div class="flex items-center justify-between">
-            <a href="/" class="flex items-center gap-1.5 group">
-              <div
-                class="flex h-8 w-8 items-center justify-center rounded-lg border-2 border-primary bg-primary/5 group-hover:bg-primary/100 transition-colors duration-300"
-              >
-                <i
-                  class="fa-solid fa-meteor text-primary group-hover:text-white text-sm transition-colors duration-300"
-                ></i>
-              </div>
+    <header class="fixed top-0 right-0 left-0 z-50 bg-surface shadow-navbar">
+      <div class="max-w-8xl mx-auto w-full px-8 max-md:px-4 py-4">
+        <!-- Top -->
+        <div class="flex items-center justify-between">
+          <a href="/" class="flex items-center gap-1.5 group">
+            <div
+              class="flex h-8 w-8 items-center justify-center rounded-lg border-2 border-primary bg-primary/5 group-hover:bg-primary/100 transition-colors duration-300"
+            >
+              <i
+                class="fa-solid fa-meteor text-primary group-hover:text-white text-sm transition-colors duration-300"
+              ></i>
+            </div>
+            <span
+              class="text-lg font-bold group-hover:text-primary-600 transition-all duration-300"
+              >Ali<span
+                class="text-2xl text-primary-600 group-hover:text-black font-bold"
+                >z</span
+              >at</span
+            >
+          </a>
+          <div class="flex items-center gap-2">
+            <button
+              class="text-sm flex items-center gap-2 px-2 py-1 rounded-lg hover:bg-secondary/10 border border-secondary/20 hover:text-secondary shadow-md shadow-secondary/10 bg-secondary-hover text-white font-bold transition-all duration-300 active:scale-95"
+              type="button"
+              title="Submit Exam"
+              id="submit-exam"
+            >
+              Finish
+            </button>
+            <div
+              class="w-20 flex items-center justify-center gap-2 px-2 py-1 rounded-lg bg-primary/10 border border-primary/20 shadow-md shadow-primary/10"
+            >
+              <i class="fa-solid fa-clock text-primary text-sm"></i>
               <span
-                class="text-lg font-bold group-hover:text-primary-600 transition-all duration-300"
-                >Ali<span
-                  class="text-2xl text-primary-600 group-hover:text-black font-bold"
-                  >z</span
-                >at</span
-              >
-            </a>
-            <div class="flex items-center gap-2">
-              <button
-                aria-label="Submit Exam"
-                class="text-sm flex items-center gap-2 px-2 py-1 rounded-lg hover:bg-secondary/10 border border-secondary/20 hover:text-secondary shadow-md shadow-secondary/10 bg-secondary-hover text-white font-bold transition-all duration-300 active:scale-95"
-                type="button"
-                title="Submit Exam"
-              >
-                Finish
-              </button>
-              <div
-                class="flex items-center gap-2 px-2 py-1 rounded-lg bg-primary/10 border border-primary/20 shadow-md shadow-primary/10"
-              >
-                <i class="fa-solid fa-clock text-primary text-sm"></i>
-                <span
-                  class="text-primary-700 text-sm font-bold"
-                  id="timer-display"
-                  >45:30</span
-                >
-              </div>
+                class="text-primary-700 text-sm font-bold w-14"
+                id="timer-display"
+              ></span>
             </div>
           </div>
-          <!-- Divider -->
-          <div class="h-px bg-border my-3"></div>
-          <!-- bottom -->
-          <div
-            class="grid grid-cols-2 md:md:grid-cols-4 items-center gap-5 text-xs text-muted"
-          >
-            <div class="flex items-center justify-center gap-1">
-              <span>Questions:</span>
-              <span class="text-muted font-semibold">24</span>
-            </div>
-            <div class="flex items-center justify-center gap-1">
-              <i class="fa-solid fa-circle-check text-primary text-sm"></i>
-              <span>Answered:</span>
-              <span class="text-primary font-semibold">18</span>
-            </div>
-            <div class="flex items-center justify-center gap-1">
-              <i class="fa-solid fa-bookmark text-warning text-sm"></i>
-              <span>Marked:</span>
-              <span class="text-warning font-semibold">5</span>
-            </div>
-            <div class="flex items-center justify-center gap-1">
-              <i class="fa-solid fa-hourglass-half text-muted text-sm"></i>
-              <span>Remaining:</span>
-              <span class="text-gray-900 font-semibold">6</span>
-            </div>
+        </div>
+        <!-- Divider -->
+        <div class="h-px bg-border my-3"></div>
+        <!-- bottom -->
+        <div
+          class="grid grid-cols-2 md:md:grid-cols-4 items-center gap-5 text-xs text-muted"
+        >
+          <div class="flex items-center justify-center gap-1">
+            <span>Questions:</span>
+            <span class="text-muted font-semibold">24</span>
+          </div>
+          <div class="flex items-center justify-center gap-1">
+            <i class="fa-solid fa-circle-check text-primary text-sm"></i>
+            <span>Answered:</span>
+            <span class="text-primary font-semibold">18</span>
+          </div>
+          <div class="flex items-center justify-center gap-1">
+            <i class="fa-solid fa-bookmark text-warning text-sm"></i>
+            <span>Marked:</span>
+            <span class="text-warning font-semibold">5</span>
+          </div>
+          <div class="flex items-center justify-center gap-1">
+            <i class="fa-solid fa-hourglass-half text-muted text-sm"></i>
+            <span>Remaining:</span>
+            <span class="text-gray-900 font-semibold">6</span>
           </div>
         </div>
       </div>
       <!-- Progress Bar -->
       <div
-        class="h-1 bg-primary transition-all duration-300 rounded-full absolute left-0 right-50 bottom-0 z-50"
+        class="h-1 bg-primary transition-all duration-300 rounded-full"
         id="progress-bar"
         style="width: 75%"
       ></div>
@@ -168,15 +164,17 @@
               <i class="fa-solid fa-circle-question text-primary text-lg"></i>
               <h2 class="text-sm">Question Navigation</h2>
             </div>
-            <div class="grid grid-cols-6 gap-2 font-semibold text-sm">
+            <div
+              id="questions-navigation"
+              class="grid grid-cols-6 gap-2 font-semibold text-sm"
+            >
               <!-- Current Question -->
-              <button
+              <!-- <button
                 class="current-question w-10 h-10 rounded-lg border flex items-center justify-center"
-                title="Current Question"
+                title="Current"
               >
                 21
               </button>
-              <!-- Answered Questions -->
               <button
                 class="answered-question w-10 h-10 rounded-lg border-2 flex items-center justify-center bg-primary-50 hover:bg-primary-100 transition-colors"
                 title="Answered"
@@ -184,21 +182,20 @@
                 1
               </button>
 
-              <!-- Marked Questions -->
               <button
                 class="w-10 h-10 rounded-lg border-2 border-warning text-warning font-semibold text-sm flex items-center justify-center bg-warning/5 hover:bg-warning/20 transition-colors"
-                title="Marked for Review"
+                title="Marked"
               >
                 3
               </button>
 
-              <!-- Unanswered Questions -->
               <button
                 class="w-10 h-10 rounded-lg border-2 border-gray-300 text-muted font-medium flex items-center justify-center bg-surface hover:bg-border transition-colors"
                 title="Not Answered"
               >
                 4
               </button>
+              -->
             </div>
           </div>
 
@@ -250,6 +247,7 @@
               <button
                 class="flex py-1 flex-1 items-center justify-center gap-2 rounded-xl bg-primary text-white px-4 text-sm font-bold shadow-lg shadow-primary/30 hover:bg-primary-hover transition-all active:scale-95"
                 type="button"
+                id="prev-btn"
               >
                 <i class="fa-solid fa-chevron-left text-sm"></i>
                 Previous
@@ -258,6 +256,7 @@
               <button
                 class="flex py-1 flex-1 items-center justify-center gap-2 rounded-xl bg-primary text-white px-4 text-sm font-bold shadow-lg shadow-primary/30 hover:bg-primary-hover transition-all active:scale-95"
                 type="button"
+                id="next-btn"
               >
                 Next
                 <i class="fa-solid fa-chevron-right text-sm"></i>
@@ -274,19 +273,24 @@
         >
           <div class="relative z-10">
             <!-- Question Header -->
-            <div class="mb-6">
+            <div class="mb-6" id="question-box">
               <div class="flex items-center gap-3 mb-4">
                 <span
+                  id="question-number"
                   class="w-8 h-8 rounded-lg bg-primary/20 text-primary font-bold text-sm flex items-center justify-center"
                   >21</span
                 >
-                <h2 class="text-xl font-semibold text-text-main">
+                <h2
+                  id="question-text"
+                  class="text-xl font-semibold text-text-main"
+                >
                   Guess the output of the following program:
                 </h2>
               </div>
 
               <!-- Code Block -->
               <div
+                id="question-code"
                 class="bg-slate-900 rounded-lg p-4 text-sm text-gray-200 border-l-4 border-primary overflow-x-auto shadow-card"
               >
                 <pre class="m-0"><code>#include&lt;stdio.h&gt;
@@ -411,8 +415,25 @@ int main()
           </div>
         </div>
       </section>
-
-      <!-- Fixed Bottom Navigation Bar -->
     </main>
+
+    <div
+      class="timeout-overlay hidden fixed inset-0 z-50 items-center justify-center bg-black/40 backdrop-blur-sm"
+    >
+      <div
+        class="font-bold bg-white rounded-xl p-8 shadow-lg text-center max-w-sm w-full"
+      >
+        <h2 class="text-xl text-text-main mb-2">Time is out ⏰</h2>
+        <p class="text-muted">Your exam has been submitted automatically.</p>
+        <div>
+          <span>will navigation to statistics</span>
+          <i
+            class="fa-solid fa-hourglass-end text-secondary font-bold text-xl mt-2"
+          ></i>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/js/exam.js"></script>
   </body>
 </html>
