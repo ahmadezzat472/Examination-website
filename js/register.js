@@ -145,8 +145,19 @@ function validateRegister(e) {
         if (!users){
             users = []
         }
-        users.push(user)
-        localStorage.setItem("users", JSON.stringify(users))
-        window.location.href = "login.html"
+        var existingEmail = users.findIndex(function(registeredUser){
+            return user.email === registeredUser.email
+        })
+        if(existingEmail !== -1){
+            emailStatus.classList.remove("hidden")
+            emailStatus.classList.add("text-danger")
+            emailStatus.textContent = "This email already exists"
+        }
+        else{
+            emailStatus.classList.add("hidden")
+            users.push(user)
+            localStorage.setItem("users", JSON.stringify(users))
+            window.location.href = "login.html"
+        }
     }
 }
