@@ -1,6 +1,8 @@
+import { courses } from "./data.js";
+
 let submitExam = document.querySelector("#submit-exam");
 
-// handle timer display -------------------------------------------
+// timer display -------------------------------------------
 let timerDisplay = document.querySelector("#timer-display");
 let timeoutOverlay = document.querySelector(".timeout-overlay");
 let hourglassIcon = document.querySelector(".fa-hourglass-end");
@@ -37,3 +39,26 @@ function timeDown() {
 
 const timer = setInterval(timeDown, 1000);
 timeDown();
+
+// questions ----------------------------------------------------
+const searchParams = window.location.search;
+const params = new URLSearchParams(searchParams);
+const courseName = params.get("course");
+const courseLevel = params.get("level");
+const courseData = courses[courseName][courseLevel];
+
+let currentQuestion = courseData[0].id;
+console.log(courseData);
+
+let questionsNavigation = document.querySelector("#questions-navigation");
+courseData.forEach((item) => {
+  questionsNavigation.innerHTML += `<button
+                class="current-question w-10 h-10 rounded-lg border flex items-center justify-center"
+                title=${currentQuestion == item.id ? `current` : item.status}
+              >
+                ${item.id}
+              </button>`;
+});
+
+let marked = [];
+let answered = [];
