@@ -10,7 +10,6 @@ let nextBtn = document.querySelector("#next-btn");
 
 let questionNumber = document.querySelector("#question-number");
 let questionText = document.querySelector("#question-text");
-let questionBox = document.querySelector("#question-box");
 let questionCode = document.querySelector("#question-code");
 
 //** ---------------------------------------------------- timer display ----------------------------------------------------
@@ -70,7 +69,7 @@ function displayNavigationQuestion() {
   courseData.forEach((item) => {
     questionsNavigation.innerHTML += `
       <button
-        class="current-question w-10 h-10 rounded-lg border flex items-center justify-center"
+        class="question-navigation w-10 h-10 rounded-lg border flex items-center justify-center"
         title=${currentQuestion == item.id ? `current` : item.status}
         id="${item.id}"
       >
@@ -97,7 +96,6 @@ function updateQuestionArea() {
 
   if (currentQuestion.code) {
     questionCode.classList.remove("hidden");
-    console.log(currentQuestion.code);
 
     questionCode.innerHTML = `
       <pre class="m-0"><code>${currentQuestion.code}</code></pre>
@@ -113,6 +111,14 @@ function renderQuestions() {
   displayNavigationQuestion();
   updateNextPrevBehavior();
   updateQuestionArea();
+
+  let questionNavigation = document.querySelectorAll(".question-navigation");
+  questionNavigation.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      currentQuestionIndex = Number(btn.id) - 1;
+      renderQuestions();
+    });
+  });
 }
 
 function nextQuestion() {
