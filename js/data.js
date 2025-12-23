@@ -59,7 +59,7 @@ export const courses = {
       {
         id: 1,
         text: "Which traversal method is used to get sorted output from a BST?",
-        status: "answered", // answered - marked
+        status: "answered", // none - answered - marked
         answers: [
           { id: 1, text: "Preorder", isCorrect: false },
           { id: 2, text: "Postorder", isCorrect: false },
@@ -91,7 +91,7 @@ export const courses = {
       {
         id: 3,
         text: "What is the average time complexity of Quick Sort?",
-        status: "marked", // answered - marked
+        status: "none", // none - answered - marked
         answers: [
           { id: 1, text: "O(n²)", isCorrect: false },
           { id: 2, text: "O(n log n)", isCorrect: true },
@@ -102,7 +102,7 @@ export const courses = {
       {
         id: 4,
         text: "What is the average time complexity of Quick Sort?",
-        status: "none", // answered - marked
+        status: "none", // none - answered - marked
         answers: [
           { id: 1, text: "O(n²)", isCorrect: false },
           { id: 2, text: "O(n log n)", isCorrect: true },
@@ -112,4 +112,6 @@ export const courses = {
       },
     ],
   },
+
+
 };
