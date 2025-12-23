@@ -7,9 +7,14 @@ var lastNameStatus = document.getElementById("lastNameStatus")
 var emailStatus = document.getElementById("emailStatus")
 var invalidIcon = document.getElementById("invalid")
 var validIcon = document.getElementById("valid")
+var form = document.querySelector("form")
 
 var nameRegex = new RegExp(/^[a-zA-Z]+$/)
 var emailRegex = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+
+function handleSignIn(){
+    form.reset()
+}
 
 fName.addEventListener("blur", function (e) {
     if (e.target.value === "") {
@@ -158,6 +163,7 @@ function validateRegister(e) {
             users.push(user)
             localStorage.setItem("users", JSON.stringify(users))
             window.location.href = "login.html"
+            e.target.reset()
         }
     }
 }
