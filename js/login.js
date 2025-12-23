@@ -1,6 +1,11 @@
 var email = document.getElementById("email")
 var password = document.getElementById("password")
 var statusMessage = document.getElementById("loginStatus")
+var form = document.querySelector("form")
+
+function handleCreateAccount(){
+    form.reset()
+}
 
 function validateLogin(e){
     e.preventDefault()
@@ -31,7 +36,7 @@ function validateLogin(e){
         statusMessage.classList.add("text-success")
         statusMessage.textContent = "Logged in successfully"
         localStorage.setItem("currentUser", JSON.stringify(currentUser))
-        localStorage.setItem("isLoggedIn", "true")
         window.location.replace("exam.html")
+        e.target.reset()
     }
 }
