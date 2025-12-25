@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Exam - Frontend Examination System</title>
+    <title>Exam</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="/css/exam.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/js/tailwind-config.js"></script>
+    <script src="../js/auth.js"></script>
+
     <style type="text/tailwindcss">
       button[title="current"] {
         @apply bg-primary text-white shadow-lg shadow-primary/30 ring-2 ring-primary/20;
@@ -28,52 +30,6 @@
         @apply border-primary bg-primary/5;
       }
     </style>
-    <!-- <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              // Primary Colors
-              primary: {
-                50: '#ecfdf6',
-                100: '#ccfbf5',
-                200: '#99f6ea',
-                300: '#5eead4',
-                400: '#2dd4bf',
-                500: '#14b8a6',
-                DEFAULT: '#14b8a6',
-                600: '#0d9488',
-                700: '#0f766e',
-                800: '#115e59',
-                900: '#134e4a',
-              },
-              // Secondary Colors
-              secondary: {
-                DEFAULT: '#f43f5e',
-                hover: '#e11d48',
-              },
-              // Status Colors
-              success: '#10b981',
-              warning: '#f59e0b',
-              danger: '#ef4444',
-              // Custom Semantic Colors (use as bg-background, text-muted, etc.)
-              background: '#f3f4f6',
-              surface: '#ffffff',
-              muted: '#64748b', // For text-muted
-              border: '#e5e7eb',
-            },
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-            },
-            boxShadow: {
-              navbar: '0 1px 3px rgba(0, 0, 0, 0.05)',
-              card: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-            },
-          },
-        },
-      };
-    </script> -->
-    <script src="../js/auth.js"></script>
   </head>
   <body class="min-h-screen bg-background">
     <header class="fixed top-0 right-0 left-0 z-50 bg-surface shadow-navbar">
@@ -208,37 +164,12 @@
               <i class="fa-solid fa-bookmark text-warning text-lg"></i>
               <h2 class="text-sm font-semibold">Marked for Review</h2>
               <span
+                id="question-marked-numbers"
                 class="ml-auto text-xs bg-warning/10 text-warning px-2 py-0.5 rounded-full font-semibold"
                 >5</span
               >
             </div>
-            <div class="flex flex-wrap gap-2">
-              <button
-                class="px-3 py-1.5 rounded-lg border-2 border-warning text-warning text-xs font-semibold bg-warning/5 hover:bg-warning/10 transition-colors"
-              >
-                3
-              </button>
-              <button
-                class="px-3 py-1.5 rounded-lg border-2 border-warning text-warning text-xs font-semibold bg-warning/5 hover:bg-warning/10 transition-colors"
-              >
-                7
-              </button>
-              <button
-                class="px-3 py-1.5 rounded-lg border-2 border-warning text-warning text-xs font-semibold bg-warning/5 hover:bg-warning/10 transition-colors"
-              >
-                15
-              </button>
-              <button
-                class="px-3 py-1.5 rounded-lg border-2 border-warning text-warning text-xs font-semibold bg-warning/5 hover:bg-warning/10 transition-colors"
-              >
-                19
-              </button>
-              <button
-                class="px-3 py-1.5 rounded-lg border-2 border-warning text-warning text-xs font-semibold bg-warning/5 hover:bg-warning/10 transition-colors"
-              >
-                22
-              </button>
-            </div>
+            <div id="questions-marked" class=""></div>
           </div>
 
           <div

@@ -9,7 +9,7 @@ export const courses = {
       {
         id: 1,
         text: "Which data structure follows the FIFO principle?",
-        status: "", // answered - marked
+        status: "none", //  none - answered - marked
         answers: [
           { id: 1, text: "Stack", isCorrect: false },
           { id: 2, text: "Queue", isCorrect: true },
@@ -20,7 +20,7 @@ export const courses = {
       {
         id: 2,
         text: "What is the time complexity of accessing an element in an array?",
-        status: "marked", // answered - marked
+        status: "marked", //  none - answered - marked
         answers: [
           { id: 1, text: "O(1)", isCorrect: true },
           { id: 2, text: "O(n)", isCorrect: false },
@@ -59,7 +59,7 @@ export const courses = {
       {
         id: 1,
         text: "Which traversal method is used to get sorted output from a BST?",
-        status: "answered", // answered - marked
+        status: "answered", // none - answered - marked
         answers: [
           { id: 1, text: "Preorder", isCorrect: false },
           { id: 2, text: "Postorder", isCorrect: false },
@@ -70,6 +70,7 @@ export const courses = {
       {
         id: 2,
         text: "What is the average time complexity of Quick Sort?",
+        status: "none", // none - answered - marked
         code: `int main()
 { int x = 10;
   float y = 10.0;
@@ -79,7 +80,7 @@ export const courses = {
   printf("x and y are not equal");
   return 0; 
 }`,
-        status: "answered", // answered - marked
+        status: "none", // answered - marked
         answers: [
           { id: 1, text: "O(n²)", isCorrect: false },
           { id: 2, text: "O(n log n)", isCorrect: true },
@@ -90,7 +91,7 @@ export const courses = {
       {
         id: 3,
         text: "What is the average time complexity of Quick Sort?",
-        status: "answered", // answered - marked
+        status: "none", // none - answered - marked
         answers: [
           { id: 1, text: "O(n²)", isCorrect: false },
           { id: 2, text: "O(n log n)", isCorrect: true },
@@ -101,7 +102,7 @@ export const courses = {
       {
         id: 4,
         text: "What is the average time complexity of Quick Sort?",
-        status: "answered", // answered - marked
+        status: "none", // none - answered - marked
         answers: [
           { id: 1, text: "O(n²)", isCorrect: false },
           { id: 2, text: "O(n log n)", isCorrect: true },
@@ -111,4 +112,6 @@ export const courses = {
       },
     ],
   },
+
+
 };

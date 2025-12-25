@@ -5,12 +5,12 @@ import { courses } from "./data.js";
 let submitExam = document.querySelector("#submit-exam");
 
 let questionsNavigation = document.querySelector("#questions-navigation");
+let questionsMarked = document.querySelector("#questions-marked");
 let prevBtn = document.querySelector("#prev-btn");
 let nextBtn = document.querySelector("#next-btn");
 
 let questionNumber = document.querySelector("#question-number");
 let questionText = document.querySelector("#question-text");
-let questionBox = document.querySelector("#question-box");
 let questionCode = document.querySelector("#question-code");
 
 //** ---------------------------------------------------- timer display ----------------------------------------------------
@@ -64,13 +64,17 @@ const courseLevel = params.get("level");
 const courseData = courses[courseName][courseLevel];
 const questionsLength = courseData.length;
 
+console.log(courseData);
+
 //** handle navigation questions and prev & next btn */
 function displayNavigationQuestion() {
   let currentQuestion = courseData[currentQuestionIndex].id;
   courseData.forEach((item) => {
+    console.log(item.id);
+
     questionsNavigation.innerHTML += `
       <button
-        class="current-question w-10 h-10 rounded-lg border flex items-center justify-center"
+        class="question-navigation-btn w-10 h-10 rounded-lg border flex items-center justify-center"
         title=${currentQuestion == item.id ? `current` : item.status}
         id="${item.id}"
       >
@@ -97,7 +101,6 @@ function updateQuestionArea() {
 
   if (currentQuestion.code) {
     questionCode.classList.remove("hidden");
-    console.log(currentQuestion.code);
 
     questionCode.innerHTML = `
       <pre class="m-0"><code>${currentQuestion.code}</code></pre>
@@ -108,11 +111,32 @@ function updateQuestionArea() {
   }
 }
 
+function goTOQuestionListener(btns) {
+  btns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      currentQuestionIndex = courseData.findIndex(
+        (q) => q.id === Number(btn.id)
+      );
+
+      if (currentQuestionIndex !== -1) {
+        renderQuestions();
+      }
+    });
+  });
+}
+
 function renderQuestions() {
   questionsNavigation.innerHTML = "";
   displayNavigationQuestion();
   updateNextPrevBehavior();
   updateQuestionArea();
+
+  let questionNavigation = document.querySelectorAll(
+    ".question-navigation-btn"
+  );
+  console.log(questionNavigation);
+
+  goTOQuestionListener(questionNavigation);
 }
 
 function nextQuestion() {
@@ -128,3 +152,43 @@ function prevQuestion() {
 nextBtn.addEventListener("click", nextQuestion);
 prevBtn.addEventListener("click", prevQuestion);
 renderQuestions();
+
+//** marked questions --------------------------- */
+let marked = [];
+function getMarkedQuestion() {
+  courseData.forEach((item) => {
+    if (item.status == "marked") marked.push(item);
+  });
+}
+function displayMarkedQuestion() {
+  getMarkedQuestion();
+  if (marked.length) {
+    marked.forEach((item) => {
+      if (item.status == "marked") {
+        questionsMarked.className = "flex gap-1.5 flex-wrap gap-2";
+        questionsMarked.innerHTML += `
+          <button
+            class="question-marked-btn px-3 py-1.5 rounded-lg border-2 border-warning text-warning text-xs font-semibold bg-warning/5 hover:bg-warning/10 transition-colors"
+            id="${item.id}"
+          >
+            ${item.id}
+          </button>`;
+      }
+    });
+  } else {
+    questionsMarked.className = "flex gap-1.5 items-center justify-center";
+    questionsMarked.innerHTML = `
+          <i
+            class="fa-regular fa-bookmark text-5xl text-warning/30 my-5"
+          ></i>`;
+  }
+}
+displayMarkedQuestion();
+
+let questionNavigation = document.querySelectorAll(".question-marked-btn");
+questionNavigation.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    currentQuestionIndex = Number(btn.id) - 1;
+    renderQuestions();
+  });
+});
