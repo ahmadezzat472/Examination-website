@@ -65,8 +65,9 @@
             >
               Finish
             </button>
+            <!-- <div class=""> -->
             <div
-              class="w-20 flex items-center justify-center gap-2 px-2 py-1 rounded-lg bg-primary/10 border border-primary/20 shadow-md shadow-primary/10"
+              class="timer-border w-20 flex items-center justify-center gap-2 px-2 py-1 rounded-lg bg-primary/10 border border-primary/50 shadow-md shadow-primary/10"
             >
               <i class="fa-solid fa-clock text-primary text-sm"></i>
               <span
@@ -74,12 +75,13 @@
                 id="timer-display"
               ></span>
             </div>
+            <!-- </div> -->
           </div>
         </div>
         <!-- Divider -->
-        <div class="h-px bg-border my-3"></div>
+        <!-- <div class="h-px bg-border my-3"></div> -->
         <!-- bottom -->
-        <div
+        <!-- <div
           class="grid grid-cols-2 md:md:grid-cols-4 items-center gap-5 text-xs text-muted"
         >
           <div class="flex items-center justify-center gap-1">
@@ -101,7 +103,7 @@
             <span>Remaining:</span>
             <span class="text-gray-900 font-semibold">6</span>
           </div>
-        </div>
+        </div> -->
       </div>
       <!-- Progress Bar -->
       <div
@@ -124,40 +126,16 @@
             <div class="flex gap-2 items-center mb-4 font-semibold">
               <i class="fa-solid fa-circle-question text-primary text-lg"></i>
               <h2 class="text-sm">Question Navigation</h2>
+              <span
+                id="question-nav-numbers"
+                class="ml-auto text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full font-semibold"
+                >5</span
+              >
             </div>
             <div
               id="questions-navigation"
               class="grid grid-cols-6 gap-2 font-semibold text-sm"
-            >
-              <!-- Current Question -->
-              <!-- <button
-                class="current-question w-10 h-10 rounded-lg border flex items-center justify-center"
-                title="Current"
-              >
-                21
-              </button>
-              <button
-                class="answered-question w-10 h-10 rounded-lg border-2 flex items-center justify-center bg-primary-50 hover:bg-primary-100 transition-colors"
-                title="Answered"
-              >
-                1
-              </button>
-
-              <button
-                class="w-10 h-10 rounded-lg border-2 border-warning text-warning font-semibold text-sm flex items-center justify-center bg-warning/5 hover:bg-warning/20 transition-colors"
-                title="Marked"
-              >
-                3
-              </button>
-
-              <button
-                class="w-10 h-10 rounded-lg border-2 border-gray-300 text-muted font-medium flex items-center justify-center bg-surface hover:bg-border transition-colors"
-                title="Not Answered"
-              >
-                4
-              </button>
-              -->
-            </div>
+            ></div>
           </div>
 
           <!-- Marked Questions Summary -->

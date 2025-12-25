@@ -15,12 +15,19 @@ let questionCode = document.querySelector("#question-code");
 let answers = document.querySelector("#answers");
 let markInput = document.querySelector("#mark-input");
 
+let questionNavNumbers = document.querySelector("#question-nav-numbers");
+let questionMarkedNumbers = document.querySelector("#question-marked-numbers");
+
+let progressBar = document.querySelector("#progress-bar");
+
 //** ---------------------------------------------------- timer display ----------------------------------------------------
 
 let timerDisplay = document.querySelector("#timer-display");
 let timeoutOverlay = document.querySelector(".timeout-overlay");
 let hourglassIcon = document.querySelector(".fa-hourglass-end");
+const timerBorder = document.querySelector(".timer-border");
 
+const totalTime = 30 * 60; // 30 minutes
 let totalSeconds = 30 * 60; // 30 minutes
 
 function timeDown() {
@@ -30,6 +37,20 @@ function timeDown() {
   timerDisplay.innerHTML = `${minutes.toString().padStart(2, "0")}:${seconds
     .toString()
     .padStart(2, "0")}`;
+
+  // Progress percentage
+  const progress = totalSeconds / totalTime;
+  const angle = progress * 360;
+
+  // Color change near end
+  const color = progress < 0.25 ? "#ef4444" : "#14b8a61a"; // red when <20%
+
+  timerBorder.style.background = `
+    conic-gradient(
+      ${color} ${angle}deg,
+      rgba(256, 256, 256, 0.5) 0deg
+    )
+  `;
 
   if (totalSeconds <= 0) {
     clearInterval(timer);
@@ -73,6 +94,9 @@ let answersNum = ["A", "B", "C", "D"];
 let currentQuestionIndex = 0;
 
 //** handle navigation questions and prev & next btn */
+questionNavNumbers.innerHTML = courseData.length;
+questionMarkedNumbers.innerHTML = markedQuestions.length;
+
 function displayNavigationQuestion() {
   let currentQuestion = courseData[currentQuestionIndex].id;
   courseData.forEach((item) => {
@@ -129,7 +153,7 @@ function updateQuestionArea() {
   let prev = checkQuestionIsAnswered(currentQuestion);
   if (prev) {
     const el = answers.querySelector(
-      `#q${currentQuestion.id}-a${prev.answerId}`
+      `#q${currentQuestion.id}-a${prev.questionId}`
     );
     if (el) el.checked = true;
   }
@@ -166,8 +190,7 @@ function updateQuestionArea() {
       );
 
       currentQuestion.status = "answered";
-      const navBtn = document.getElementById(String(currentQuestion.id));
-      if (navBtn) navBtn.setAttribute("title", "answered");
+      calcProgress();
     });
   });
 }
@@ -316,6 +339,15 @@ markInput.addEventListener("change", () => {
     courseData[currentQuestionIndex].status = "marked";
   }
 
+  questionMarkedNumbers.innerHTML = markedQuestions.length;
   localStorage.setItem("markedQuestions", JSON.stringify(markedQuestions));
   displayMarkedQuestion();
 });
+
+//** ---------------------------------------------------- questions ----------------------------------------------------
+
+function calcProgress() {
+  let ratio = (answeredQuestions.length / questionsLength) * 100;
+  progressBar.style.width = `${ratio}%`;
+}
+calcProgress();
