@@ -24,3 +24,8 @@
 button {
   cursor: pointer;
 }
+
+.timer-border {
+  background: conic-gradient(#14b8a61a 360deg, rgba(0, 0, 0, 0.1) 0deg);
+  transition: background 0.3s linear;
+}
