@@ -80,7 +80,7 @@ export const courses = {
   printf("x and y are not equal");
   return 0; 
 }`,
-        status: "none", // answered - marked
+        status: "none", // answered
         answers: [
           { id: 1, text: "O(n²)", isCorrect: false },
           { id: 2, text: "O(n log n)", isCorrect: true },
@@ -112,6 +112,4 @@ export const courses = {
       },
     ],
   },
-
-
 };

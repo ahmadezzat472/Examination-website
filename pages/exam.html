@@ -26,6 +26,10 @@
         @apply border-primary-400 text-primary-700 hover:bg-primary-400;
       }
 
+      button[title="marked"] {
+        @apply border-warning text-warning hover:bg-warning hover:text-white;
+      }
+
       .input:checked + div {
         @apply border-primary bg-primary/5;
       }
@@ -239,8 +243,8 @@ int main()
             </div>
 
             <!-- Answer Options -->
-            <div class="space-y-3 mb-6">
-              <label class="cursor-pointer group relative block">
+            <div id="answers" class="space-y-3 mb-6">
+              <!-- <label class="cursor-pointer group relative block">
                 <input
                   class="custom-radio sr-only"
                   name="q21"
@@ -320,7 +324,7 @@ int main()
                     >Run time error</span
                   >
                 </div>
-              </label>
+              </label> -->
             </div>
 
             <!-- Mark for Review Checkbox -->
@@ -331,7 +335,7 @@ int main()
                 <input
                   class="peer h-5 w-5 cursor-pointer appearance-none rounded-md border-2 border-gray-500 bg-surface transition-all checked:border-warning checked:bg-warning hover:border-warning"
                   type="checkbox"
-                  id="mark-review"
+                  id="mark-input"
                 />
                 <i
                   class="fa-solid fa-check text-xs absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white"
