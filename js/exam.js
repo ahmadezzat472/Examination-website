@@ -1,69 +1,57 @@
+//** _________________________________ get courses _________________________________
+
 import { courses } from "./data.js";
 
-//** ---------------------------------------------------- Guard ----------------------------------------------------
+//** _________________________________ Guard - Auth _________________________________
 
-//** get course data from url  */
+//** get course name and level from url
 const searchParams = window.location.search;
 const params = new URLSearchParams(searchParams);
 const courseName = params.get("course");
 const courseLevel = params.get("level");
 
-//** get course data from currentUser  */
+//** get the Completed Courses from currentUser
 let currentUser = JSON.parse(localStorage.getItem("currentUser")) || {};
+let CompletedCourses = currentUser.CompletedCourses || [];
 
-let CompleteCourse = currentUser.CompleteCourse || undefined;
-
-//** error popup for guard redirects (use existing .error-popup in HTML) */
+//** popup show message error
 function showErrorPopup(message) {
   const errorOverlay = document.querySelector(".error-popup");
-  // try to update the inner texts if structure matches
-  const container = errorOverlay.querySelector("div");
-  if (container) {
-    const title = container.querySelector("h2");
-    const para = container.querySelector("p");
-    if (title) title.textContent = "Error";
-    if (para) para.textContent = message;
-  }
+  const container = errorOverlay.querySelector(".error-popup-container");
+  const para = container.querySelector("p");
+  para.textContent = message;
   errorOverlay.classList.replace("hidden", "flex");
 
   setTimeout(() => {
-    location.replace("/pages/home.html");
+    location.replace("/");
   }, 4000);
 }
 
-//** check is Complete this course ?  */
-function isCompleteThisCourse() {
+//** check: course is exist | course is completed ?  */
+function CheckThisCourse() {
   if (
     courses[courseName] == undefined ||
     courses[courseName][courseLevel] == undefined
   ) {
-    showErrorPopup("Course or level not found. Returning to home.");
+    showErrorPopup("oh!! Course or level not found.");
     return;
   }
 
-  if (!courseName || !courseLevel) {
-    showErrorPopup("Invalid course selection. Returning to home.");
-    return;
-  }
-  if (
-    CompleteCourse &&
-    courseName == CompleteCourse.name &&
-    courseLevel == CompleteCourse.level
-  ) {
-    showErrorPopup(
-      "You have already completed this course. Returning to home."
-    );
+  const courseCompleted = CompletedCourses.some(
+    (course) => course.name === courseName && course.level === courseLevel
+  );
+  if (courseCompleted) {
+    showErrorPopup("You have already completed this course.");
     return;
   }
 }
-isCompleteThisCourse();
+CheckThisCourse();
 
-//** ---------------------------------------------------- select element ----------------------------------------------------
-
-let submitExam = document.querySelector("#submit-exam");
+//** _________________________________ select element _________________________________
 
 let questionsNavigation = document.querySelector("#questions-navigation");
 let questionsMarked = document.querySelector("#questions-marked");
+
 let prevBtn = document.querySelector("#prev-btn");
 let nextBtn = document.querySelector("#next-btn");
 
@@ -78,7 +66,7 @@ let questionMarkedNumbers = document.querySelector("#question-marked-numbers");
 
 let progressBar = document.querySelector("#progress-bar");
 
-//** ---------------------------------------------------- timer display ----------------------------------------------------
+//** _________________________________ timer display _________________________________
 
 let timerDisplay = document.querySelector("#timer-display");
 let timeoutOverlay = document.querySelector(".timeout-overlay");
@@ -88,20 +76,23 @@ const timerBorder = document.querySelector(".timer-border");
 const totalTime = 30 * 60; // 30 minutes
 let totalSeconds = 30 * 60; // 30 minutes
 
+const timer = setInterval(timeDown, 1000);
+
 function timeDown() {
-  const minutes = Math.floor(totalSeconds / 60); // get only the minutes
-  const seconds = totalSeconds % 60; // get the remaining seconds from the minutes
+  //**  get the minutes and remaining seconds from the minutes
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
 
   timerDisplay.innerHTML = `${minutes.toString().padStart(2, "0")}:${seconds
     .toString()
     .padStart(2, "0")}`;
 
-  // Progress percentage
+  //** calc Progress percentage
   const progress = totalSeconds / totalTime;
   const angle = progress * 360;
 
-  // Color change near end
-  const color = progress < 0.25 ? "#ef4444" : "#14b8a61a"; // red when <20%
+  //** Color change near end
+  const color = progress < 0.25 ? "#ef4444" : "#14b8a61a";
 
   timerBorder.style.background = `
     conic-gradient(
@@ -111,12 +102,11 @@ function timeDown() {
   `;
 
   if (totalSeconds <= 0) {
-    clearInterval(timer);
-
-    saveExamDetails();
-
     document.body.classList.add("overflow-hidden");
     timeoutOverlay.classList.replace("hidden", "flex");
+
+    clearInterval(timer);
+    saveExamDetails();
 
     const toggleIcons = setInterval(() => {
       hourglassIcon.classList.toggle("fa-hourglass-start");
@@ -131,26 +121,70 @@ function timeDown() {
 
   totalSeconds--;
 }
-
-const timer = setInterval(timeDown, 1000);
 timeDown();
 
-//** ---------------------------------------------------- questions ----------------------------------------------------
+//** _________________________________ questions _________________________________
 
-//** Variables */
+//** Variables
 const courseData =
   (courses[courseName] && courses[courseName][courseLevel]) || courses.ds.easy;
 const questionsLength = courseData.length;
 let answeredQuestions =
   JSON.parse(localStorage.getItem("answeredQuestions")) || [];
 let markedQuestions = JSON.parse(localStorage.getItem("markedQuestions")) || [];
+
 let answersNum = ["A", "B", "C", "D"];
 let currentQuestionIndex = 0;
 
-//** handle navigation questions and prev & next btn */
+//** display length of questions and marked questions
 questionNavNumbers.innerHTML = courseData.length;
 questionMarkedNumbers.innerHTML = markedQuestions.length;
 
+//** handle prev & next btn
+nextBtn.addEventListener("click", nextQuestion);
+prevBtn.addEventListener("click", prevQuestion);
+
+function nextQuestion() {
+  currentQuestionIndex++;
+  renderQuestions();
+}
+
+function prevQuestion() {
+  currentQuestionIndex--;
+  renderQuestions();
+}
+
+//** handle navigation questions and display the navigation questions
+function renderQuestions() {
+  questionsNavigation.innerHTML = "";
+
+  displayNavigationQuestion();
+  updateNextPrevBehavior();
+  updateQuestionArea();
+
+  let questionNavigation = document.querySelectorAll(
+    ".question-navigation-btn"
+  );
+
+  goTOQuestionListener(questionNavigation);
+}
+renderQuestions();
+
+function goTOQuestionListener(btns) {
+  btns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      currentQuestionIndex = courseData.findIndex(
+        (q) => q.id === Number(btn.id)
+      );
+
+      if (currentQuestionIndex !== -1) {
+        renderQuestions();
+      }
+    });
+  });
+}
+
+//** display navigation questions
 function displayNavigationQuestion() {
   let currentQuestion = courseData[currentQuestionIndex].id;
   courseData.forEach((item) => {
@@ -173,6 +207,7 @@ function displayNavigationQuestion() {
   });
 }
 
+//** disabled and un disabled the next and prev btns
 function updateNextPrevBehavior() {
   prevBtn.disabled = currentQuestionIndex === 0;
   prevBtn.classList.toggle("opacity-50", prevBtn.disabled);
@@ -183,6 +218,7 @@ function updateNextPrevBehavior() {
   nextBtn.classList.toggle("cursor-not-allowed", nextBtn.disabled);
 }
 
+//** display the question title and answers
 function updateQuestionArea() {
   const currentQuestion = courseData[currentQuestionIndex];
 
@@ -199,11 +235,9 @@ function updateQuestionArea() {
     questionCode.innerHTML = "";
   }
 
-  markInput.checked = markedQuestions.includes(currentQuestion.id);
-
   displayAnswers(currentQuestion);
 
-  // restore previously answered choice for this question
+  //** get previously answered (if exist) for this question
   let prev = checkQuestionIsAnswered(currentQuestion);
   if (prev) {
     const el = answers.querySelector(
@@ -212,13 +246,13 @@ function updateQuestionArea() {
     if (el) el.checked = true;
   }
 
-  // change listeners to save answers when selected
+  //** change listeners to save answers when selected
   const inputs = answers.querySelectorAll("input.custom-radio");
   inputs.forEach((input) => {
     input.addEventListener("change", () => {
       const qId = currentQuestion.id;
-      const answerIsTrue = input.dataset.answerIsCorrect; // data-answer-is-correct
-      const correctAnswer = input.dataset.answerCorrect; // data-answer-correct
+      const answerIsTrue = input.dataset.answerIsCorrect; //** data-answer-is-correct
+      const correctAnswer = input.dataset.answerCorrect; //** data-answer-correct
       const answerText = input.value;
 
       const idx = answeredQuestions.findIndex((a) => a.questionId === qId);
@@ -247,20 +281,14 @@ function updateQuestionArea() {
       calcProgress();
     });
   });
-}
 
-function checkQuestionIsAnswered(currentQuestion) {
-  return answeredQuestions.find((a) => a.questionId === currentQuestion.id);
-}
-
-function checkQuestionIsMarked(currentQuestion) {
-  return markedQuestions.find((a) => a === currentQuestion.id);
+  markInput.checked = markedQuestions.includes(currentQuestion.id);
 }
 
 function displayAnswers(currentQuestion) {
   answers.innerHTML = "";
 
-  // ** get the correct answer */
+  // ** get the correct answer
   let correctAnswerText = currentQuestion.answers.find(
     (item) => item.isCorrect == true
   );
@@ -294,48 +322,15 @@ function displayAnswers(currentQuestion) {
   });
 }
 
-function goTOQuestionListener(btns) {
-  btns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      currentQuestionIndex = courseData.findIndex(
-        (q) => q.id === Number(btn.id)
-      );
-
-      if (currentQuestionIndex !== -1) {
-        renderQuestions();
-      }
-    });
-  });
+function checkQuestionIsAnswered(currentQuestion) {
+  return answeredQuestions.find((a) => a.questionId === currentQuestion.id);
 }
 
-function renderQuestions() {
-  questionsNavigation.innerHTML = "";
-  displayNavigationQuestion();
-  updateNextPrevBehavior();
-  updateQuestionArea();
-
-  let questionNavigation = document.querySelectorAll(
-    ".question-navigation-btn"
-  );
-
-  goTOQuestionListener(questionNavigation);
+function checkQuestionIsMarked(currentQuestion) {
+  return markedQuestions.find((a) => a === currentQuestion.id);
 }
 
-function nextQuestion() {
-  currentQuestionIndex++;
-  renderQuestions();
-}
-
-function prevQuestion() {
-  currentQuestionIndex--;
-  renderQuestions();
-}
-
-nextBtn.addEventListener("click", nextQuestion);
-prevBtn.addEventListener("click", prevQuestion);
-renderQuestions();
-
-//** marked questions --------------------------- */
+//**  _________________________________ marked questions _________________________________
 
 function displayMarkedQuestion() {
   if (markedQuestions.length) {
@@ -350,6 +345,7 @@ function displayMarkedQuestion() {
           ${questionId}
         </button>`;
     });
+
     attachMarkedButtonListeners();
   } else {
     questionsMarked.className = "flex gap-1.5 items-center justify-center";
@@ -359,6 +355,7 @@ function displayMarkedQuestion() {
       ></i>`;
   }
 }
+displayMarkedQuestion();
 
 function attachMarkedButtonListeners() {
   const questionMarked = document.querySelectorAll(".question-marked-btn");
@@ -374,17 +371,13 @@ function attachMarkedButtonListeners() {
   });
 }
 
-displayMarkedQuestion();
-
 markInput.addEventListener("change", () => {
   const currentQuestion = courseData[currentQuestionIndex];
 
   if (!markInput.checked) {
-    // remove from marked
     markedQuestions = markedQuestions.filter((id) => id !== currentQuestion.id);
     currentQuestion.status = "none";
   } else {
-    // add to marked if not already there
     if (!markedQuestions.includes(currentQuestion.id)) {
       markedQuestions.push(currentQuestion.id);
     }
@@ -393,10 +386,11 @@ markInput.addEventListener("change", () => {
 
   questionMarkedNumbers.innerHTML = markedQuestions.length;
   localStorage.setItem("markedQuestions", JSON.stringify(markedQuestions));
+
   displayMarkedQuestion();
 });
 
-//** ---------------------------------------------------- progress bar ----------------------------------------------------
+//** _________________________________ progress bar _________________________________
 
 function calcProgress() {
   let ratio = (answeredQuestions.length / questionsLength) * 100;
@@ -404,12 +398,13 @@ function calcProgress() {
 }
 calcProgress();
 
-//** ---------------------------------------------------- submit exam ----------------------------------------------------
+//** _________________________________ submit exam _________________________________
 let finishOverlay = document.querySelector(".finish-overlay");
 let cancelFinish = document.querySelector("#cancel-finish");
 let confirmExam = document.querySelector("#confirm-finish");
 let leftAnswer = document.querySelector("#left-answer");
 let circleQuestionIcon = document.querySelector("#circle-question-icon");
+let submitExam = document.querySelector("#submit-exam");
 
 submitExam.addEventListener("click", openDialog);
 cancelFinish.addEventListener("click", closeDialog);
@@ -422,9 +417,8 @@ function openDialog() {
   if (leftQuestions) {
     leftAnswer.innerHTML = `you have ${leftQuestions} not answered`;
   } else {
-    leftAnswer.innerHTML = "you finish all questions";
     circleQuestionIcon.className =
-      "fa-regular fa-circle-check text-green-500 text-4xl mb-4";
+      "fa-regular fa-circle-check text-green-500 text-4xl mb-4 animate-bounce";
     confirmExam.classList.replace("bg-secondary", "bg-green-500");
     confirmExam.classList.replace(
       "hover:bg-secondary-hover",
@@ -439,11 +433,8 @@ function closeDialog() {
 }
 
 let users = JSON.parse(localStorage.getItem("users")) || {};
-console.log(users);
-
 function confirmExamHandler() {
   saveExamDetails();
-  // close dialog and redirect to result page
   document.body.classList.remove("overflow-hidden");
   finishOverlay.classList.replace("flex", "hidden");
   location.replace("/pages/result.html");
@@ -455,10 +446,20 @@ function saveExamDetails() {
   ).length;
 
   const grade = Math.round((correctCount / questionsLength) * 10);
-  const completeCourse = { name: courseName, level: courseLevel, grade };
-  currentUser.CompleteCourse = completeCourse;
+  const lastResult = {
+    course: courseName,
+    level: courseLevel,
+    grade,
+    correct: correctCount,
+    total: questionsLength,
+  };
 
-  // update users storage: try to store by email when available
+  const completeCourse = { name: courseName, level: courseLevel, grade };
+  if (!currentUser.CompletedCourses) {
+    currentUser.CompletedCourses = [];
+  }
+  currentUser.CompletedCourses.push(completeCourse);
+  currentUser.lastResult = lastResult;
 
   const idx = users.findIndex((u) => u.email === currentUser.email);
   if (idx !== -1) users[idx] = currentUser;
@@ -466,18 +467,6 @@ function saveExamDetails() {
 
   localStorage.setItem("users", JSON.stringify(users));
   localStorage.setItem("currentUser", JSON.stringify(currentUser));
-
-  // save a result snapshot that result page can read
-  localStorage.setItem(
-    "lastResult",
-    JSON.stringify({
-      course: courseName,
-      level: courseLevel,
-      grade,
-      correct: correctCount,
-      total: questionsLength,
-    })
-  );
 
   removeQuestionFromLS();
 }

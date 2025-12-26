@@ -356,18 +356,21 @@ int main()
       >
         <i
           id="circle-question-icon"
-          class="fa-solid fa-circle-question text-secondary text-4xl mb-4"
+          class="fa-solid fa-circle-question text-secondary text-4xl mb-4 animate-bounce"
         ></i>
         <h2 class="text-xl font-bold text-text-main mb-2">Finish Exam?</h2>
-        <p class="text-muted mb-6 text-sm">
-          Are you sure you want to finish the exam and submit your answers?
-          <span id="left-answer"></span>
-        </p>
+        <div class="text-muted text-sm font-semibold">
+          Are you sure you want to finish the exam?
+          <p
+            id="left-answer"
+            class="text-secondary font-bold text-muted mb-6 text-sm"
+          ></p>
+        </div>
 
         <div class="flex gap-3 justify-center">
           <button
             id="cancel-finish"
-            class="px-4 py-2 rounded-lg border border-border text-text-main hover:bg-gray-100 transition"
+            class="px-4 py-2 rounded-lg border border-border text-text-main hover:bg-gray-200 transition"
           >
             Cancel
           </button>
@@ -383,36 +386,21 @@ int main()
     </div>
 
     <div
-      class="error-popup fixed inset-0 z-50 hidden items-center justify-center bg-black/40 backdrop-blur-sm"
+      class="error-popup fixed inset-0 z-50 hidden items-center justify-center bg-black/70 backdrop-blur-lg"
     >
       <div
-        class="bg-white rounded-xl p-8 shadow-lg max-w-sm w-full text-center"
+        class="error-popup-container bg-red-50 border border-secondary rounded-xl p-8 shadow-lg max-w-sm w-full text-center"
       >
         <i
-          id="circle-question-icon"
-          class="fa-solid fa-circle-question text-secondary text-4xl mb-4"
+          class="fa-solid fa-triangle-exclamation text-secondary text-4xl mb-4 animate-bounce"
         ></i>
-        <h2 class="text-xl font-bold text-text-main mb-2">Finish Exam?</h2>
-        <p class="text-muted mb-6 text-sm">
-          Are you sure you want to finish the exam and submit your answers?
-          <span id="left-answer"></span>
-        </p>
-
-        <div class="flex gap-3 justify-center">
-          <button
-            id="cancel-finish"
-            class="px-4 py-2 rounded-lg border border-border text-text-main hover:bg-gray-100 transition"
-          >
-            Cancel
-          </button>
-
-          <button
-            id="confirm-finish"
-            class="px-4 py-2 rounded-lg bg-secondary text-white font-semibold hover:bg-secondary-hover transition"
-          >
-            Finish Exam
-          </button>
-        </div>
+        <h2 class="text-xl font-bold text-red-600 mb-2">Not Allowed</h2>
+        <p class="text-muted text-sm font-semibold mb-1"></p>
+        <span class="text-gray-600 text-xs font-semibold"
+          >Redirecting To Home<span class="ml-1 text-[18px] animate-pulse"
+            >...</span
+          ></span
+        >
       </div>
     </div>
 
