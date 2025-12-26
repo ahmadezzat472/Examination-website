@@ -1,5 +1,63 @@
 import { courses } from "./data.js";
 
+//** ---------------------------------------------------- Guard ----------------------------------------------------
+
+//** get course data from url  */
+const searchParams = window.location.search;
+const params = new URLSearchParams(searchParams);
+const courseName = params.get("course");
+const courseLevel = params.get("level");
+
+//** get course data from currentUser  */
+let currentUser = JSON.parse(localStorage.getItem("currentUser")) || {};
+
+let CompleteCourse = currentUser.CompleteCourse || undefined;
+
+//** error popup for guard redirects (use existing .error-popup in HTML) */
+function showErrorPopup(message) {
+  const errorOverlay = document.querySelector(".error-popup");
+  // try to update the inner texts if structure matches
+  const container = errorOverlay.querySelector("div");
+  if (container) {
+    const title = container.querySelector("h2");
+    const para = container.querySelector("p");
+    if (title) title.textContent = "Error";
+    if (para) para.textContent = message;
+  }
+  errorOverlay.classList.replace("hidden", "flex");
+
+  setTimeout(() => {
+    location.replace("/pages/home.html");
+  }, 4000);
+}
+
+//** check is Complete this course ?  */
+function isCompleteThisCourse() {
+  if (
+    courses[courseName] == undefined ||
+    courses[courseName][courseLevel] == undefined
+  ) {
+    showErrorPopup("Course or level not found. Returning to home.");
+    return;
+  }
+
+  if (!courseName || !courseLevel) {
+    showErrorPopup("Invalid course selection. Returning to home.");
+    return;
+  }
+  if (
+    CompleteCourse &&
+    courseName == CompleteCourse.name &&
+    courseLevel == CompleteCourse.level
+  ) {
+    showErrorPopup(
+      "You have already completed this course. Returning to home."
+    );
+    return;
+  }
+}
+isCompleteThisCourse();
+
 //** ---------------------------------------------------- select element ----------------------------------------------------
 
 let submitExam = document.querySelector("#submit-exam");
@@ -55,6 +113,8 @@ function timeDown() {
   if (totalSeconds <= 0) {
     clearInterval(timer);
 
+    saveExamDetails();
+
     document.body.classList.add("overflow-hidden");
     timeoutOverlay.classList.replace("hidden", "flex");
 
@@ -76,12 +136,6 @@ const timer = setInterval(timeDown, 1000);
 timeDown();
 
 //** ---------------------------------------------------- questions ----------------------------------------------------
-
-//** fetch course data */
-const searchParams = window.location.search;
-const params = new URLSearchParams(searchParams);
-const courseName = params.get("course");
-const courseLevel = params.get("level");
 
 //** Variables */
 const courseData =
@@ -200,8 +254,6 @@ function checkQuestionIsAnswered(currentQuestion) {
 }
 
 function checkQuestionIsMarked(currentQuestion) {
-  console.log(currentQuestion);
-
   return markedQuestions.find((a) => a === currentQuestion.id);
 }
 
@@ -386,33 +438,31 @@ function closeDialog() {
   finishOverlay.classList.replace("flex", "hidden");
 }
 
-let currentUser = JSON.parse(localStorage.getItem("currentUser")) || {};
 let users = JSON.parse(localStorage.getItem("users")) || {};
+console.log(users);
+
 function confirmExamHandler() {
-  // count correct answers (dataset stores "true"/"false" strings)
+  saveExamDetails();
+  // close dialog and redirect to result page
+  document.body.classList.remove("overflow-hidden");
+  finishOverlay.classList.replace("flex", "hidden");
+  location.replace("/pages/result.html");
+}
+
+function saveExamDetails() {
   const correctCount = answeredQuestions.filter(
     (a) => String(a.answerIsTrue) === "true"
   ).length;
 
-  // grade scaled to 10
   const grade = Math.round((correctCount / questionsLength) * 10);
-
   const completeCourse = { name: courseName, level: courseLevel, grade };
-
-  // attach to current user object
   currentUser.CompleteCourse = completeCourse;
 
   // update users storage: try to store by email when available
-  if (currentUser && currentUser.email) {
-    users = users || {};
-    users[currentUser.email] = currentUser;
-  } else if (Array.isArray(users)) {
-    const idx = users.findIndex((u) => u.email === currentUser.email);
-    if (idx !== -1) users[idx] = currentUser;
-    else users.push(currentUser);
-  } else {
-    users.lastUser = currentUser;
-  }
+
+  const idx = users.findIndex((u) => u.email === currentUser.email);
+  if (idx !== -1) users[idx] = currentUser;
+  else users.push(currentUser);
 
   localStorage.setItem("users", JSON.stringify(users));
   localStorage.setItem("currentUser", JSON.stringify(currentUser));
@@ -429,8 +479,10 @@ function confirmExamHandler() {
     })
   );
 
-  // close dialog and redirect to result page
-  document.body.classList.remove("overflow-hidden");
-  finishOverlay.classList.replace("flex", "hidden");
-  location.replace("/pages/result.html");
+  removeQuestionFromLS();
+}
+
+function removeQuestionFromLS() {
+  localStorage.removeItem("answeredQuestions");
+  localStorage.removeItem("markedQuestions");
 }
