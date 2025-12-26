@@ -344,10 +344,93 @@ markInput.addEventListener("change", () => {
   displayMarkedQuestion();
 });
 
-//** ---------------------------------------------------- questions ----------------------------------------------------
+//** ---------------------------------------------------- progress bar ----------------------------------------------------
 
 function calcProgress() {
   let ratio = (answeredQuestions.length / questionsLength) * 100;
   progressBar.style.width = `${ratio}%`;
 }
 calcProgress();
+
+//** ---------------------------------------------------- submit exam ----------------------------------------------------
+let finishOverlay = document.querySelector(".finish-overlay");
+let cancelFinish = document.querySelector("#cancel-finish");
+let confirmExam = document.querySelector("#confirm-finish");
+let leftAnswer = document.querySelector("#left-answer");
+let circleQuestionIcon = document.querySelector("#circle-question-icon");
+
+submitExam.addEventListener("click", openDialog);
+cancelFinish.addEventListener("click", closeDialog);
+confirmExam.addEventListener("click", confirmExamHandler);
+
+function openDialog() {
+  document.body.classList.add("overflow-hidden");
+  finishOverlay.classList.replace("hidden", "flex");
+  const leftQuestions = questionsLength - answeredQuestions.length;
+  if (leftQuestions) {
+    leftAnswer.innerHTML = `you have ${leftQuestions} not answered`;
+  } else {
+    leftAnswer.innerHTML = "you finish all questions";
+    circleQuestionIcon.className =
+      "fa-regular fa-circle-check text-green-500 text-4xl mb-4";
+    confirmExam.classList.replace("bg-secondary", "bg-green-500");
+    confirmExam.classList.replace(
+      "hover:bg-secondary-hover",
+      "hover:bg-green-700"
+    );
+  }
+}
+
+function closeDialog() {
+  document.body.classList.remove("overflow-hidden");
+  finishOverlay.classList.replace("flex", "hidden");
+}
+
+let currentUser = JSON.parse(localStorage.getItem("currentUser")) || {};
+let users = JSON.parse(localStorage.getItem("users")) || {};
+function confirmExamHandler() {
+  // count correct answers (dataset stores "true"/"false" strings)
+  const correctCount = answeredQuestions.filter(
+    (a) => String(a.answerIsTrue) === "true"
+  ).length;
+
+  // grade scaled to 10
+  const grade = Math.round((correctCount / questionsLength) * 10);
+
+  const completeCourse = { name: courseName, level: courseLevel, grade };
+
+  // attach to current user object
+  currentUser.CompleteCourse = completeCourse;
+
+  // update users storage: try to store by email when available
+  if (currentUser && currentUser.email) {
+    users = users || {};
+    users[currentUser.email] = currentUser;
+  } else if (Array.isArray(users)) {
+    const idx = users.findIndex((u) => u.email === currentUser.email);
+    if (idx !== -1) users[idx] = currentUser;
+    else users.push(currentUser);
+  } else {
+    users.lastUser = currentUser;
+  }
+
+  localStorage.setItem("users", JSON.stringify(users));
+  localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+  // save a result snapshot that result page can read
+  localStorage.setItem(
+    "lastResult",
+    JSON.stringify({
+      course: courseName,
+      level: courseLevel,
+      grade,
+      correct: correctCount,
+      total: questionsLength,
+    })
+  );
+
+  // close dialog and redirect to result page
+  document.body.classList.remove("overflow-hidden");
+  finishOverlay.classList.replace("flex", "hidden");
+  location.replace("/pages/result.html");
+}
