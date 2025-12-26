@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/css/exam.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/js/tailwind-config.js"></script>
-    <script src="../js/auth.js"></script>
+    <script src="/js/auth.js"></script>
 
     <style type="text/tailwindcss">
       button[title="current"] {
@@ -344,6 +344,40 @@ int main()
           <i
             class="fa-solid fa-hourglass-end text-secondary font-bold text-xl mt-2"
           ></i>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="finish-overlay fixed inset-0 z-50 hidden items-center justify-center bg-black/40 backdrop-blur-sm"
+    >
+      <div
+        class="bg-white rounded-xl p-8 shadow-lg max-w-sm w-full text-center"
+      >
+        <i
+          id="circle-question-icon"
+          class="fa-solid fa-circle-question text-secondary text-4xl mb-4"
+        ></i>
+        <h2 class="text-xl font-bold text-text-main mb-2">Finish Exam?</h2>
+        <p class="text-muted mb-6 text-sm">
+          Are you sure you want to finish the exam and submit your answers?
+          <span id="left-answer"></span>
+        </p>
+
+        <div class="flex gap-3 justify-center">
+          <button
+            id="cancel-finish"
+            class="px-4 py-2 rounded-lg border border-border text-text-main hover:bg-gray-100 transition"
+          >
+            Cancel
+          </button>
+
+          <button
+            id="confirm-finish"
+            class="px-4 py-2 rounded-lg bg-secondary text-white font-semibold hover:bg-secondary-hover transition"
+          >
+            Finish Exam
+          </button>
         </div>
       </div>
     </div>

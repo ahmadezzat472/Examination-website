@@ -1,25 +1,43 @@
-var inputs = document.querySelectorAll("input")
-var statusMessage = document.getElementById("loginStatus")
+var email = document.getElementById("email");
+var password = document.getElementById("password");
+var statusMessage = document.getElementById("loginStatus");
+var form = document.querySelector("form");
 
-function validateLogin(e){
-    e.preventDefault()
-    var user = JSON.parse(localStorage.getItem("user"))
-    statusMessage.classList.remove("hidden")
-    if(!user){
-        statusMessage.classList.remove("text-success")
-        statusMessage.classList.add("text-danger")
-        statusMessage.textContent = "Sorry, something went wrong in our end"
-    }
-    else if(inputs[0].value !== user.email || inputs[1].value !== user.password){
-        statusMessage.classList.remove("text-success")
-        statusMessage.classList.add("text-danger")
-        statusMessage.textContent = "Invalid Email or Password"
-    }
-    else{
-        statusMessage.classList.remove("text-danger")
-        statusMessage.classList.add("text-success")
-        statusMessage.textContent = "Logged in successfully"
-        localStorage.setItem("isLoggedIn", "true")
-        window.location.replace("exam.html")
-    }
+function handleCreateAccount() {
+  form.reset();
+}
+
+function validateLogin(e) {
+  e.preventDefault();
+  statusMessage.classList.remove("hidden");
+  var currentUser = {
+    email: email.value,
+    password: password.value,
+  };
+  var users = JSON.parse(localStorage.getItem("users"));
+  if (!users) {
+    users = [];
+  }
+  var userFound = users.findIndex(function (user) {
+    return (
+      user.email === currentUser.email && user.password === currentUser.password
+    );
+  });
+  if (userFound === -1) {
+    statusMessage.classList.remove("text-success");
+    statusMessage.classList.add("text-danger");
+    statusMessage.textContent = "Invalid Email or Password";
+  } else {
+    var currentUser = {
+      fName: users[userFound].fName,
+      lName: users[userFound].lName,
+      email: users[userFound].email,
+    };
+    statusMessage.classList.remove("text-danger");
+    statusMessage.classList.add("text-success");
+    statusMessage.textContent = "Logged in successfully";
+    localStorage.setItem("currentUser", JSON.stringify(currentUser));
+    window.location.replace("exam.html");
+    e.target.reset();
+  }
 }
