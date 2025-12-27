@@ -18,7 +18,7 @@ document.querySelector(
 let CompletedCourses = currentUser.CompletedCourses || [];
 
 //** popup show message error
-function showErrorPopup(message) {
+function showErrorPopup(message, path) {
   const errorOverlay = document.querySelector(".error-popup");
   const container = errorOverlay.querySelector(".error-popup-container");
   const para = container.querySelector("p");
@@ -27,7 +27,7 @@ function showErrorPopup(message) {
 
   setTimeout(() => {
     // window.unlockExam();
-    location.replace("/");
+    location.replace(path);
   }, 4000);
 }
 
@@ -37,15 +37,22 @@ function CheckThisCourse() {
     courses[courseName] == undefined ||
     courses[courseName][courseLevel] == undefined
   ) {
-    showErrorPopup("oh!! Course or level not found.");
+    showErrorPopup("oh!! Course or level not found.", "/");
+    document.querySelector("#redirect-to").innerHTML = "Redirecting To Home";
     return;
   }
 
   const courseCompleted = CompletedCourses.some(
     (course) => course.name === courseName && course.level === courseLevel
   );
+
   if (courseCompleted) {
-    showErrorPopup("You have already completed this course.");
+    showErrorPopup(
+      "You have already completed this course.",
+      `/pages/result.html?course=${courseName}&level=${courseLevel}`
+    );
+    document.querySelector("#redirect-to").innerHTML = "Redirecting To Result";
+
     return;
   }
 }
@@ -128,11 +135,19 @@ function timeDown() {
 }
 timeDown();
 
+function formatTime(seconds) {
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return `${mins.toString().padStart(2, "0")}:${secs
+    .toString()
+    .padStart(2, "0")}`;
+}
+
 //** _________________________________ questions _________________________________
 
 //** Variables
-const courseData =
-  (courses[courseName] && courses[courseName][courseLevel]) || courses.ds.easy;
+const courseFullData = courses[courseName];
+const courseData = courses[courseName] && courses[courseName][courseLevel];
 const questionsLength = courseData.length;
 let answeredQuestions =
   JSON.parse(localStorage.getItem("answeredQuestions")) || [];
@@ -152,8 +167,6 @@ nextBtn.forEach((btn) => {
 prevBtn.forEach((btn) => {
   btn.addEventListener("click", prevQuestion);
 });
-// nextBtn.addEventListener("click", nextQuestion);
-// prevBtn.addEventListener("click", prevQuestion);
 
 function nextQuestion() {
   currentQuestionIndex++;
@@ -435,6 +448,8 @@ confirmExam.addEventListener("click", confirmExamHandler);
 function openDialog() {
   document.body.classList.add("overflow-hidden");
   finishOverlay.classList.replace("hidden", "flex");
+  answeredQuestions.length;
+
   const leftQuestions = questionsLength - answeredQuestions.length;
   if (leftQuestions) {
     leftAnswer.innerHTML = `you have ${leftQuestions} not answered`;
@@ -471,15 +486,26 @@ function saveExamDetails() {
   ).length;
 
   const grade = Math.round((correctCount / questionsLength) * 10);
+
+  const takenSeconds = totalTime - totalSeconds;
+  const takenTimeFormatted = formatTime(takenSeconds);
+
   const lastResult = {
-    course: courseName,
+    courseKey: courseName,
+    courseName: courseFullData.name,
+    courseCategory: courseFullData.category,
     level: courseLevel,
     grade,
     correct: correctCount,
     total: questionsLength,
+    timeTaken: takenTimeFormatted,
   };
 
-  const completeCourse = { name: courseName, level: courseLevel, grade };
+  const completeCourse = {
+    name: courseName,
+    level: courseLevel,
+    result: lastResult,
+  };
   if (!currentUser.CompletedCourses) {
     currentUser.CompletedCourses = [];
   }
