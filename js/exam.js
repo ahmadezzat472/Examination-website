@@ -56,8 +56,8 @@ CheckThisCourse();
 let questionsNavigation = document.querySelector("#questions-navigation");
 let questionsMarked = document.querySelector("#questions-marked");
 
-let prevBtn = document.querySelector(".prev-btn");
-let nextBtn = document.querySelector(".next-btn");
+let prevBtn = document.querySelectorAll(".prev-btn");
+let nextBtn = document.querySelectorAll(".next-btn");
 
 let questionNumber = document.querySelector("#question-number");
 let questionText = document.querySelector("#question-text");
@@ -77,8 +77,8 @@ let timeoutOverlay = document.querySelector(".timeout-overlay");
 let hourglassIcon = document.querySelector(".fa-hourglass-end");
 const timerBorder = document.querySelector(".timer-border");
 
-const totalTime = 30 * 60; // 30 minutes
-let totalSeconds = 30 * 60; // 30 minutes
+const totalTime = 10 * 60; // 30 minutes
+let totalSeconds = 10 * 60; // 30 minutes
 
 const timer = setInterval(timeDown, 1000);
 
@@ -146,8 +146,14 @@ questionNavNumbers.innerHTML = courseData.length;
 questionMarkedNumbers.innerHTML = markedQuestions.length;
 
 //** handle prev & next btn
-nextBtn.addEventListener("click", nextQuestion);
-prevBtn.addEventListener("click", prevQuestion);
+nextBtn.forEach((btn) => {
+  btn.addEventListener("click", nextQuestion);
+});
+prevBtn.forEach((btn) => {
+  btn.addEventListener("click", prevQuestion);
+});
+// nextBtn.addEventListener("click", nextQuestion);
+// prevBtn.addEventListener("click", prevQuestion);
 
 function nextQuestion() {
   currentQuestionIndex++;
@@ -214,13 +220,20 @@ function displayNavigationQuestion() {
 
 //** disabled and un disabled the next and prev btns
 function updateNextPrevBehavior() {
-  prevBtn.disabled = currentQuestionIndex === 0;
-  prevBtn.classList.toggle("opacity-50", prevBtn.disabled);
-  prevBtn.classList.toggle("cursor-not-allowed", prevBtn.disabled);
+  const isFirst = currentQuestionIndex === 0;
+  const isLast = currentQuestionIndex === questionsLength - 1;
 
-  nextBtn.disabled = currentQuestionIndex === questionsLength - 1;
-  nextBtn.classList.toggle("opacity-50", nextBtn.disabled);
-  nextBtn.classList.toggle("cursor-not-allowed", nextBtn.disabled);
+  prevBtn.forEach((btn) => {
+    btn.disabled = isFirst;
+    btn.classList.toggle("opacity-50", isFirst);
+    btn.classList.toggle("cursor-not-allowed", isFirst);
+  });
+
+  nextBtn.forEach((btn) => {
+    btn.disabled = isLast;
+    btn.classList.toggle("opacity-50", isLast);
+    btn.classList.toggle("cursor-not-allowed", isLast);
+  });
 }
 
 //** display the question title and answers
@@ -233,7 +246,7 @@ function updateQuestionArea() {
   if (currentQuestion.code) {
     questionCode.classList.remove("hidden");
     questionCode.innerHTML = `
-      <pre class="m-0"><code>${currentQuestion.code}</code></pre>
+      <pre class="m-0 text-xs sm:text-sm"><code>${currentQuestion.code}</code></pre>
     `;
   } else {
     questionCode.classList.add("hidden");
@@ -312,14 +325,14 @@ function displayAnswers(currentQuestion) {
           id="q${currentQuestion.id}-a${item.id}"
         />
         <div
-          class="flex items-center gap-3 lg:gap-4 px-3 py-2 lg:px-4 lg:py-3 rounded-xl border-2 border-border bg-surface transition-all duration-200 hover:border-primary/50 hover:shadow-sm group-hover:bg-primary/5"
+          class="flex items-center gap-3 lg:gap-4 px-3 py-2 lg:px-4 lg:py-3 rounded-xl border md:border-2 border-border bg-surface transition-all duration-200 hover:border-primary/50 hover:shadow-sm group-hover:bg-primary/5"
         >
           <span
-            class="radio-indicator w-7 h-7 lg:w-8 lg:h-8 rounded-lg bg-surface border-2 border-border text-text-muted font-semibold text-sm flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors"
+            class="radio-indicator w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 rounded-lg bg-surface border-2 border-border text-muted font-semibold text-sm flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors"
             >${answersNum[item.id - 1]}</span
           >
           <span
-            class="text-base font-medium lg:font-bold text-muted group-hover:text-text-main transition-all duration-200"
+            class="text-base font-medium max-md:text-[15px] lg:font-bold group-hover:text-text-main transition-all duration-200"
             >${item.text}</span
           >
         </div>
@@ -411,9 +424,11 @@ let cancelFinish = document.querySelector("#cancel-finish");
 let confirmExam = document.querySelector("#confirm-finish");
 let leftAnswer = document.querySelector("#left-answer");
 let circleQuestionIcon = document.querySelector("#circle-question-icon");
-let submitExam = document.querySelector("#submit-exam");
+let submitExam = document.querySelectorAll(".submit-exam");
 
-submitExam.addEventListener("click", openDialog);
+submitExam.forEach((btn) => {
+  btn.addEventListener("click", openDialog);
+});
 cancelFinish.addEventListener("click", closeDialog);
 confirmExam.addEventListener("click", confirmExamHandler);
 
@@ -491,44 +506,46 @@ function removeQuestionFromLS() {
 function updateSubmitButtonStyle() {
   const allAnswered = answeredQuestions.length === questionsLength;
 
-  if (allAnswered) {
-    submitExam.classList.remove(
-      "bg-secondary-hover",
-      "hover:bg-secondary/10",
-      "border-secondary/20",
-      "hover:text-secondary",
-      "text-white"
-    );
-    submitExam.classList.add(
-      "bg-green-500",
-      "hover:bg-green-100",
-      "border-green-500/20",
-      "hover:border-green/50",
-      "hover:text-green-500",
-      "text-white"
-    );
-  } else {
-    submitExam.classList.remove(
-      "bg-green-500",
-      "hover:bg-green-600",
-      "border-green-500/20"
-    );
-    submitExam.classList.add(
-      "bg-secondary-hover",
-      "hover:bg-secondary/10",
-      "border-secondary/20",
-      "hover:border-secondary/50",
-      "hover:text-secondary",
-      "text-white"
-    );
-  }
+  submitExam.forEach((btn) => {
+    if (allAnswered) {
+      btn.classList.remove(
+        "bg-secondary-hover",
+        "hover:bg-secondary/10",
+        "border-secondary/20",
+        "hover:text-secondary"
+      );
+
+      btn.classList.add(
+        "bg-green-500",
+        "hover:bg-green-100",
+        "border-green-500/20",
+        "hover:text-green-500",
+        "text-white"
+      );
+    } else {
+      btn.classList.remove(
+        "bg-green-500",
+        "hover:bg-green-100",
+        "border-green-500/20"
+      );
+
+      btn.classList.add(
+        "bg-secondary-hover",
+        "hover:bg-secondary/10",
+        "border-secondary/20",
+        "hover:text-secondary",
+        "text-white"
+      );
+    }
+  });
 }
+
 updateSubmitButtonStyle();
 
 //** _________________________________ menu bar _________________________________
 let sidebarMenu = document.querySelector("#sidebar-menu");
 let sidebar = document.querySelector("#sidebar");
-sidebarMenu.addEventListener("click", showSidebar);
+if (sidebarMenu) sidebarMenu.addEventListener("click", showSidebar);
 
 function showSidebar() {
   sidebar.classList.toggle("max-md:hidden");

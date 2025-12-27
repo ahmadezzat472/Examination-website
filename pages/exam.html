@@ -28,10 +28,6 @@
       button[title="marked"] {
         @apply bg-warning/5 hover:bg-warning/20 border-warning hover:border-warning text-warning shadow-md shadow-warning/10;
       }
-
-      .input:checked + div {
-        @apply border-primary bg-primary/5;
-      }
     </style>
   </head>
   <body class="min-h-screen bg-background">
@@ -57,10 +53,9 @@
           </a>
           <div class="flex items-center gap-2">
             <button
-              class="text-sm flex items-center gap-2 px-2 py-1 rounded-lg hover:bg-secondary/10 border border-secondary/20 hover:text-secondary shadow-md shadow-gray-300 bg-secondary-hover text-white font-bold transition-all duration-300 active:scale-95"
+              class="submit-exam md:hidden text-sm flex items-center gap-2 px-2 py-1 rounded-lg hover:bg-secondary/10 border border-secondary/20 hover:text-secondary shadow-md shadow-gray-300 bg-secondary-hover text-white font-bold transition-all duration-300 active:scale-95"
               type="button"
               title="Submit Exam"
-              id="submit-exam"
             >
               Finish
             </button>
@@ -159,24 +154,30 @@
             >
               <div class="flex items-center justify-between gap-3">
                 <button
-                  class="flex py-1 flex-1 items-center justify-center gap-2 rounded-xl bg-primary text-white px-4 text-sm font-bold shadow-lg shadow-primary/30 hover:bg-primary-hover transition-all active:scale-95"
+                  class="prev-btn flex py-1 flex-1 items-center justify-center gap-2 rounded-xl bg-primary text-white px-4 text-sm font-bold shadow-lg shadow-primary/30 hover:bg-primary-hover transition-all active:scale-95"
                   type="button"
-                  id="prev-btn"
                 >
                   <i class="fa-solid fa-chevron-left text-sm"></i>
                   Previous
                 </button>
 
                 <button
-                  class="flex py-1 flex-1 items-center justify-center gap-2 rounded-xl bg-primary text-white px-4 text-sm font-bold shadow-lg shadow-primary/30 hover:bg-primary-hover transition-all active:scale-95"
+                  class="next-btn flex py-1 flex-1 items-center justify-center gap-2 rounded-xl bg-primary text-white px-4 text-sm font-bold shadow-lg shadow-primary/30 hover:bg-primary-hover transition-all active:scale-95"
                   type="button"
-                  id="next-btn"
                 >
                   Next
                   <i class="fa-solid fa-chevron-right text-sm"></i>
                 </button>
               </div>
             </div>
+
+            <button
+              class="submit-exam dddd w-full text-center max-md:hidden text-sm gap-2 px-2 py-1 rounded-lg hover:bg-secondary/10 border border-secondary/20 hover:text-secondary shadow-md shadow-gray-300 bg-secondary-hover text-white font-bold transition-all duration-300 active:scale-95"
+              type="button"
+              title="Submit Exam"
+            >
+              Finish
+            </button>
           </div>
         </aside>
 
@@ -227,9 +228,8 @@
                   ></i>
                 </div>
                 <span
-                  class="text-sm font-medium text-text-muted group-hover:text-text-main transition-colors flex items-center gap-2"
+                  class="text-xs md:text-sm font-bold text-muted group-hover:text-text-main transition-colors flex items-center gap-2"
                 >
-                  <i class="fa-solid fa-bookmark text-sm text-warning"></i>
                   Mark for review
                 </span>
               </label>
