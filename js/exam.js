@@ -12,6 +12,9 @@ const courseLevel = params.get("level");
 
 //** get the Completed Courses from currentUser
 let currentUser = JSON.parse(localStorage.getItem("currentUser")) || {};
+document.querySelector(
+  "#user-name"
+).innerHTML = `${currentUser.fName} ${currentUser.lName}`;
 let CompletedCourses = currentUser.CompletedCourses || [];
 
 //** popup show message error
@@ -23,6 +26,7 @@ function showErrorPopup(message) {
   errorOverlay.classList.replace("hidden", "flex");
 
   setTimeout(() => {
+    // window.unlockExam();
     location.replace("/");
   }, 4000);
 }
@@ -52,8 +56,8 @@ CheckThisCourse();
 let questionsNavigation = document.querySelector("#questions-navigation");
 let questionsMarked = document.querySelector("#questions-marked");
 
-let prevBtn = document.querySelector("#prev-btn");
-let nextBtn = document.querySelector("#next-btn");
+let prevBtn = document.querySelector(".prev-btn");
+let nextBtn = document.querySelector(".next-btn");
 
 let questionNumber = document.querySelector("#question-number");
 let questionText = document.querySelector("#question-text");
@@ -115,6 +119,7 @@ function timeDown() {
 
     setTimeout(() => {
       clearInterval(toggleIcons);
+      // window.unlockExam();
       location.replace("/pages/timeout.html");
     }, 3000);
   }
@@ -190,7 +195,7 @@ function displayNavigationQuestion() {
   courseData.forEach((item) => {
     questionsNavigation.innerHTML += `
       <button
-        class="question-navigation-btn w-10 h-10 rounded-lg border flex items-center justify-center"
+        class="question-navigation-btn w-9 h-9 lg:w-10 lg:h-10 rounded-lg bg-gray-50 text-gray-600 hover:bg-gray-200 border-[1.5px] border-gray-300 hover:border-gray-400 shadow-md shadow-gray-100 flex items-center justify-center  transition-all duration-200"
         title=${
           currentQuestion == item.id
             ? `current`
@@ -279,6 +284,7 @@ function updateQuestionArea() {
 
       currentQuestion.status = "answered";
       calcProgress();
+      updateSubmitButtonStyle();
     });
   });
 
@@ -306,14 +312,14 @@ function displayAnswers(currentQuestion) {
           id="q${currentQuestion.id}-a${item.id}"
         />
         <div
-          class="flex items-center gap-4 px-4 py-3 rounded-xl border-2 border-border bg-surface transition-all duration-200 hover:border-primary/50 hover:shadow-sm group-hover:bg-primary/5"
+          class="flex items-center gap-3 lg:gap-4 px-3 py-2 lg:px-4 lg:py-3 rounded-xl border-2 border-border bg-surface transition-all duration-200 hover:border-primary/50 hover:shadow-sm group-hover:bg-primary/5"
         >
           <span
-            class="radio-indicator w-8 h-8 rounded-lg bg-surface border-2 border-border text-text-muted font-semibold text-sm flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors"
+            class="radio-indicator w-7 h-7 lg:w-8 lg:h-8 rounded-lg bg-surface border-2 border-border text-text-muted font-semibold text-sm flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors"
             >${answersNum[item.id - 1]}</span
           >
           <span
-            class="text-base font-medium text-text-muted group-hover:text-text-main transition-colors"
+            class="text-base font-medium lg:font-bold text-muted group-hover:text-text-main transition-all duration-200"
             >${item.text}</span
           >
         </div>
@@ -334,12 +340,13 @@ function checkQuestionIsMarked(currentQuestion) {
 
 function displayMarkedQuestion() {
   if (markedQuestions.length) {
-    questionsMarked.className = "flex gap-1.5 flex-wrap gap-2";
+    questionsMarked.className =
+      "grid [grid-template-columns:repeat(auto-fill,minmax(2rem,1fr))] lg:[grid-template-columns:repeat(auto-fill,minmax(2.5rem,1fr))] gap-x-1.5 gap-y-3 justify-center font-semibold text-sm";
     questionsMarked.innerHTML = "";
     markedQuestions.forEach((questionId) => {
       questionsMarked.innerHTML += `
         <button
-          class="question-marked-btn px-3 py-1.5 rounded-lg border-2 border-warning text-warning text-xs font-semibold bg-warning/5 hover:bg-warning/10 transition-colors"
+          class="question-marked-btn  w-9 h-9 lg:w-10 lg:h-10 rounded-lg border-2 border-warning text-warning text-xs font-semibold bg-warning/5 hover:bg-warning/20 transition-all duration-200"
           id="${questionId}"
         >
           ${questionId}
@@ -348,10 +355,10 @@ function displayMarkedQuestion() {
 
     attachMarkedButtonListeners();
   } else {
-    questionsMarked.className = "flex gap-1.5 items-center justify-center";
+    questionsMarked.className = "flex items-center justify-center";
     questionsMarked.innerHTML = `
       <i
-        class="fa-regular fa-bookmark text-5xl text-warning/30 my-5"
+        class="fa-regular fa-bookmark text-4xl text-warning/30 my-5"
       ></i>`;
   }
 }
@@ -434,6 +441,9 @@ function closeDialog() {
 
 let users = JSON.parse(localStorage.getItem("users")) || {};
 function confirmExamHandler() {
+  // Unlock the exam page before navigating
+  // window.unlockExam();
+
   saveExamDetails();
   document.body.classList.remove("overflow-hidden");
   finishOverlay.classList.replace("flex", "hidden");
@@ -474,4 +484,52 @@ function saveExamDetails() {
 function removeQuestionFromLS() {
   localStorage.removeItem("answeredQuestions");
   localStorage.removeItem("markedQuestions");
+}
+
+//** _________________________________ update submit button style _________________________________
+
+function updateSubmitButtonStyle() {
+  const allAnswered = answeredQuestions.length === questionsLength;
+
+  if (allAnswered) {
+    submitExam.classList.remove(
+      "bg-secondary-hover",
+      "hover:bg-secondary/10",
+      "border-secondary/20",
+      "hover:text-secondary",
+      "text-white"
+    );
+    submitExam.classList.add(
+      "bg-green-500",
+      "hover:bg-green-100",
+      "border-green-500/20",
+      "hover:border-green/50",
+      "hover:text-green-500",
+      "text-white"
+    );
+  } else {
+    submitExam.classList.remove(
+      "bg-green-500",
+      "hover:bg-green-600",
+      "border-green-500/20"
+    );
+    submitExam.classList.add(
+      "bg-secondary-hover",
+      "hover:bg-secondary/10",
+      "border-secondary/20",
+      "hover:border-secondary/50",
+      "hover:text-secondary",
+      "text-white"
+    );
+  }
+}
+updateSubmitButtonStyle();
+
+//** _________________________________ menu bar _________________________________
+let sidebarMenu = document.querySelector("#sidebar-menu");
+let sidebar = document.querySelector("#sidebar");
+sidebarMenu.addEventListener("click", showSidebar);
+
+function showSidebar() {
+  sidebar.classList.toggle("max-md:hidden");
 }
