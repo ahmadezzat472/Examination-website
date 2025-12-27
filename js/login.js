@@ -33,6 +33,7 @@ function validateLogin(e) {
       lName: users[userFound].lName,
       email: users[userFound].email,
       password: users[userFound].password,
+      CompletedCourses: users[userFound].CompletedCourses,
     };
     statusMessage.classList.remove("text-danger");
     statusMessage.classList.add("text-success");

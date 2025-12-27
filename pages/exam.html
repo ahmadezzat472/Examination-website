@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Exam</title>
+    <title>Exam Page</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -30,10 +30,9 @@
       }
     </style>
   </head>
-  <body class="min-h-screen bg-background">
+  <body class="bg-background">
     <header class="fixed top-0 right-0 left-0 z-50 bg-surface shadow-lg">
       <div class="max-w-8xl mx-auto w-full px-8 max-md:px-4 py-3">
-        <!-- Top -->
         <div class="flex items-center justify-between">
           <a href="/" class="flex items-center gap-1.5 group">
             <div
@@ -92,10 +91,8 @@
       ></div>
     </header>
 
-    <main class="max-w-8xl mx-auto w-full px-8 max-md:px-4 pb-8">
-      <div
-        class="flex flex-col md:flex-row gap-4 md:gap-6 mt-20 md:mt-24 relative"
-      >
+    <main class="max-w-8xl mx-auto w-full px-8 max-md:px-4 pb-8 mt-20 md:mt-24">
+      <div class="flex flex-col md:flex-row gap-4 md:gap-6 relative">
         <!-- Sidebar -->
         <button
           id="sidebar-menu"
@@ -324,9 +321,8 @@
         <h2 class="text-xl font-bold text-red-600 mb-2">Not Allowed</h2>
         <p class="text-muted text-sm font-semibold mb-1"></p>
         <span class="text-gray-600 text-xs font-semibold"
-          >Redirecting To Home<span class="ml-1 text-[18px] animate-pulse"
-            >...</span
-          ></span
+          ><span id="redirect-to">Redirecting To Home</span
+          ><span class="ml-1 text-[18px] animate-pulse">...</span></span
         >
       </div>
     </div>

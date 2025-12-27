@@ -3,97 +3,191 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Result</title>
-    <link rel="stylesheet" href="/css/global.css" />
-    <link rel="stylesheet" href="/css/exam.css" />
+    <title>Result Page</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/result.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/js/tailwind-config.js"></script>
     <script src="/js/auth.js"></script>
   </head>
-  <body class="min-h-screen bg-background flex items-center justify-center p-6">
-    <main class="max-w-xl w-full">
-      <div
-        class="bg-surface rounded-2xl shadow-card border border-border p-8 text-center"
-      >
-        <h1 class="text-2xl font-bold text-text-main mb-2">Exam Result</h1>
-
-        <p id="no-result" class="text-muted mb-4 hidden">
-          No result found — redirecting to home.
-        </p>
-
-        <div id="result-card" class="space-y-4">
-          <div class="text-sm text-text-muted">Student</div>
-          <div class="text-lg font-semibold text-text-main" id="username">
-            -
-          </div>
-
-          <div class="grid grid-cols-2 gap-4 mt-4">
-            <div class="p-4 bg-surface rounded-lg border border-border">
-              <div class="text-xs text-text-muted">Course</div>
-              <div class="font-semibold" id="course-name">-</div>
-              <div class="text-xs text-muted" id="course-level">-</div>
-            </div>
-
-            <div class="p-4 bg-surface rounded-lg border border-border">
-              <div class="text-xs text-text-muted">Grade</div>
-              <div class="font-semibold text-2xl text-primary" id="grade">
-                -
-              </div>
-              <div class="text-xs text-muted">
-                Score <span id="score">-</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="mt-6">
-            <button
-              id="home-btn"
-              class="px-4 py-2 rounded-lg bg-primary text-white font-semibold"
+  <body class="bg-background">
+    <header class="fixed top-0 right-0 left-0 z-50 bg-surface shadow-lg">
+      <div class="max-w-8xl mx-auto w-full px-8 max-md:px-4 py-3">
+        <div class="flex items-center justify-between">
+          <a href="/" class="flex items-center gap-1.5 group">
+            <div
+              class="flex h-8 w-8 items-center justify-center rounded-lg border-2 border-primary bg-primary/5 group-hover:bg-primary/100 transition-colors duration-300"
             >
-              Back to Home
-            </button>
-            <button id="view-profile" class="px-4 py-2 rounded-lg border ml-2">
-              Profile
-            </button>
+              <i
+                class="fa-solid fa-meteor text-primary group-hover:text-white text-sm transition-colors duration-300"
+              ></i>
+            </div>
+            <span
+              class="text-lg font-bold group-hover:text-primary-600 transition-all duration-300"
+              >Ali<span
+                class="text-2xl text-primary-600 group-hover:text-black font-bold"
+                >z</span
+              >at</span
+            >
+          </a>
+
+          <div class="flex items-center space-x-3">
+            <div class="text-right">
+              <p class="user-name text-sm font-medium"></p>
+              <p class="text-xs text-muted dark:text-muted-dark">Student</p>
+            </div>
+            <img
+              alt="User Avatar"
+              class="h-9 w-9 rounded-full ring-2 ring-primary p-0.5 object-cover"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBecymijBK4VfJCeg19x6-6OEmDc1rX_gYYWUE6k2azzMjYRPZ0qgOzHYMf2cTTTMIZfZtmSc4QQpXFuwLJsn9whGDjA3GhI88UGK_l7UM_NMztN2VLVxdD2Uk8Gzb3zEzwSZOSz1p9d0ZaU5i5_qbYyUAgeLcyOyr0KpQkuVrum2BySoYXUvOn1mNYSn_lysBlb0jLB3FcLGnyjbgxf8y3s2-6_iukhxTw0EpGq0ZCjMudqsMcnWrbUAQYmKW1pPAf6bRkMPb4yvo"
+            />
           </div>
         </div>
       </div>
+    </header>
+
+    <main class="max-w-2xl mx-auto w-full px-8 max-md:px-4 pb-8 mt-20 md:mt-24">
+      <div class="w-full mb-5">
+        <a
+          href="/"
+          class="flex items-center text-sm font-medium text-muted dark:text-muted-dark hover:text-primary transition-colors"
+        >
+          <i class="fa-solid fa-arrow-left text-sm mr-2"></i>
+          Back to Home
+        </a>
+      </div>
+
+      <div
+        class="w-full bg-surface dark:bg-surface-dark rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-800 relative overflow-hidden text-center"
+      >
+        <div
+          id="bg-overlay"
+          class="absolute top-0 left-1/2 w-full h-64 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/2 pointer-events-none"
+        ></div>
+        <div class="relative z-10 flex flex-col items-center">
+          <div
+            id="icon-box"
+            class="mb-6 w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center relative z-10 ring-4 ring-primary/20"
+          >
+            <i
+              id="icon-success"
+              class="fa-solid fa-trophy text-6xl text-primary"
+            ></i>
+          </div>
+          <h1
+            id="title-result"
+            class="text-2xl sm:text-3xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-primary to-teal-200"
+          >
+            Exam Completed!
+          </h1>
+          <p
+            class="text-muted dark:text-muted-dark text-base sm:text-lg mb-8 leading-relaxed"
+          >
+            <span id="msg-result">Congratulations</span>
+            <span class="user-name text-gray-900 dark:text-white font-semibold"
+              >John Smith</span
+            >,
+            <span id="msg-details-result">
+              you have successfully completed the</span
+            >
+            <span id="course-name" class="text-primary font-medium"
+              >Advanced C Programming</span
+            >
+            exam.
+          </p>
+          <div
+            class="w-full bg-background dark:bg-background-dark/50 rounded-xl p-6 border border-gray-200 dark:border-gray-700"
+          >
+            <p
+              class="text-sm text-muted dark:text-muted-dark uppercase tracking-widest font-semibold mb-2"
+            >
+              Final Score
+            </p>
+            <div class="flex items-baseline justify-center space-x-2">
+              <span
+                id="score"
+                class="text-5xl sm:text-6xl font-extrabold text-gray-900 dark:text-white"
+              ></span>
+              <span
+                class="text-xl sm:text-2xl text-muted dark:text-muted-dark font-medium"
+                >/ 100</span
+              >
+            </div>
+            <div
+              class="mt-4 w-full h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden"
+            >
+              <div
+                id="grade-progress"
+                class="h-full bg-gradient-to-r from-primary to-teal-400 rounded-full shadow-[0_0_10px_rgba(20,184,166,0.5)]"
+                style="width: 85%"
+              ></div>
+            </div>
+            <div class="mt-8 flex justify-between text-xs sm:text-sm px-2">
+              <div class="flex flex-col items-center">
+                <span class="text-muted dark:text-muted-dark mb-1">Status</span>
+                <span class="font-bold flex items-center">
+                  <i
+                    id="state-icon"
+                    class="fa-regular fa-circle-check text-xs mr-1 text-green-500"
+                  ></i>
+                  <span id="state-text" class="text-green-500"
+                    >Passed</span
+                  ></span
+                >
+              </div>
+              <div class="flex flex-col items-center">
+                <span class="text-muted dark:text-muted-dark mb-1">Level</span>
+                <span
+                  id="display-level"
+                  class="text-primary-700 dark:text-white font-semibold"
+                  >easy</span
+                >
+              </div>
+              <div class="flex flex-col items-center">
+                <span class="text-muted dark:text-muted-dark mb-1"
+                  >Time Taken</span
+                >
+                <span
+                  id="display-time"
+                  class="text-gray-900 dark:text-white font-semibold"
+                  >42m 15s</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div
+        class="w-full bg-surface dark:bg-surface-dark rounded-2xl p-5 shadow-md border border-gray-200 dark:border-gray-800 flex items-center justify-between opacity-80 hover:opacity-100 transition-opacity cursor-pointer"
+      >
+        <div class="flex items-center gap-4">
+          <div
+            class="w-12 h-12 rounded-lg bg-gray-800 flex items-center justify-center border border-gray-700"
+          >
+            <span class="material-icons text-gray-400">lock</span>
+          </div>
+          <div>
+            <p
+              class="text-xs text-muted dark:text-muted-dark uppercase tracking-wider"
+            >
+              Up Next
+            </p>
+            <h3 class="font-semibold text-gray-900 dark:text-white">
+              Data Structures II
+            </h3>
+          </div>
+        </div>
+        <span class="material-icons text-gray-400">chevron_right</span>
+      </div> -->
     </main>
 
-    <script>
-      const last = JSON.parse(localStorage.getItem("lastResult"));
-      const user = JSON.parse(localStorage.getItem("currentUser")) || {};
-
-      const noResult = document.getElementById("no-result");
-      const card = document.getElementById("result-card");
-
-      if (!last) {
-        card.classList.add("hidden");
-        noResult.classList.remove("hidden");
-        setTimeout(() => location.replace("/pages/home.html"), 1800);
-      } else {
-        document.getElementById("course-name").textContent = last.course || "-";
-        document.getElementById("course-level").textContent = last.level || "-";
-        document.getElementById("grade").textContent =
-          last.grade !== undefined ? last.grade + "/10" : "-";
-        document.getElementById("score").textContent = `${
-          last.correct || 0
-        } / ${last.total || 0}`;
-        document.getElementById("username").textContent =
-          user.name || user.email || "Student";
-      }
-
-      document.getElementById("home-btn").addEventListener("click", () => {
-        location.replace("/pages/home.html");
-      });
-
-      document.getElementById("view-profile").addEventListener("click", () => {
-        location.replace("/pages/login.html");
-      });
-    </script>
+    <script src="/js/result.js"></script>
   </body>
 </html>
