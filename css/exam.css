@@ -15,7 +15,6 @@
   outline-offset: 2px;
 }
 
-/* Smooth transitions */
 .custom-radio + div,
 .custom-radio + div .radio-indicator {
   transition: all 0.2s ease-in-out;
