@@ -32,6 +32,7 @@ function validateLogin(e) {
       fName: users[userFound].fName,
       lName: users[userFound].lName,
       email: users[userFound].email,
+      password: users[userFound].password,
     };
     statusMessage.classList.remove("text-danger");
     statusMessage.classList.add("text-success");

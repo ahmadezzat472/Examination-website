@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Result</title>
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/exam.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="/js/auth.js"></script>
+  </head>
+  <body class="min-h-screen bg-background flex items-center justify-center p-6">
+    <main class="max-w-xl w-full">
+      <div
+        class="bg-surface rounded-2xl shadow-card border border-border p-8 text-center"
+      >
+        <h1 class="text-2xl font-bold text-text-main mb-2">Exam Result</h1>
+
+        <p id="no-result" class="text-muted mb-4 hidden">
+          No result found — redirecting to home.
+        </p>
+
+        <div id="result-card" class="space-y-4">
+          <div class="text-sm text-text-muted">Student</div>
+          <div class="text-lg font-semibold text-text-main" id="username">
+            -
+          </div>
+
+          <div class="grid grid-cols-2 gap-4 mt-4">
+            <div class="p-4 bg-surface rounded-lg border border-border">
+              <div class="text-xs text-text-muted">Course</div>
+              <div class="font-semibold" id="course-name">-</div>
+              <div class="text-xs text-muted" id="course-level">-</div>
+            </div>
+
+            <div class="p-4 bg-surface rounded-lg border border-border">
+              <div class="text-xs text-text-muted">Grade</div>
+              <div class="font-semibold text-2xl text-primary" id="grade">
+                -
+              </div>
+              <div class="text-xs text-muted">
+                Score <span id="score">-</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6">
+            <button
+              id="home-btn"
+              class="px-4 py-2 rounded-lg bg-primary text-white font-semibold"
+            >
+              Back to Home
+            </button>
+            <button id="view-profile" class="px-4 py-2 rounded-lg border ml-2">
+              Profile
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      const last = JSON.parse(localStorage.getItem("lastResult"));
+      const user = JSON.parse(localStorage.getItem("currentUser")) || {};
+
+      const noResult = document.getElementById("no-result");
+      const card = document.getElementById("result-card");
+
+      if (!last) {
+        card.classList.add("hidden");
+        noResult.classList.remove("hidden");
+        setTimeout(() => location.replace("/pages/home.html"), 1800);
+      } else {
+        document.getElementById("course-name").textContent = last.course || "-";
+        document.getElementById("course-level").textContent = last.level || "-";
+        document.getElementById("grade").textContent =
+          last.grade !== undefined ? last.grade + "/10" : "-";
+        document.getElementById("score").textContent = `${
+          last.correct || 0
+        } / ${last.total || 0}`;
+        document.getElementById("username").textContent =
+          user.name || user.email || "Student";
+      }
+
+      document.getElementById("home-btn").addEventListener("click", () => {
+        location.replace("/pages/home.html");
+      });
+
+      document.getElementById("view-profile").addEventListener("click", () => {
+        location.replace("/pages/login.html");
+      });
+    </script>
+  </body>
+</html>
