@@ -40,157 +40,29 @@
           </a>
       </div>
     </header>
-    <div class="py-6 px-5 bg-background min-h-[calc(100vh-64px)] dark:bg-background-dark">
-      <div>
-        <h2 class="text-xl font-bold dark:text-text-dark">All Courses</h2>
-        <p class="text-sm text-muted dark:text-muted-dark">Expand your knowledge with our premium curriculum.</p>
-      </div>
-      <div class="grid justify-items-center grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 py-5 gap-y-5">
-        <div class="shadow-card rounded-xl w-64 p-5 bg-surface dark:bg-surface-dark flex flex-col gap-4">
-          <div class="w-12 bg-gradient-to-r from-blue-400 to-blue-800 rounded-lg p-2 shadow-md shadow-blue-300">
-            <img src="../assets/imgs/hierarchy-structure.png" alt="data structure">
-          </div>
-          <div class="flex flex-col gap-2">
-            <p class="font-bold dark:text-text-dark">Data Structures & Algo</p>
-            <div class="flex flex-col gap-3">
-              <p class="course-description text-xs text-muted max-h-12 overflow-hidden text-ellipsis">Master the fundamentals of data structures and algorithms in C++. Includes 50+ practice problems.</p>
-              <hr class="my-1 dark:border-muted-dark">
-              <div class="text-xs text-muted flex gap-3">
-                <div>
-                  <i class="fa-regular fa-clock"></i> <span>45m</span>
-                </div>
-                <div>
-                  <i class="fa-solid fa-circle-question"></i> <span>24 Qs</span>
-                </div>
-              </div>
-              <button type="submit"
-                class="bg-primary-600 text-white py-2 text-sm rounded-lg shadow-input hover:bg-primary transition-all duration-300 cursor-pointer">
-                Course Details
-              </button>
-            </div>
-          </div>
+    <div class="py-6 px-5 bg-background min-h-[calc(100vh-64px)] dark:bg-background-dark grid grid-cols-1 sm:grid-cols-12">
+      <aside class="sm:col-span-3 lg:col-span-2 pr-5">
+        <h3 class="font-bold text-sm dark:text-text-dark">Categories</h3>
+        <ul class="py-3 flex sm:flex-col gap-1 overflow-x-scroll items-center sm:items-start sm:overflow-x-hidden">
+          <li class="text-xs text-muted dark:text-muted-dark cursor-pointer bg-surface dark:text-primary-400 text-primary-400 font-bold py-2 px-3 rounded-lg hover:bg-surface transition-all duration-300 min-w-fit w-full">All Courses</li>
+          <li class="text-xs text-muted dark:text-muted-dark cursor-pointer py-2 px-3 rounded-lg hover:bg-surface transition-all duration-300 min-w-fit w-full">Computer Science</li>
+          <li class="text-xs text-muted dark:text-muted-dark cursor-pointer py-2 px-3 rounded-lg hover:bg-surface transition-all duration-300 min-w-fit w-full">Programming</li>
+          <li class="text-xs text-muted dark:text-muted-dark cursor-pointer py-2 px-3 rounded-lg hover:bg-surface transition-all duration-300 min-w-fit w-full">Systems</li>
+          <li class="text-xs text-muted dark:text-muted-dark cursor-pointer py-2 px-3 rounded-lg hover:bg-surface transition-all duration-300 min-w-fit w-full">Data Science</li>
+          <li class="text-xs text-muted dark:text-muted-dark cursor-pointer py-2 px-3 rounded-lg hover:bg-surface transition-all duration-300 min-w-fit w-full">Infrastructure</li>
+          <li class="text-xs text-muted dark:text-muted-dark cursor-pointer py-2 px-3 rounded-lg hover:bg-surface transition-all duration-300 min-w-fit w-full">Security</li>
+        </ul>
+      </aside>
+      <div class="sm:col-span-9 lg:col-span-10">
+        <div>
+          <h2 id="category" class="text-xl font-bold dark:text-text-dark"></h2>
+          <p class="text-sm text-muted dark:text-muted-dark">Expand your knowledge with our premium curriculum.</p>
         </div>
-        <div class="shadow-card rounded-xl w-64 p-5 bg-surface dark:bg-surface-dark flex flex-col gap-4">
-          <div class="w-12 h-12 bg-gradient-to-r from-purple-400 to-pink-600 rounded-lg p-2 shadow-md shadow-purple-300">
-            <img src="../assets/imgs/data-processing.png" alt="database systems">
-          </div>
-          <div class="flex flex-col gap-2">
-            <p class="font-bold dark:text-text-dark">Database Systems</p>
-            <div class="flex flex-col gap-3 dark:text-muted-dark">
-              <p class="course-description text-xs text-muted max-h-12 overflow-hidden text-ellipsis">Learn SQL, NoSQL, and database design principles. Understand indexing and query optimization.</p>
-              <hr class="my-1 dark:border-muted-dark">
-              <div class="text-xs text-muted flex gap-3">
-                <div>
-                  <i class="fa-regular fa-clock"></i> <span>60m</span>
-                </div>
-                <div>
-                  <i class="fa-solid fa-circle-question"></i> <span>40 Qs</span>
-                </div>
-              </div>
-              <button type="submit"
-                class="bg-primary-600 text-white py-2 text-sm rounded-lg shadow-input hover:bg-primary transition-all duration-300 cursor-pointer">
-                Course Details
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="shadow-card rounded-xl w-64 p-5 bg-surface dark:bg-surface-dark flex flex-col gap-4">
-          <div class="w-12 bg-gradient-to-r from-amber-300 to-amber-500 rounded-lg p-2 shadow-md shadow-amber-200">
-            <img src="../assets/imgs/java-script.png" alt="JavaScript">
-          </div>
-          <div class="flex flex-col gap-2">
-            <p class="font-bold dark:text-text-dark">Advanced JavaScript</p>
-            <div class="flex flex-col dark:text-muted-dark gap-3">
-              <p class="course-description text-xs text-muted max-h-12 overflow-hidden text-ellipsis">Deep dive into closures, prototypes, async programming, and modern ES6+ features that will blow your mind up.</p>
-              <hr class="my-1 dark:border-muted-dark">
-              <div class="text-xs text-muted flex gap-3">
-                <div>
-                  <i class="fa-regular fa-clock"></i> <span>30m</span>
-                </div>
-                <div>
-                  <i class="fa-solid fa-circle-question"></i> <span>15 Qs</span>
-                </div>
-              </div>
-              <button type="submit"
-                class="bg-primary-600 text-white py-2 text-sm rounded-lg shadow-input hover:bg-primary transition-all duration-300 cursor-pointer">
-                Course Details
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="shadow-card rounded-xl w-64 p-5 bg-surface dark:bg-surface-dark flex flex-col gap-4">
-          <div class="w-12 bg-gradient-to-r from-gray-400 to-gray-600 rounded-lg p-2 shadow-md shadow-gray-300">
-            <img src="../assets/imgs/cyber-security.png" alt="data structure">
-          </div>
-          <div class="flex flex-col gap-2">
-            <p class="font-bold dark:text-text-dark">Cyber Security Basics</p>
-            <div class="flex flex-col dark:text-muted-dark gap-3">
-              <p class="course-description text-xs text-muted max-h-12 overflow-hidden text-ellipsis">Master the fundamentals of data structures and algorithms in C++. Includes 50+ practice problems.</p>
-              <hr class="my-1 dark:border-muted-dark">
-              <div class="text-xs text-muted flex gap-3">
-                <div>
-                  <i class="fa-regular fa-clock"></i> <span>45m</span>
-                </div>
-                <div>
-                  <i class="fa-solid fa-circle-question"></i> <span>24 Qs</span>
-                </div>
-              </div>
-              <button type="submit"
-                class="bg-primary-600 text-white py-2 text-sm rounded-lg shadow-input hover:bg-primary transition-all duration-300 cursor-pointer">
-                Course Details
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="shadow-card rounded-xl w-64 p-5 bg-surface dark:bg-surface-dark flex flex-col gap-4">
-          <div class="w-12 bg-gradient-to-r from-sky-300 to-sky-500 rounded-lg p-2 shadow-md shadow-sky-200">
-            <img src="../assets/imgs/server.png" alt="cloud computing">
-          </div>
-          <div class="flex flex-col gap-2">
-            <p class="font-bold dark:text-text-dark">Cloud Computing</p>
-            <div class="flex flex-col dark:text-muted-dark gap-3">
-              <p class="course-description text-xs text-muted max-h-12 overflow-hidden text-ellipsis">Understand AWS core services, security, architecture, pricing, and support. Ideal for beginners who want to start.</p>
-              <hr class="my-1 dark:border-muted-dark">
-              <div class="text-xs text-muted flex gap-3">
-                <div>
-                  <i class="fa-regular fa-clock"></i> <span>1h</span>
-                </div>
-                <div>
-                  <i class="fa-solid fa-circle-question"></i> <span>65 Qs</span>
-                </div>
-              </div>
-              <button type="submit"
-                class="bg-primary-600 text-white py-2 text-sm rounded-lg shadow-input hover:bg-primary transition-all duration-300 cursor-pointer">
-                Course Details
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="shadow-card rounded-xl w-64 p-5 bg-surface dark:bg-surface-dark flex flex-col gap-4">
-          <div class="w-12 bg-secondary-hover rounded-lg p-2 shadow-md shadow-red-300">
-            <img src="../assets/imgs/ux.png" alt="ui/ux">
-          </div>
-          <div class="flex flex-col gap-2">
-            <p class="font-bold dark:text-text-dark">UI/UX Design</p>
-            <div class="flex flex-col dark:text-muted-dark gap-3">
-              <p class="course-description text-xs text-muted max-h-12 overflow-hidden text-ellipsis">Follow the design process: empathize with users, define pain points, ideate solutions, create amazing designs.</p>
-              <hr class="my-1 dark:border-muted-dark">
-              <div class="text-xs text-muted flex gap-3">
-                <div>
-                  <i class="fa-regular fa-clock"></i> <span>2h</span>
-                </div>
-                <div>
-                  <i class="fa-solid fa-circle-question"></i> <span>100 Qs</span>
-                </div>
-              </div>
-              <button type="submit"
-                class="bg-primary-600 text-white py-2 text-sm rounded-lg shadow-input hover:bg-primary transition-all duration-300 cursor-pointer">
-                Course Details
-              </button>
-            </div>
-          </div>
+        <div id="coursesGrid" class="grid justify-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 py-5 gap-y-5">
+          
         </div>
       </div>
     </div>
+    <script type="module" src="../js/home.js"></script>
   </body>
 </html>
