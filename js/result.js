@@ -1,6 +1,33 @@
+//** get course name and level from url */
+const searchParams = window.location.search;
+const params = new URLSearchParams(searchParams);
+const courseKey = params.get("course");
+const courseLevel = params.get("level");
+
+//** get the Completed Courses from currentUser */
 const user = JSON.parse(localStorage.getItem("currentUser")) || {};
-const last = user.lastResult;
-console.log(user, last);
+let last = user.lastResult;
+let CompletedCourses = user.CompletedCourses || [];
+
+//** check: course is exist | course is completed ?  */
+function CheckThisCourse() {
+  if (courseKey == undefined || courseLevel == undefined) {
+    last = user.lastResult;
+    return;
+  }
+
+  const CourseCompletedIndex = CompletedCourses.findIndex(
+    (course) => course.name === courseKey && course.level === courseLevel
+  );
+
+  if (CourseCompletedIndex != -1) {
+    last = CompletedCourses[CourseCompletedIndex].result;
+    return;
+  } else {
+    last = user.lastResult;
+  }
+}
+CheckThisCourse();
 
 //** the user is passed ? */
 let correct = last.correct;

@@ -42,11 +42,11 @@ function CheckThisCourse() {
     return;
   }
 
-  const courseCompleted = CompletedCourses.some(
+  const isCourseCompleted = CompletedCourses.some(
     (course) => course.name === courseName && course.level === courseLevel
   );
 
-  if (courseCompleted) {
+  if (isCourseCompleted) {
     showErrorPopup(
       "You have already completed this course.",
       `/pages/result.html?course=${courseName}&level=${courseLevel}`
@@ -127,7 +127,7 @@ function timeDown() {
     setTimeout(() => {
       clearInterval(toggleIcons);
       // window.unlockExam();
-      location.replace("/pages/timeout.html");
+      location.replace("/pages/result.html");
     }, 3000);
   }
 
