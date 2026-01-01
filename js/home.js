@@ -1,9 +1,17 @@
 import { courses } from "./data.js";
 
-let currentUser = JSON.parse(localStorage.getItem("currentUser")) || {};
-document.querySelector(
-  "#user-name"
-).innerHTML = `${currentUser.fName} ${currentUser.lName}`;
+let currentUser = JSON.parse(localStorage.getItem("currentUser")) || null;
+
+if (currentUser) {
+  document.querySelector("#user-box").classList.remove("hidden");
+  document.querySelector("#login-btn").classList.add("hidden");
+  document.querySelector(
+    "#user-name"
+  ).innerHTML = `${currentUser.fName} ${currentUser.lName}`;
+} else {
+  document.querySelector("#user-box").classList.add("hidden");
+  document.querySelector("#login-btn").classList.remove("hidden");
+}
 
 var selectedCategory = document.getElementById("category");
 var allCourses = Object.entries(courses);

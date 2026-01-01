@@ -39,7 +39,7 @@ function validateLogin(e) {
     statusMessage.classList.add("text-success");
     statusMessage.textContent = "Logged in successfully";
     localStorage.setItem("currentUser", JSON.stringify(currentUser));
-    window.location.replace("exam.html");
+    window.location.replace("/");
     e.target.reset();
   }
 }
