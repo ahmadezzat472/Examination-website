@@ -450,6 +450,7 @@ function openDialog() {
   finishOverlay.classList.replace("hidden", "flex");
   answeredQuestions.length;
 
+  leftAnswer.innerHTML = "";
   const leftQuestions = questionsLength - answeredQuestions.length;
   if (leftQuestions) {
     leftAnswer.innerHTML = `you have ${leftQuestions} not answered`;
