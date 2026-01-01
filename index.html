@@ -19,10 +19,9 @@
   </head>
   <body class="pt-16">
     <header
-      class="fixed top-0 right-0 left-0 z-50 bg-surface shadow-navbar dark:bg-surface-dark"
+      class="fixed top-0 right-0 left-0 z-50 bg-surface shadow-lg dark:bg-surface-dark"
     >
       <div class="max-w-8xl mx-auto w-full px-8 max-md:px-4 py-4">
-        <!-- Top -->
         <div class="flex items-center justify-between">
           <a href="/" class="flex items-center gap-1.5 group">
             <div
@@ -37,11 +36,26 @@
             >
               Ali
               <span
-                class="text-2xl text-primary-600 group-hover:text-black font-bold"
+                class="text-2xl text-primary-600 group-hover:text-black dark:group-hover:text-white font-bold"
                 >z</span
               >at
             </span>
           </a>
+          <div class="flex items-center space-x-3 max-md:hidden">
+            <div class="hidden sm:block text-right">
+              <p id="user-name" class="text-sm font-medium dark:text-white">
+                John Smith
+              </p>
+              <p class="text-xs text-muted-light dark:text-muted-dark">
+                Student
+              </p>
+            </div>
+            <img
+              alt="User Avatar"
+              class="h-9 w-9 rounded-full ring-2 ring-primary p-0.5 object-cover"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBecymijBK4VfJCeg19x6-6OEmDc1rX_gYYWUE6k2azzMjYRPZ0qgOzHYMf2cTTTMIZfZtmSc4QQpXFuwLJsn9whGDjA3GhI88UGK_l7UM_NMztN2VLVxdD2Uk8Gzb3zEzwSZOSz1p9d0ZaU5i5_qbYyUAgeLcyOyr0KpQkuVrum2BySoYXUvOn1mNYSn_lysBlb0jLB3FcLGnyjbgxf8y3s2-6_iukhxTw0EpGq0ZCjMudqsMcnWrbUAQYmKW1pPAf6bRkMPb4yvo"
+            />
+          </div>
         </div>
       </div>
     </header>
