@@ -2,6 +2,7 @@ export const courses = {
   // 1. DATA STRUCTURES
   ds: {
     id: 1,
+    imageSrc: "../assets/imgs/hierarchy-structure.png",
     name: "Data Structures",
     category: "Computer Science",
     description:
@@ -368,6 +369,7 @@ int main()
   // 2. WEB DEVELOPMENT
   web: {
     id: 2,
+    imageSrc: "../assets/imgs/domain.png",
     name: "Web Development",
     category: "Programming",
     description:
@@ -443,6 +445,7 @@ int main()
   // 3. OPERATING SYSTEMS
   os: {
     id: 3,
+    imageSrc: "../assets/imgs/system-update.png",
     name: "Operating Systems",
     category: "Systems",
     description: "Process management, memory hierarchy, and file systems.",
@@ -513,6 +516,7 @@ int main()
   // 4. DATABASE MANAGEMENT (DBMS)
   dbms: {
     id: 4,
+    imageSrc: "../assets/imgs/database-management.png",
     name: "Database Systems",
     category: "Data Science",
     description: "SQL, NoSQL, Relational algebra, and Normalization.",
@@ -581,6 +585,7 @@ int main()
   // 5. NETWORKING
   net: {
     id: 5,
+    imageSrc: "../assets/imgs/computer.png",
     name: "Computer Networks",
     category: "Infrastructure",
     description: "OSI layers, TCP/IP, routing, and switching.",
@@ -649,6 +654,7 @@ int main()
   // 6. CYBERSECURITY
   sec: {
     id: 6,
+    imageSrc: "../assets/imgs/cyber-security.png",
     name: "Cybersecurity",
     category: "Security",
     description:
