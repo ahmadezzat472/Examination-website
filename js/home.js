@@ -1,4 +1,10 @@
 import { courses } from "./data.js";
+
+let currentUser = JSON.parse(localStorage.getItem("currentUser")) || {};
+document.querySelector(
+  "#user-name"
+).innerHTML = `${currentUser.fName} ${currentUser.lName}`;
+
 var selectedCategory = document.getElementById("category");
 var allCourses = Object.entries(courses);
 var grid = document.getElementById("coursesGrid");
@@ -8,7 +14,7 @@ grid.addEventListener("click", function (e) {
   if (e.target.classList.contains("course-btn")) {
     var courseName = e.target.dataset.course;
     var encodedName = encodeURIComponent(courseName);
-    window.location.href = `course-details.html?course=${encodedName}`;
+    window.location.href = `pages/course-details.html?course=${encodedName}`;
   }
 });
 
