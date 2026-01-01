@@ -7,8 +7,7 @@ if (
 }
 if (
   (!currentUser && window.location.pathname === "/pages/exam.html") ||
-  (!currentUser && window.location.pathname === "/pages/result.html") ||
-  (!currentUser && window.location.pathname === "/pages/timeout.html")
+  (!currentUser && window.location.pathname === "/pages/result.html")
 ) {
   window.location.replace("login.html");
 } else if (
@@ -19,6 +18,6 @@ if (
   if (lastPage) {
     window.location.replace(lastPage);
   } else {
-    window.location.replace("home.html");
+    window.location.replace("/");
   }
 }
