@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Redirect Page</title>
+    <title>Home</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -12,58 +12,97 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="/css/global.css" />
-    <link rel="stylesheet" href="/css/exam.css" />
+    <link rel="stylesheet" href="/css/home.css" />
+    <script src="/js/auth.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              primary: {
-                50: "#ecfdf6",
-                100: "#ccfbf5",
-                200: "#99f6ea",
-                300: "#5eead4",
-                400: "#2dd4bf",
-                500: "#14b8a6",
-                DEFAULT: "#14b8a6",
-                600: "#0d9488",
-                700: "#0f766e",
-                800: "#115e59",
-                900: "#134e4a",
-              },
-              secondary: {
-                DEFAULT: "#f43f5e",
-                hover: "#e11d48",
-              },
-              success: "#10b981",
-              warning: "#f59e0b",
-              danger: "#ef4444",
-              background: "#f3f4f6",
-              surface: "#ffffff",
-              muted: "#64748b",
-              "text-main": "#1f2937",
-              border: "#e5e7eb",
-            },
-            fontFamily: {
-              sans: ["Inter", "sans-serif"],
-            },
-            boxShadow: {
-              navbar: "0 1px 3px rgba(0, 0, 0, 0.05)",
-              card: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
-            },
-          },
-        },
-      };
-    </script>
+    <script src="/js/tailwind-config.js"></script>
   </head>
-  <body>
-    <main class="text-center h-screen bg-primary">
-      <section class="bg-surface flex flex-col">
-        <a href="pages/exam.html?course=ds&level=hard">ds - hard </a>
-        <a href="pages/exam.html?course=ds&level=easy">ds - easy </a>
-        <a href="pages/exam.html?course=ds&level=medium">ds - medium </a>
-      </section>
-    </main>
+  <body class="pt-16">
+    <header
+      class="fixed top-0 right-0 left-0 z-50 bg-surface shadow-navbar dark:bg-surface-dark"
+    >
+      <div class="max-w-8xl mx-auto w-full px-8 max-md:px-4 py-4">
+        <!-- Top -->
+        <div class="flex items-center justify-between">
+          <a href="/" class="flex items-center gap-1.5 group">
+            <div
+              class="flex h-8 w-8 items-center justify-center rounded-lg border-2 border-primary bg-primary/5 group-hover:bg-primary/100 transition-colors duration-300"
+            >
+              <i
+                class="fa-solid fa-meteor text-primary group-hover:text-white text-sm transition-colors duration-300"
+              ></i>
+            </div>
+            <span
+              class="text-lg font-bold group-hover:text-primary-600 transition-all duration-300 dark:text-text-dark"
+            >
+              Ali
+              <span
+                class="text-2xl text-primary-600 group-hover:text-black font-bold"
+                >z</span
+              >at
+            </span>
+          </a>
+        </div>
+      </div>
+    </header>
+    <div
+      class="py-6 px-5 bg-background min-h-[calc(100vh-64px)] dark:bg-background-dark grid grid-cols-1 sm:grid-cols-12"
+    >
+      <aside class="sm:col-span-3 lg:col-span-2 pr-5">
+        <h3 class="font-bold text-sm dark:text-text-dark">Categories</h3>
+        <ul
+          class="py-3 flex sm:flex-col gap-1 overflow-x-scroll items-center sm:items-start sm:overflow-x-hidden"
+        >
+          <li
+            class="text-xs text-muted dark:text-muted-dark cursor-pointer bg-surface dark:text-primary-400 text-primary-400 font-bold py-2 px-3 rounded-lg hover:bg-surface transition-all duration-300 min-w-fit w-full"
+          >
+            All Courses
+          </li>
+          <li
+            class="text-xs text-muted dark:text-muted-dark cursor-pointer py-2 px-3 rounded-lg hover:bg-surface transition-all duration-300 min-w-fit w-full"
+          >
+            Computer Science
+          </li>
+          <li
+            class="text-xs text-muted dark:text-muted-dark cursor-pointer py-2 px-3 rounded-lg hover:bg-surface transition-all duration-300 min-w-fit w-full"
+          >
+            Programming
+          </li>
+          <li
+            class="text-xs text-muted dark:text-muted-dark cursor-pointer py-2 px-3 rounded-lg hover:bg-surface transition-all duration-300 min-w-fit w-full"
+          >
+            Systems
+          </li>
+          <li
+            class="text-xs text-muted dark:text-muted-dark cursor-pointer py-2 px-3 rounded-lg hover:bg-surface transition-all duration-300 min-w-fit w-full"
+          >
+            Data Science
+          </li>
+          <li
+            class="text-xs text-muted dark:text-muted-dark cursor-pointer py-2 px-3 rounded-lg hover:bg-surface transition-all duration-300 min-w-fit w-full"
+          >
+            Infrastructure
+          </li>
+          <li
+            class="text-xs text-muted dark:text-muted-dark cursor-pointer py-2 px-3 rounded-lg hover:bg-surface transition-all duration-300 min-w-fit w-full"
+          >
+            Security
+          </li>
+        </ul>
+      </aside>
+      <div class="sm:col-span-9 lg:col-span-10">
+        <div>
+          <h2 id="category" class="text-xl font-bold dark:text-text-dark"></h2>
+          <p class="text-sm text-muted dark:text-muted-dark">
+            Expand your knowledge with our premium curriculum.
+          </p>
+        </div>
+        <div
+          id="coursesGrid"
+          class="grid justify-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 py-5 gap-y-5"
+        ></div>
+      </div>
+    </div>
+    <script type="module" src="/js/home.js"></script>
   </body>
 </html>
