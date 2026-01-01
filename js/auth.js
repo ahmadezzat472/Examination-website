@@ -7,7 +7,8 @@ if (
 }
 if (
   (!currentUser && window.location.pathname === "/pages/exam.html") ||
-  (!currentUser && window.location.pathname === "/pages/result.html")
+  (!currentUser && window.location.pathname === "/pages/result.html") ||
+  (!currentUser && window.location.pathname === "/pages/course-details.html")
 ) {
   window.location.replace("login.html");
 } else if (

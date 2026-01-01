@@ -1,11 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Course Details</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="/css/global.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/js/tailwind-config.js"></script>
+    <script src="/js/auth.js"></script>
+  </head>
+  <body>
+    <body
+      class="bg-background-light dark:bg-background-dark text-light dark:text-text-dark"
+    >
+      <header
+        class="fixed top-0 right-0 left-0 z-50 bg-surface shadow-lg dark:bg-surface-dark"
+      >
+        <div class="max-w-8xl mx-auto w-full px-8 max-md:px-4 py-4">
+          <div class="flex items-center justify-between">
+            <a href="/" class="flex items-center gap-1.5 group">
+              <div
+                class="flex h-8 w-8 items-center justify-center rounded-lg border-2 border-primary bg-primary/5 group-hover:bg-primary/100 transition-colors duration-300"
+              >
+                <i
+                  class="fa-solid fa-meteor text-primary group-hover:text-white text-sm transition-colors duration-300"
+                ></i>
+              </div>
+              <span
+                class="text-lg font-bold group-hover:text-primary-600 transition-all duration-300 dark:text-text-dark"
+              >
+                Ali
+                <span
+                  class="text-2xl text-primary-600 group-hover:text-black dark:group-hover:text-white font-bold"
+                  >z</span
+                >at
+              </span>
+            </a>
+            <div class="flex items-center space-x-3 max-md:hidden">
+              <div class="hidden sm:block text-right">
+                <p id="user-name" class="text-sm font-medium dark:text-white">
+                  John Smith
+                </p>
+                <p class="text-xs text-muted-light dark:text-muted-dark">
+                  Student
+                </p>
+              </div>
+              <img
+                alt="User Avatar"
+                class="h-9 w-9 rounded-full ring-2 ring-primary p-0.5 object-cover"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBecymijBK4VfJCeg19x6-6OEmDc1rX_gYYWUE6k2azzMjYRPZ0qgOzHYMf2cTTTMIZfZtmSc4QQpXFuwLJsn9whGDjA3GhI88UGK_l7UM_NMztN2VLVxdD2Uk8Gzb3zEzwSZOSz1p9d0ZaU5i5_qbYyUAgeLcyOyr0KpQkuVrum2BySoYXUvOn1mNYSn_lysBlb0jLB3FcLGnyjbgxf8y3s2-6_iukhxTw0EpGq0ZCjMudqsMcnWrbUAQYmKW1pPAf6bRkMPb4yvo"
+              />
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main
+        class="max-w-8xl mx-auto w-full px-8 max-md:px-4 pb-8 mt-20 md:mt-24 space-y-6"
+      >
+        <div class="w-full mb-5">
+          <a
+            href="/"
+            class="flex items-center text-sm font-medium text-muted dark:text-muted-dark hover:text-primary transition-colors"
+          >
+            <i class="fa-solid fa-arrow-left text-sm mr-2"></i>
+            Back to Home
+          </a>
+        </div>
+
+        <div
+          class="bg-surface-light dark:bg-surface-dark rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-800 relative overflow-hidden"
+        >
+          <div
+            class="relative z-10 flex flex-col md:flex-row gap-6 items-start"
+          >
+            <div class="flex-shrink-0">
+              <div
+                class="p-2 w-48 rounded-xl bg-gradient-to-br from-blue-400 to-blue-800 flex items-center justify-center shadow-inner border border-gray-700"
+              >
+                <img id="course-img" src="/assets/imgs/computer.png" alt="" />
+              </div>
+            </div>
+            <div class="flex-grow">
+              <div class="flex justify-between items-start">
+                <div>
+                  <span
+                    id="course-category"
+                    class="inline-block px-2 py-1 mb-2 text-xs font-semibold rounded bg-primary/10 text-primary border border-primary/20"
+                  >
+                    Computer Science
+                  </span>
+                  <h1
+                    id="course-name"
+                    class="text-2xl sm:text-3xl font-bold mb-2"
+                  >
+                    Advanced C Programming &amp; Algorithms
+                  </h1>
+                  <p
+                    id="course-desc"
+                    class="text-muted-light dark:text-muted-dark text-sm sm:text-base mb-4"
+                  >
+                    Master the intricacies of C programming, memory management,
+                    pointers, and essential data structures needed for
+                    high-performance computing.
+                  </p>
+                </div>
+              </div>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-2">
+                <div class="flex flex-col">
+                  <span
+                    class="text-xs text-muted-light dark:text-muted-dark uppercase tracking-wider"
+                    >Duration</span
+                  >
+                  <span class="font-semibold text-lg">10 Mins</span>
+                </div>
+                <div class="flex flex-col">
+                  <span
+                    class="text-xs text-muted-light dark:text-muted-dark uppercase tracking-wider"
+                    >Questions</span
+                  >
+                  <span class="font-semibold text-lg">10 Qs</span>
+                </div>
+                <div class="flex flex-col">
+                  <span
+                    class="text-xs text-muted-light dark:text-muted-dark uppercase tracking-wider"
+                    >status</span
+                  >
+                  <span
+                    id="course-status"
+                    class="font-semibold text-lg text-yellow-500"
+                    >complete</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="grid grid-cols-1 lg:items-start lg:grid-cols-4 gap-6 pb-24 md:pb-0"
+        >
+          <div
+            class="lg:col-span-2 bg-surface-light dark:bg-surface-dark rounded-2xl p-6 shadow-md border border-gray-200 dark:border-gray-800"
+          >
+            <h2 class="text-xl font-bold mb-4 flex items-center">
+              <i class="fa-solid fa-newspaper text-primary mr-2"></i>
+              Topics Covered
+            </h2>
+            <div class="space-y-3">
+              <div class="flex items-center">
+                <i
+                  class="fa-regular fa-circle-check text-green-500 text-sm mt-1 mr-2"
+                ></i>
+
+                <p class="text-sm text-gray-700 dark:text-gray-300">
+                  Memory Allocation (malloc, calloc, realloc, free)
+                </p>
+              </div>
+              <div class="flex items-center">
+                <i
+                  class="fa-regular fa-circle-check text-green-500 text-sm mt-1 mr-2"
+                ></i>
+                <p class="text-sm text-gray-700 dark:text-gray-300">
+                  Pointer Arithmetic &amp; Double Pointers
+                </p>
+              </div>
+              <div class="flex items-center">
+                <i
+                  class="fa-regular fa-circle-check text-green-500 text-sm mt-1 mr-2"
+                ></i>
+                <p class="text-sm text-gray-700 dark:text-gray-300">
+                  Structs, Unions, and Bit Fields
+                </p>
+              </div>
+              <div class="flex items-center">
+                <i
+                  class="fa-regular fa-circle-check text-green-500 text-sm mt-1 mr-2"
+                ></i>
+                <p class="text-sm text-gray-700 dark:text-gray-300">
+                  File I/O Handling
+                </p>
+              </div>
+              <div class="flex items-center">
+                <i
+                  class="fa-regular fa-circle-check text-green-500 text-sm mt-1 mr-2"
+                ></i>
+                <p class="text-sm text-gray-700 dark:text-gray-300">
+                  Recursion and Algorithmic Complexity
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- start exam -->
+          <div
+            class="bg-surface-light dark:bg-surface-dark rounded-2xl p-6 shadow-md border border-gray-200 dark:border-gray-800"
+          >
+            <h2 class="text-lg font-bold mb-4 flex items-center">
+              <i class="fa-regular fa-file-code text-xl text-primary mr-2"></i>
+              Start Exam
+            </h2>
+            <ul class="space-y-3">
+              <a
+                class="exam-links flex items-center justify-between text-sm text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800/50 dark:hover:bg-gray-800 dark:border dark:border-gray-800/50 dark:hover:border dark:hover:border-primary-200/50 p-2 rounded-lg transition-all duration-200"
+              >
+                <div class="flex items-center gap-3">
+                  <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  Easy Level
+                </div>
+                <i class="fa-solid fa-play text-primary text-lg"></i>
+              </a>
+              <a
+                class="exam-links flex items-center justify-between text-sm text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800/50 dark:hover:bg-gray-800 dark:border dark:border-gray-800/50 dark:hover:border dark:hover:border-primary-200/50 p-2 rounded-lg transition-all duration-200"
+              >
+                <div class="flex items-center gap-3">
+                  <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  Medium Level
+                </div>
+                <i class="fa-solid fa-play text-primary text-lg"></i>
+              </a>
+              <a
+                class="exam-links flex items-center justify-between text-sm text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800/50 dark:hover:bg-gray-800 dark:border dark:border-gray-800/50 dark:hover:border dark:hover:border-primary-200/50 p-2 rounded-lg transition-all duration-200"
+              >
+                <div class="flex items-center gap-3">
+                  <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  Hard Level
+                </div>
+                <i class="fa-solid fa-play text-primary text-lg"></i>
+              </a>
+            </ul>
+          </div>
+          <!-- Prerequisites -->
+          <div
+            class="bg-surface-light dark:bg-surface-dark rounded-2xl p-6 shadow-md border border-gray-200 dark:border-gray-800"
+          >
+            <h2 class="text-lg font-bold mb-4 flex items-center">
+              <i class="fa-solid fa-bell text-xl text-secondary mr-2"></i>
+              Prerequisites
+            </h2>
+            <ul class="space-y-3">
+              <li
+                class="flex items-center text-sm text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800/50 p-2 rounded-lg"
+              >
+                <span class="w-1.5 h-1.5 rounded-full bg-secondary mr-3"></span>
+                Basic C Syntax
+              </li>
+              <li
+                class="flex items-center text-sm text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800/50 p-2 rounded-lg"
+              >
+                <span class="w-1.5 h-1.5 rounded-full bg-secondary mr-3"></span>
+                Computer Architecture Basics
+              </li>
+              <li
+                class="flex items-center text-sm text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800/50 p-2 rounded-lg"
+              >
+                <span class="w-1.5 h-1.5 rounded-full bg-secondary mr-3"></span>
+                Completed "Intro to C"
+              </li>
+            </ul>
+          </div>
+        </div>
+      </main>
+
+      <div
+        class="error-popup fixed inset-0 z-50 hidden items-center justify-center bg-black/70 backdrop-blur-lg"
+      >
+        <div
+          class="error-popup-container bg-red-50 border border-secondary rounded-xl p-8 shadow-lg max-w-sm w-full text-center"
+        >
+          <i
+            class="fa-solid fa-triangle-exclamation text-secondary text-4xl mb-4 animate-bounce"
+          ></i>
+          <h2 class="text-xl font-bold text-red-600 mb-2">Not Allowed</h2>
+          <p class="text-muted text-sm font-semibold mb-1"></p>
+          <span class="text-gray-600 text-xs font-semibold"
+            ><span id="redirect-to">Redirecting To Home</span
+            ><span class="ml-1 text-[18px] animate-pulse">...</span></span
+          >
+        </div>
+      </div>
+      <script type="module" src="/js/course-details.js"></script>
+    </body>
+  </body>
 </html>
