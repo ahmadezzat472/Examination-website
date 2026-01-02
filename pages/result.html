@@ -17,8 +17,8 @@
     <script src="/js/tailwind-config.js"></script>
     <script src="/js/auth.js"></script>
   </head>
-  <body class="bg-background">
-    <header class="fixed top-0 right-0 left-0 z-50 bg-surface shadow-lg">
+  <body class="bg-background dark:bg-background-dark">
+    <header class="fixed top-0 right-0 left-0 z-50 bg-surface shadow-lg dark:bg-surface-dark">
       <div class="max-w-8xl mx-auto w-full px-8 max-md:px-4 py-3">
         <div class="flex items-center justify-between">
           <a href="/" class="flex items-center gap-1.5 group">
@@ -30,9 +30,9 @@
               ></i>
             </div>
             <span
-              class="text-lg font-bold group-hover:text-primary-600 transition-all duration-300"
+              class="text-lg font-bold group-hover:text-primary-600 transition-all duration-300 dark:text-text-dark"
               >Ali<span
-                class="text-2xl text-primary-600 group-hover:text-black font-bold"
+                class="text-2xl text-primary-600 group-hover:text-black font-bold dark:group-hover:text-white"
                 >z</span
               >at</span
             >
@@ -40,7 +40,7 @@
 
           <div class="flex items-center space-x-3">
             <div class="text-right">
-              <p class="user-name text-sm font-medium"></p>
+              <p class="user-name text-sm font-medium dark:text-white"></p>
               <p class="text-xs text-muted dark:text-muted-dark">Student</p>
             </div>
             <img

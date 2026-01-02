@@ -214,7 +214,7 @@ function displayNavigationQuestion() {
   courseData.forEach((item) => {
     questionsNavigation.innerHTML += `
       <button
-        class="question-navigation-btn w-9 h-9 lg:w-10 lg:h-10 rounded-lg bg-gray-50 text-gray-600 hover:bg-gray-200 border-[1.5px] border-gray-300 hover:border-gray-400 shadow-md shadow-gray-100 flex items-center justify-center  transition-all duration-200"
+        class="question-navigation-btn dark:bg-surface-dark dark:text-text-dark dark:hover:text-text-main w-9 h-9 lg:w-10 lg:h-10 rounded-lg bg-gray-50 text-gray-600 hover:bg-gray-200 border-[1.5px] border-gray-300 hover:border-gray-400 shadow-md shadow-gray-100 flex items-center justify-center  transition-all duration-200"
         title=${
           currentQuestion == item.id
             ? `current`
@@ -338,14 +338,14 @@ function displayAnswers(currentQuestion) {
           id="q${currentQuestion.id}-a${item.id}"
         />
         <div
-          class="flex items-center gap-3 lg:gap-4 px-3 py-2 lg:px-4 lg:py-3 rounded-xl border md:border-2 border-border bg-surface transition-all duration-200 hover:border-primary/50 hover:shadow-sm group-hover:bg-primary/5"
+          class="flex items-center gap-3 lg:gap-4 px-3 py-2 lg:px-4 lg:py-3 rounded-xl border md:border-2 border-border bg-surface dark:bg-surface-dark transition-all duration-200 hover:border-primary/50 hover:shadow-sm group-hover:bg-primary/5"
         >
           <span
-            class="radio-indicator w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 rounded-lg bg-surface border-2 border-border text-muted font-semibold text-sm flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors"
+            class="radio-indicator w-6 h-6 sm:w-7 dark:bg-surface-dark dark:text-white sm:h-7 lg:w-8 lg:h-8 rounded-lg bg-surface border-2 border-border text-muted font-semibold text-sm flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors"
             >${answersNum[item.id - 1]}</span
           >
           <span
-            class="text-base font-medium max-md:text-[15px] lg:font-bold group-hover:text-text-main transition-all duration-200"
+            class="text-base dark:text-white dark:group-hover:text-white font-medium max-md:text-[15px] lg:font-bold group-hover:text-text-main transition-all duration-200"
             >${item.text}</span
           >
         </div>

@@ -40,7 +40,7 @@ categories.forEach(function (category) {
     category.classList.add("dark:text-primary-400");
     selectedCategory.textContent = category.textContent;
     grid.innerHTML = "";
-    if (category.textContent === "All Courses") {
+    if (category.textContent.trim() === "All Courses") {
       allCourses.forEach(function (course) {
         var totalQuestions = course[1].easy.length;
         var card = document.createElement("div");
@@ -84,7 +84,7 @@ categories.forEach(function (category) {
       });
     } else {
       var showedCourses = allCourses.filter(function (course) {
-        return course[1].category === category.textContent;
+        return course[1].category === category.textContent.trim();
       });
       showedCourses.forEach(function (course) {
         var totalQuestions = course[1].easy.length;

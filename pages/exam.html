@@ -113,14 +113,14 @@
           >
             <!-- Questions -->
             <div
-              class="bg-surface rounded-xl shadow-card border border-border p-5"
+              class="bg-surface dark:bg-surface-dark rounded-xl shadow-card border border-border p-5"
             >
               <div class="flex gap-5 items-center mb-4 font-semibold">
                 <div class="flex items-center gap-2">
                   <i
                     class="fa-solid fa-circle-question text-primary text-lg"
                   ></i>
-                  <h2 class="text-sm">Question Navigation</h2>
+                  <h2 class="text-sm dark:text-text-dark">Question Navigation</h2>
                 </div>
                 <span
                   id="question-nav-numbers"
@@ -136,11 +136,11 @@
 
             <!-- Marked Questions Summary -->
             <div
-              class="bg-surface rounded-xl shadow-card border border-border p-5"
+              class="bg-surface dark:bg-surface-dark rounded-xl shadow-card border border-border p-5"
             >
               <div class="flex items-center gap-2 mb-2">
                 <i class="fa-solid fa-bookmark text-warning text-lg"></i>
-                <h2 class="text-sm font-semibold">Marked for Review</h2>
+                <h2 class="text-sm font-semibold dark:text-text-dark">Marked for Review</h2>
                 <span
                   id="question-marked-numbers"
                   class="ml-auto text-xs bg-warning/10 text-warning px-2 py-0.5 rounded-full font-semibold"
@@ -151,7 +151,7 @@
             </div>
 
             <div
-              class="max-md:hidden bg-surface rounded-xl shadow-card border border-border p-5"
+              class="max-md:hidden bg-surface dark:bg-surface-dark rounded-xl shadow-card border border-border p-5"
             >
               <div class="flex items-center justify-between gap-3">
                 <button
@@ -185,7 +185,7 @@
         <!-- questions content -->
         <section class="flex-1 min-w-0">
           <div
-            class="bg-surface rounded-2xl shadow-card border border-border p-6 md:p-8 relative overflow-hidden"
+            class="bg-surface dark:bg-surface-dark rounded-2xl shadow-card border border-border p-6 md:p-8 relative overflow-hidden"
           >
             <div class="relative z-10">
               <!-- Question Header -->
@@ -198,7 +198,7 @@
                   >
                   <h2
                     id="question-text"
-                    class="text-[15px] sm:text-lg lg:text-xl font-semibold text-text-main"
+                    class="text-[15px] dark:text-text-dark sm:text-lg lg:text-xl font-semibold text-text-main"
                   >
                     Guess the output of the following program:
                   </h2>
@@ -229,7 +229,7 @@
                   ></i>
                 </div>
                 <span
-                  class="text-xs md:text-sm font-bold text-muted group-hover:text-text-main transition-colors flex items-center gap-2"
+                  class="text-xs md:text-sm font-bold text-muted dark:text-muted-dark dark:group-hover:text-text-dark group-hover:text-text-main transition-colors flex items-center gap-2"
                 >
                   Mark for review
                 </span>
