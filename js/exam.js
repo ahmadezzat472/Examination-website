@@ -306,10 +306,16 @@ function updateQuestionArea() {
   //** get previously answered (if exist) for this question
   let prev = checkQuestionIsAnswered(currentQuestion);
   if (prev) {
-    const el = answers.querySelector(
-      `#q${currentQuestion.id}-a${prev.questionId}`
+    const selectedAnswer = currentQuestion.answers.find(
+      (answer) => answer.text === prev.answerText
     );
-    if (el) el.checked = true;
+
+    if (selectedAnswer) {
+      const el = answers.querySelector(
+        `#q${currentQuestion.id}-a${selectedAnswer.id}`
+      );
+      if (el) el.checked = true;
+    }
   }
 
   //** change listeners to save answers when selected

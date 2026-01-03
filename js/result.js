@@ -1,31 +1,3 @@
-//** _________________________________ dark mode  _________________________________
-
-// Initialize theme on page load
-const savedTheme = localStorage.getItem("theme");
-const html = document.documentElement;
-
-if (
-  savedTheme === "dark" ||
-  (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)
-) {
-  html.classList.add("dark");
-} else {
-  html.classList.remove("dark");
-}
-
-// Toggle button handler
-const darkBtn = document.querySelector("#dark-btn");
-
-darkBtn.addEventListener("click", () => {
-  html.classList.toggle("dark");
-
-  if (html.classList.contains("dark")) {
-    localStorage.setItem("theme", "dark");
-  } else {
-    localStorage.setItem("theme", "light");
-  }
-});
-
 //** get course name and level from url */
 const searchParams = window.location.search;
 const params = new URLSearchParams(searchParams);
@@ -35,6 +7,8 @@ const courseLevel = params.get("level");
 //** get the Completed Courses from currentUser */
 const user = JSON.parse(localStorage.getItem("currentUser")) || {};
 let last = user.lastResult;
+console.log(last);
+
 let CompletedCourses = user.CompletedCourses || [];
 
 //** check: course is exist | course is completed ?  */
