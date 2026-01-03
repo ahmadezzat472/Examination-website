@@ -2,15 +2,72 @@ import { courses } from "./data.js";
 
 let currentUser = JSON.parse(localStorage.getItem("currentUser")) || null;
 
+//** _________________________________ dark mode  _________________________________
+// Initialize theme on page load
+const savedTheme = localStorage.getItem("theme");
+const html = document.documentElement;
+
+if (
+  savedTheme === "dark" ||
+  (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)
+) {
+  html.classList.add("dark");
+} else {
+  html.classList.remove("dark");
+}
+
+// Toggle button handler
+const darkBtn = document.querySelector("#dark-btn");
+
+darkBtn.addEventListener("click", () => {
+  html.classList.toggle("dark");
+
+  if (html.classList.contains("dark")) {
+    localStorage.setItem("theme", "dark");
+  } else {
+    localStorage.setItem("theme", "light");
+  }
+});
+
 if (currentUser) {
   document.querySelector("#user-box").classList.remove("hidden");
+  document.querySelector("#logout-btn").classList.remove("hidden");
   document.querySelector("#login-btn").classList.add("hidden");
   document.querySelector(
     "#user-name"
   ).innerHTML = `${currentUser.fName} ${currentUser.lName}`;
+
+  var userData = document.querySelector("#user-data");
+  var imgBtn = document.querySelector("#img-btn");
+  imgBtn.addEventListener("click", function () {
+    userData.classList.toggle("hidden");
+  });
+
+  //** _________________________________ logout  _________________________________
+  var logoutBtn = document.querySelector("#logout-btn");
+  logoutBtn.addEventListener("click", function () {
+    logoutBtn.disabled = true;
+    logoutBtn.classList.add("pointer-events-none");
+
+    logoutBtn.innerHTML = `
+  <span class="inline-block h-4 w-4 border-2 border-white/40 border-t-white rounded-full animate-spin"></span>
+  <span></span>
+  `;
+
+    setTimeout(() => {
+      // Remove auth data
+      localStorage.removeItem("markedQuestions");
+      localStorage.removeItem("answeredQuestions");
+      localStorage.removeItem("currentUser");
+      sessionStorage.clear();
+
+      window.location.href = "/";
+    }, 2000);
+  });
 } else {
   document.querySelector("#user-box").classList.add("hidden");
   document.querySelector("#login-btn").classList.remove("hidden");
+  document.querySelector("#logout-btn").classList.add("hidden");
 }
 
 var selectedCategory = document.getElementById("category");
