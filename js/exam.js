@@ -54,7 +54,7 @@ function showErrorPopup(message, path) {
   errorOverlay.classList.replace("hidden", "flex");
 
   setTimeout(() => {
-    // window.unlockExam();
+    window.unlockExam();
     location.replace(path);
   }, 4000);
 }
@@ -87,6 +87,13 @@ function CheckThisCourse() {
 CheckThisCourse();
 
 //** _________________________________ select element _________________________________
+var imgBtn = document.querySelector("#img-btn");
+var userData = document.querySelector("#user-data");
+
+//** image button
+imgBtn.addEventListener("click", function () {
+  userData.classList.toggle("hidden");
+});
 
 let questionsNavigation = document.querySelector("#questions-navigation");
 let questionsMarked = document.querySelector("#questions-marked");
@@ -154,7 +161,7 @@ function timeDown() {
 
     setTimeout(() => {
       clearInterval(toggleIcons);
-      // window.unlockExam();
+      window.unlockExam();
       location.replace("/pages/result.html");
     }, 3000);
   }
@@ -501,7 +508,7 @@ function closeDialog() {
 let users = JSON.parse(localStorage.getItem("users")) || {};
 function confirmExamHandler() {
   // Unlock the exam page before navigating
-  // window.unlockExam();
+  window.unlockExam();
 
   saveExamDetails();
   document.body.classList.remove("overflow-hidden");
