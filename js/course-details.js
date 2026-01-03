@@ -24,7 +24,7 @@ logoutBtn.addEventListener("click", function () {
   }, 3000);
 });
 
-//** _________________________________ logout  _________________________________
+//** _________________________________ dark mode  _________________________________
 // Initialize theme on page load
 const savedTheme = localStorage.getItem("theme");
 const html = document.documentElement;

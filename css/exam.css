@@ -1,7 +1,7 @@
 .custom-radio:checked + div {
   border-color: var(--color-primary, #14b8a6);
   background-color: rgba(20, 184, 166, 0.08);
-  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
+  box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.1);
 }
 
 .custom-radio:checked + div .radio-indicator {
@@ -9,6 +9,11 @@
   border-color: var(--color-primary, #14b8a6);
   color: #ffffff;
 }
+
+.custom-radio:checked + div span {
+  color: var(--color-primary, #14b8a6);;
+}
+
 
 .custom-radio:focus-visible + div {
   outline: 2px solid var(--color-primary, #14b8a6);
