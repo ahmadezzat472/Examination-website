@@ -2,6 +2,55 @@
 
 import { courses } from "./data.js";
 
+//** _________________________________ logout  _________________________________
+var logoutBtn = document.querySelector("#logout-btn");
+logoutBtn.addEventListener("click", function () {
+  logoutBtn.disabled = true;
+  logoutBtn.classList.add("pointer-events-none");
+
+  logoutBtn.innerHTML = `
+  <span class="inline-block h-4 w-4 border-2 border-white/40 border-t-white rounded-full animate-spin"></span>
+  <span></span>
+  `;
+
+  setTimeout(() => {
+    // Remove auth data
+    localStorage.removeItem("markedQuestions");
+    localStorage.removeItem("answeredQuestions");
+    localStorage.removeItem("currentUser");
+    sessionStorage.clear();
+
+    window.location.href = "/pages/login.html";
+  }, 3000);
+});
+
+//** _________________________________ logout  _________________________________
+// Initialize theme on page load
+const savedTheme = localStorage.getItem("theme");
+const html = document.documentElement;
+
+if (
+  savedTheme === "dark" ||
+  (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)
+) {
+  html.classList.add("dark");
+} else {
+  html.classList.remove("dark");
+}
+
+// Toggle button handler
+const darkBtn = document.querySelector("#dark-btn");
+
+darkBtn.addEventListener("click", () => {
+  html.classList.toggle("dark");
+
+  if (html.classList.contains("dark")) {
+    localStorage.setItem("theme", "dark");
+  } else {
+    localStorage.setItem("theme", "light");
+  }
+});
+
 //** _________________________________ Guard - Auth _________________________________
 
 //** get course name and level from url
@@ -58,6 +107,9 @@ function CheckThisCourseLevel(examLevel) {
 
 //** _________________________________ select element _________________________________
 
+var imgBtn = document.querySelector("#img-btn");
+var userData = document.querySelector("#user-data");
+
 var courseImg = document.querySelector("#course-img");
 var courseCategory = document.querySelector("#course-category");
 var courseFullName = document.querySelector("#course-name");
@@ -65,9 +117,13 @@ var courseDesc = document.querySelector("#course-desc");
 var courseStatus = document.querySelector("#course-status");
 var examLinks = document.querySelectorAll(".exam-links");
 var examLevelStateIcons = document.querySelectorAll(".fa-play");
-console.log(examLevelStateIcons);
 
 //** _________________________________ display data  _________________________________
+
+//** image button
+imgBtn.addEventListener("click", function () {
+  userData.classList.toggle("hidden");
+});
 
 //** get course details
 const courseData = courses[courseName];

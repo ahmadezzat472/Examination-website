@@ -18,7 +18,7 @@
   </head>
   <body>
     <body
-      class="bg-background-light dark:bg-background-dark text-light dark:text-text-dark"
+      class="bg-background dark:bg-background-dark text-text-main dark:text-text-dark"
     >
       <header
         class="fixed top-0 right-0 left-0 z-50 bg-surface shadow-lg dark:bg-surface-dark"
@@ -34,41 +34,66 @@
                 ></i>
               </div>
               <span
-                class="text-lg font-bold group-hover:text-primary-600 transition-all duration-300 dark:text-text-dark"
+                class="text-xl font-bold group-hover:text-primary-600 transition-all duration-300 dark:text-text-dark"
               >
                 Ali
                 <span
-                  class="text-2xl text-primary-600 group-hover:text-black dark:group-hover:text-white font-bold"
+                  class="-ml-1 text-3xl text-primary-600 group-hover:text-black dark:group-hover:text-white font-bold"
                   >z</span
                 >at
               </span>
             </a>
-            <div class="flex items-center space-x-3 max-md:hidden">
-              <div class="hidden sm:block text-right">
-                <p id="user-name" class="text-sm font-medium dark:text-white">
-                  John Smith
-                </p>
-                <p class="text-xs text-muted-light dark:text-muted-dark">
-                  Student
-                </p>
+            <div class="flex items-center gap-2">
+              <button
+                id="dark-btn"
+                class="bg-background dark:bg-background-dark text-primary-700 dark:text-primary hover:bg-surface dark:hover:bg-surface-dark hover:scale-95 py-2 px-3 rounded-lg transition-all duration-200"
+              >
+                <!-- Light mode icon -->
+                <i class="fa-regular fa-lightbulb block dark:hidden"></i>
+
+                <!-- Dark mode icon -->
+                <i class="fa-solid fa-lightbulb hidden dark:block"></i>
+              </button>
+              <!-- logout -->
+              <button
+                id="logout-btn"
+                class="border-none outline-none bg-secondary/10 text-secondary hover:bg-secondary/20 hover:scale-95 py-1 px-2 rounded-lg transition-all duration-200"
+              >
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+              </button>
+              <!-- user -->
+              <div class="relative ml-4">
+                <div
+                  id="user-data"
+                  class="hidden absolute z-50 top-[53px] right-0 bg-surface dark:bg-surface-dark text-center shadow-lg w-max p-3 rounded-b-xl"
+                >
+                  <p
+                    id="user-name"
+                    class="text-sm font-medium text-text-main dark:text-white"
+                  >
+                    John Smith
+                  </p>
+                  <p class="text-xs text-muted dark:text-muted-dark">Student</p>
+                </div>
+                <img
+                  id="img-btn"
+                  alt="User Avatar"
+                  class="h-9 w-9 rounded-full ring-2 ring-primary p-0.5 object-cover cursor-pointer"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBecymijBK4VfJCeg19x6-6OEmDc1rX_gYYWUE6k2azzMjYRPZ0qgOzHYMf2cTTTMIZfZtmSc4QQpXFuwLJsn9whGDjA3GhI88UGK_l7UM_NMztN2VLVxdD2Uk8Gzb3zEzwSZOSz1p9d0ZaU5i5_qbYyUAgeLcyOyr0KpQkuVrum2BySoYXUvOn1mNYSn_lysBlb0jLB3FcLGnyjbgxf8y3s2-6_iukhxTw0EpGq0ZCjMudqsMcnWrbUAQYmKW1pPAf6bRkMPb4yvo"
+                />
               </div>
-              <img
-                alt="User Avatar"
-                class="h-9 w-9 rounded-full ring-2 ring-primary p-0.5 object-cover"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBecymijBK4VfJCeg19x6-6OEmDc1rX_gYYWUE6k2azzMjYRPZ0qgOzHYMf2cTTTMIZfZtmSc4QQpXFuwLJsn9whGDjA3GhI88UGK_l7UM_NMztN2VLVxdD2Uk8Gzb3zEzwSZOSz1p9d0ZaU5i5_qbYyUAgeLcyOyr0KpQkuVrum2BySoYXUvOn1mNYSn_lysBlb0jLB3FcLGnyjbgxf8y3s2-6_iukhxTw0EpGq0ZCjMudqsMcnWrbUAQYmKW1pPAf6bRkMPb4yvo"
-              />
             </div>
           </div>
         </div>
       </header>
 
       <main
-        class="max-w-8xl mx-auto w-full px-8 max-md:px-4 pb-8 mt-20 md:mt-24 space-y-6"
+        class="max-w-8xl mx-auto w-full px-8 max-md:px-4 pb-7 mt-20 md:mt-24 space-y-6"
       >
-        <div class="w-full mb-5">
+        <div class="w-fit mb-5">
           <a
             href="/"
-            class="flex items-center text-sm font-medium text-muted dark:text-muted-dark hover:text-primary transition-colors"
+            class="flex items-center text-sm font-medium text-muted dark:text-muted-dark dark:hover:text-primary hover:text-primary transition-colors"
           >
             <i class="fa-solid fa-arrow-left text-sm mr-2"></i>
             Back to Home
@@ -76,14 +101,14 @@
         </div>
 
         <div
-          class="bg-surface-light dark:bg-surface-dark rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-800 relative overflow-hidden"
+          class="bg-surface dark:bg-surface-dark rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-800 relative overflow-hidden"
         >
           <div
             class="relative z-10 flex flex-col md:flex-row gap-6 items-start"
           >
-            <div class="flex-shrink-0">
+            <div class="shrink-0">
               <div
-                class="p-2 w-48 rounded-xl bg-gradient-to-br from-blue-400 to-blue-800 flex items-center justify-center shadow-inner border border-gray-700"
+                class="p-2 w-full sm:w-48 rounded-xl bg-gradient-to-br from-blue-400 to-blue-800 flex items-center justify-center shadow-inner border border-gray-700"
               >
                 <img id="course-img" src="/assets/imgs/computer.png" alt="" />
               </div>
@@ -105,7 +130,7 @@
                   </h1>
                   <p
                     id="course-desc"
-                    class="text-muted-light dark:text-muted-dark text-sm sm:text-base mb-4"
+                    class="text-muted dark:text-muted-dark text-sm sm:text-base mb-4"
                   >
                     Master the intricacies of C programming, memory management,
                     pointers, and essential data structures needed for
@@ -116,21 +141,21 @@
               <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-2">
                 <div class="flex flex-col">
                   <span
-                    class="text-xs text-muted-light dark:text-muted-dark uppercase tracking-wider"
+                    class="text-xs text-muted font-semibold dark:text-muted-dark uppercase tracking-wider"
                     >Duration</span
                   >
                   <span class="font-semibold text-lg">10 Mins</span>
                 </div>
                 <div class="flex flex-col">
                   <span
-                    class="text-xs text-muted-light dark:text-muted-dark uppercase tracking-wider"
+                    class="text-xs text-muted font-semibold dark:text-muted-dark uppercase tracking-wider"
                     >Questions</span
                   >
                   <span class="font-semibold text-lg">10 Qs</span>
                 </div>
                 <div class="flex flex-col">
                   <span
-                    class="text-xs text-muted-light dark:text-muted-dark uppercase tracking-wider"
+                    class="text-xs text-muted font-semibold dark:text-muted-dark uppercase tracking-wider"
                     >status</span
                   >
                   <span
@@ -148,7 +173,7 @@
           class="grid grid-cols-1 lg:items-start lg:grid-cols-4 gap-6 pb-24 md:pb-0"
         >
           <div
-            class="lg:col-span-2 bg-surface-light dark:bg-surface-dark rounded-2xl p-6 shadow-md border border-gray-200 dark:border-gray-800"
+            class="lg:col-span-2 bg-surface dark:bg-surface-dark rounded-2xl p-6 shadow-md border border-gray-200 dark:border-gray-800"
           >
             <h2 class="text-xl font-bold mb-4 flex items-center">
               <i class="fa-solid fa-newspaper text-primary mr-2"></i>
@@ -200,7 +225,7 @@
           </div>
           <!-- start exam -->
           <div
-            class="bg-surface-light dark:bg-surface-dark rounded-2xl p-6 shadow-md border border-gray-200 dark:border-gray-800"
+            class="bg-surface dark:bg-surface-dark rounded-2xl p-6 shadow-md border border-gray-200 dark:border-gray-800"
           >
             <h2 class="text-lg font-bold mb-4 flex items-center">
               <i class="fa-regular fa-file-code text-xl text-primary mr-2"></i>
@@ -208,7 +233,7 @@
             </h2>
             <ul class="space-y-3">
               <a
-                class="exam-links flex items-center justify-between text-sm text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800/50 dark:hover:bg-gray-800 dark:border dark:border-gray-800/50 dark:hover:border dark:hover:border-primary-200/50 p-2 rounded-lg transition-all duration-200"
+                class="exam-links flex items-center justify-between text-sm text-gray-600 dark:text-gray-400 bg-background dark:bg-gray-800/90 dark:hover:bg-gray-800 border hover:border-gray-400/80 dark:hover:border-primary-200/50 dark:border-gray-800/50 dark:hover:border dark:hover:border-primary-200/50 py-1.5 px-4 rounded-lg transition-all duration-200"
               >
                 <div class="flex items-center gap-3">
                   <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
@@ -217,7 +242,7 @@
                 <i class="fa-solid fa-play text-primary text-lg"></i>
               </a>
               <a
-                class="exam-links flex items-center justify-between text-sm text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800/50 dark:hover:bg-gray-800 dark:border dark:border-gray-800/50 dark:hover:border dark:hover:border-primary-200/50 p-2 rounded-lg transition-all duration-200"
+                class="exam-links flex items-center justify-between text-sm text-gray-600 dark:text-gray-400 bg-background dark:bg-gray-800/90 dark:hover:bg-gray-800 border hover:border-gray-400/80 dark:hover:border-primary-200/50 dark:border-gray-800/50 dark:hover:border dark:hover:border-primary-200/50 py-1.5 px-4 rounded-lg transition-all duration-200"
               >
                 <div class="flex items-center gap-3">
                   <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
@@ -226,7 +251,7 @@
                 <i class="fa-solid fa-play text-primary text-lg"></i>
               </a>
               <a
-                class="exam-links flex items-center justify-between text-sm text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800/50 dark:hover:bg-gray-800 dark:border dark:border-gray-800/50 dark:hover:border dark:hover:border-primary-200/50 p-2 rounded-lg transition-all duration-200"
+                class="exam-links flex items-center justify-between text-sm text-gray-600 dark:text-gray-400 bg-background dark:bg-gray-800/90 dark:hover:bg-gray-800 border hover:border-gray-400/80 dark:hover:border-primary-200/50 dark:border-gray-800/50 dark:hover:border dark:hover:border-primary-200/50 py-1.5 px-4 rounded-lg transition-all duration-200"
               >
                 <div class="flex items-center gap-3">
                   <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
@@ -238,7 +263,7 @@
           </div>
           <!-- Prerequisites -->
           <div
-            class="bg-surface-light dark:bg-surface-dark rounded-2xl p-6 shadow-md border border-gray-200 dark:border-gray-800"
+            class="bg-surface dark:bg-surface-dark rounded-2xl p-6 shadow-md border border-gray-200 dark:border-gray-800"
           >
             <h2 class="text-lg font-bold mb-4 flex items-center">
               <i class="fa-solid fa-bell text-xl text-secondary mr-2"></i>
@@ -246,19 +271,19 @@
             </h2>
             <ul class="space-y-3">
               <li
-                class="flex items-center text-sm text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800/50 p-2 rounded-lg"
+                class="flex items-center text-sm text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800/50 py-3 px-4 rounded-lg"
               >
                 <span class="w-1.5 h-1.5 rounded-full bg-secondary mr-3"></span>
                 Basic C Syntax
               </li>
               <li
-                class="flex items-center text-sm text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800/50 p-2 rounded-lg"
+                class="flex items-center text-sm text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800/50 py-3 px-4 rounded-lg"
               >
                 <span class="w-1.5 h-1.5 rounded-full bg-secondary mr-3"></span>
-                Computer Architecture Basics
+                Computer Architecture
               </li>
               <li
-                class="flex items-center text-sm text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800/50 p-2 rounded-lg"
+                class="flex items-center text-sm text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800/50 py-3 px-4 rounded-lg"
               >
                 <span class="w-1.5 h-1.5 rounded-full bg-secondary mr-3"></span>
                 Completed "Intro to C"
