@@ -22,9 +22,17 @@
   >
     <div class="flex gap-2 items-center">
       <i
-        class="fa-solid fa-graduation-cap p-3 bg-primary-500 text-white shadow-input rounded-xl"
+        class="fa-solid fa-graduation-cap p-3 bg-primary-500 text-white shadow-input rounded-xl animate-bounce"
       ></i>
-      <span class="font-bold dark:text-text-dark">Ezzity</span>
+      <span
+        class="text-xl font-bold group-hover:text-primary-600 transition-all duration-300 dark:text-text-dark"
+      >
+        Ali
+        <span
+          class="-ml-1 text-3xl text-primary-600 group-hover:text-black dark:group-hover:text-white font-bold"
+          >z</span
+        >at
+      </span>
     </div>
     <div class="flex flex-col items-center gap-1">
       <p class="font-bold text-xl dark:text-text-dark">Create your account</p>
@@ -111,6 +119,7 @@
         </p>
       </div>
       <button
+        id="register-btn"
         type="submit"
         class="bg-primary-600 text-white py-2 text-sm rounded-lg shadow-input hover:bg-primary transition-all duration-300 cursor-pointer"
       >

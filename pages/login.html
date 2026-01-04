@@ -24,7 +24,7 @@
       class="bg-surface dark:bg-surface-dark rounded-xl shadow-navbar shadow-xl p-6 flex flex-col items-center w-96"
     >
       <i
-        class="fa-solid fa-graduation-cap p-4 bg-surface-dark dark:bg-surface text-primary-600 shadow-navbar shadow-xl rounded-xl"
+        class="fa-solid fa-graduation-cap p-4 bg-surface-dark dark:bg-surface text-primary-600 shadow-navbar shadow-xl rounded-xl animate-bounce"
       ></i>
       <h2 class="text-text-light text-xl font-bold mt-3 dark:text-text-dark">
         Welcome Back
@@ -40,7 +40,7 @@
         <div class="flex flex-col gap-2">
           <label
             for="email"
-            class="text-xs text-text-light font-medium w-fit dark:text-text-dark"
+            class="text-sm text-muted font-medium w-fit dark:text-text-dark"
             >Email Address</label
           >
           <div
@@ -49,7 +49,7 @@
             <i class="fa-regular fa-envelope absolute left-3 text-gray-400"></i>
             <input
               type="email"
-              class="w-full p-2 pl-9 bg-background rounded-lg text-xs outline-none focus:shadow-input"
+              class="w-full p-2.5 pl-9 bg-background rounded-lg text-sm outline-none focus:shadow-input"
               id="email"
               placeholder="student@ezzity.com"
             />
@@ -58,7 +58,7 @@
         <div class="flex flex-col gap-2">
           <label
             for="password"
-            class="text-xs text-text-light font-medium w-fit dark:text-text-dark"
+            class="text-sm text-text-muted font-medium w-fit dark:text-text-dark"
             >Password</label
           >
           <div
@@ -67,13 +67,14 @@
             <i class="fa-solid fa-lock absolute left-3 text-gray-400"></i>
             <input
               type="password"
-              class="w-full p-2 pl-9 text-xs bg-background placeholder:text-lg placeholder:font-bold outline-none rounded-lg focus:shadow-input"
+              class="w-full p-2.5 pl-9 text-sm bg-background placeholder:text-lg placeholder:font-bold outline-none rounded-lg focus:shadow-input"
               id="password"
               placeholder="........."
             />
           </div>
         </div>
         <button
+          id="login-btn"
           type="submit"
           class="bg-primary-600 text-white py-3 text-sm rounded-lg shadow-input hover:bg-primary transition-all duration-300 cursor-pointer flex justify-center items-center gap-2"
         >

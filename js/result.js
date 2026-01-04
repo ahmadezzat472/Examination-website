@@ -1,3 +1,18 @@
+//** _________________________________ dark mode  _________________________________
+
+// Initialize theme on page load
+const savedTheme = localStorage.getItem("theme");
+const html = document.documentElement;
+
+if (
+  savedTheme === "dark" ||
+  (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)
+) {
+  html.classList.add("dark");
+} else {
+  html.classList.remove("dark");
+}
+
 //** get course name and level from url */
 const searchParams = window.location.search;
 const params = new URLSearchParams(searchParams);

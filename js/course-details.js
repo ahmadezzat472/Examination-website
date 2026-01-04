@@ -14,7 +14,6 @@ logoutBtn.addEventListener("click", function () {
   `;
 
   setTimeout(() => {
-    // Remove auth data
     localStorage.removeItem("markedQuestions");
     localStorage.removeItem("answeredQuestions");
     localStorage.removeItem("currentUser");
@@ -25,7 +24,6 @@ logoutBtn.addEventListener("click", function () {
 });
 
 //** _________________________________ dark mode  _________________________________
-// Initialize theme on page load
 const savedTheme = localStorage.getItem("theme");
 const html = document.documentElement;
 
