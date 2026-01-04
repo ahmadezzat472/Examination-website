@@ -102,11 +102,13 @@ categories.forEach(function (category) {
         var totalQuestions = course[1].easy.length;
         var card = document.createElement("div");
         card.className =
-          "shadow-card rounded-xl w-64 p-5 bg-surface dark:bg-surface-dark flex flex-col gap-4";
+          "shadow-card rounded-xl p-5 bg-surface dark:bg-surface-dark flex flex-col gap-4";
         card.innerHTML = `
-          <div class="w-12 bg-gradient-to-r from-blue-400 to-blue-800 rounded-lg p-2 shadow-md shadow-blue-300">
-          <img src="${course[1].imageSrc}" alt="${course[1].name}">
-        </div>
+          <div class="w-full overflow-hidden bg-gradient-to-r from-blue-400 to-blue-800 dark:from-blue-300 dark:to-blue-800 rounded-lg p-2 shadow-md shadow-blue-300 dark:shadow-blue-500/50">
+              <img class="w-1/2 h-full m-auto" src="${
+                course[1].imageSrc
+              }" alt="${course[1].name}">
+            </div>
   
         <div class="flex flex-col gap-2">
           <p class="font-bold dark:text-text-dark">${course[1].name}</p>
@@ -147,11 +149,13 @@ categories.forEach(function (category) {
         var totalQuestions = course[1].easy.length;
         var card = document.createElement("div");
         card.className =
-          "shadow-card rounded-xl w-64 p-5 bg-surface dark:bg-surface-dark flex flex-col gap-4";
+          "shadow-card rounded-xl p-5 bg-surface dark:bg-surface-dark flex flex-col gap-4";
         card.innerHTML = `
-            <div class="w-12 bg-gradient-to-r from-blue-400 to-blue-800 rounded-lg p-2 shadow-md shadow-blue-300">
-            <img src="${course[1].imageSrc}" alt="${course[1].name}">
-          </div>
+          <div class="w-full overflow-hidden bg-gradient-to-r from-blue-400 to-blue-800 dark:from-blue-300 dark:to-blue-800 rounded-lg p-2 shadow-md shadow-blue-300 dark:shadow-blue-500/50">
+              <img class="w-1/2 h-full m-auto" src="${
+                course[1].imageSrc
+              }" alt="${course[1].name}">
+            </div>
     
           <div class="flex flex-col gap-2">
             <p class="font-bold dark:text-text-dark">${course[1].name}</p>
@@ -194,11 +198,13 @@ document.addEventListener("DOMContentLoaded", function () {
     var totalQuestions = course[1].easy.length;
     var card = document.createElement("div");
     card.className =
-      "shadow-card rounded-xl w-64 p-5 bg-surface dark:bg-surface-dark flex flex-col gap-4";
+      "shadow-card rounded-xl p-5 bg-surface dark:bg-surface-dark flex flex-col gap-4";
     card.innerHTML = `
-            <div class="w-12 bg-gradient-to-r from-blue-400 to-blue-800 rounded-lg p-2 shadow-md shadow-blue-300">
-        <img src="${course[1].imageSrc}" alt="${course[1].name}">
-      </div>
+          <div class="w-full overflow-hidden bg-gradient-to-r from-blue-400 to-blue-800 dark:from-blue-300 dark:to-blue-800 rounded-lg p-2 shadow-md shadow-blue-300 dark:shadow-blue-500/50">
+              <img class="w-1/2 h-full m-auto" src="${
+                course[1].imageSrc
+              }" alt="${course[1].name}">
+            </div>
 
       <div class="flex flex-col gap-2">
         <p class="font-bold dark:text-text-dark">${course[1].name}</p>
