@@ -1,10 +1,12 @@
+// FullscreenExamGuard.init();
+
 //** _________________________________ get courses _________________________________
 
 import { courses } from "./data.js";
 
 //** _________________________________ dark mode  _________________________________
 
-// Initialize theme on page load
+//** Initialize theme on page load
 const savedTheme = localStorage.getItem("theme");
 const html = document.documentElement;
 
@@ -17,7 +19,7 @@ if (
   html.classList.remove("dark");
 }
 
-// Toggle button handler
+//** Toggle button handler
 const darkBtn = document.querySelector("#dark-btn");
 
 darkBtn.addEventListener("click", () => {
@@ -523,12 +525,12 @@ function confirmExamHandler() {
 }
 
 function saveExamDetails() {
+  // FullscreenExamGuard.disable();
   const correctCount = answeredQuestions.filter(
     (a) => String(a.answerIsTrue) === "true"
   ).length;
 
   const grade = Math.round((correctCount / questionsLength) * 10);
-
   const takenSeconds = totalTime - totalSeconds;
   const takenTimeFormatted = formatTime(takenSeconds);
 
@@ -541,6 +543,7 @@ function saveExamDetails() {
     correct: correctCount,
     total: questionsLength,
     timeTaken: takenTimeFormatted,
+    // fullscreenExits: FullscreenExamGuard.getExitCount(),
   };
 
   const completeCourse = {

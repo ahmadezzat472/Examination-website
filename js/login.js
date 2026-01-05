@@ -49,6 +49,7 @@ function validateLogin(e) {
         lName: users[userFound].lName,
         email: users[userFound].email,
         CompletedCourses: users[userFound].CompletedCourses,
+        password: users[userFound].password,
       };
 
       statusMessage.classList.remove("text-danger");
@@ -78,5 +79,3 @@ if (
 } else {
   html.classList.remove("dark");
 }
-
-
