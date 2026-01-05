@@ -124,10 +124,12 @@ var FullscreenExamGuard = (function () {
     }
   }
 
+  
+
   //** Initialize fullscreen guard
   function init() {
     //** Show initial prompt
-    // showInitialPrompt();
+    showInitialPrompt();
 
     //** Listen for fullscreen changes
     document.addEventListener("fullscreenchange", handleFullscreenChange);
@@ -156,10 +158,10 @@ var FullscreenExamGuard = (function () {
     var overlay = document.createElement("div");
     overlay.id = "fullscreen-initial-overlay";
     overlay.className =
-      "fixed inset-0 z-[100] bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center";
+      "fixed inset-0 z-[100] bg-background flex items-center justify-center";
     overlay.innerHTML =
-      '<div class="bg-white rounded-2xl p-8 max-w-lg text-center shadow-2xl">' +
-      '<i class="fa-solid fa-shield-halved text-6xl mb-4 text-blue-600"></i>' +
+      '<div class="bg-surface rounded-2xl p-8 max-w-lg text-center shadow-2xl">' +
+      '<i class="fa-solid fa-shield-halved text-6xl mb-4 text-primary"></i>' +
       '<h2 class="text-3xl font-bold mb-4 text-gray-800">Exam Security Notice</h2>' +
       '<div class="text-left mb-6 space-y-3 text-gray-700">' +
       '<p class="flex items-start gap-2">' +
@@ -185,7 +187,7 @@ var FullscreenExamGuard = (function () {
       "<strong>Note:</strong> Press ESC to exit fullscreen anytime, but use it wisely!" +
       "</p>" +
       "</div>" +
-      '<button id="start-exam-fullscreen-btn" class="w-full bg-blue-600 text-white px-8 py-4 rounded-lg text-xl font-bold hover:bg-blue-700 transition-all shadow-lg">' +
+      '<button id="start-exam-fullscreen-btn" class="w-full bg-primary-600 text-white px-8 py-4 rounded-lg text-xl font-bold hover:bg-primary-800 transition-all shadow-lg">' +
       '<i class="fa-solid fa-expand mr-2"></i>Start Exam in Fullscreen' +
       "</button>" +
       "</div>";

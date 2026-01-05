@@ -1,4 +1,4 @@
-// FullscreenExamGuard.init();
+FullscreenExamGuard.init();
 
 //** _________________________________ get courses _________________________________
 
@@ -525,7 +525,7 @@ function confirmExamHandler() {
 }
 
 function saveExamDetails() {
-  // FullscreenExamGuard.disable();
+  FullscreenExamGuard.disable();
   const correctCount = answeredQuestions.filter(
     (a) => String(a.answerIsTrue) === "true"
   ).length;
@@ -543,7 +543,7 @@ function saveExamDetails() {
     correct: correctCount,
     total: questionsLength,
     timeTaken: takenTimeFormatted,
-    // fullscreenExits: FullscreenExamGuard.getExitCount(),
+    fullscreenExits: FullscreenExamGuard.getExitCount(),
   };
 
   const completeCourse = {

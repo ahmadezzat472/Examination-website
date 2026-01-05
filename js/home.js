@@ -123,11 +123,11 @@ categories.forEach(function (category) {
             <div class="text-xs text-muted dark:text-muted-dark flex gap-3">
               <div>
                 <i class="fa-regular fa-clock"></i>
-                <span>${totalQuestions * 2}m</span>
+                <span>${totalQuestions}m</span>
               </div>
               <div>
                 <i class="fa-solid fa-circle-question"></i>
-                <span>${totalQuestions} Qs</span>
+                <span>${totalQuestions}Qs</span>
               </div>
             </div>
   
@@ -170,11 +170,11 @@ categories.forEach(function (category) {
               <div class="text-xs text-muted dark:text-muted-dark flex gap-3">
                 <div>
                   <i class="fa-regular fa-clock"></i>
-                  <span>${totalQuestions * 2}m</span>
+                  <span>${totalQuestions}m</span>
                 </div>
                 <div>
                   <i class="fa-solid fa-circle-question"></i>
-                  <span>${totalQuestions} Qs</span>
+                  <span>${totalQuestions}Qs</span>
                 </div>
               </div>
     
@@ -219,11 +219,11 @@ document.addEventListener("DOMContentLoaded", function () {
           <div class="text-xs text-muted dark:text-muted-dark flex gap-3">
             <div>
               <i class="fa-regular fa-clock"></i>
-              <span>${totalQuestions * 2}m</span>
+              <span>${totalQuestions}m</span>
             </div>
             <div>
               <i class="fa-solid fa-circle-question"></i>
-              <span>${totalQuestions} Qs</span>
+              <span>${totalQuestions}Qs</span>
             </div>
           </div>
 
