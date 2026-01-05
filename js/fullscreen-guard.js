@@ -108,13 +108,13 @@ var FullscreenExamGuard = (function () {
         showFinalWarning();
 
         setTimeout(function () {
-          if (typeof autoSubmitExam === "function") {
-            autoSubmitExam("Too many fullscreen exits");
-          } else if (typeof confirmExamHandler === "function") {
-            confirmExamHandler();
-          } else {
-            window.location.href = "/pages/result.html";
-          }
+          // if (typeof autoSubmitExam === "function") {
+          //   autoSubmitExam("Too many fullscreen exits");
+          // } else if (typeof confirmExamHandler === "function") {
+          confirmExamHandler();
+          // } else {
+          window.location.href = "/pages/result.html";
+          // }
         }, 3000);
       } else {
         //** Show warning
@@ -123,8 +123,6 @@ var FullscreenExamGuard = (function () {
       }
     }
   }
-
-  
 
   //** Initialize fullscreen guard
   function init() {

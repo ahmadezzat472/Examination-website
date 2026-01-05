@@ -1,5 +1,7 @@
 FullscreenExamGuard.init();
 
+var btnStart = document.querySelector("#start-exam-fullscreen-btn");
+
 //** _________________________________ get courses _________________________________
 
 import { courses } from "./data.js";
@@ -124,7 +126,11 @@ const timerBorder = document.querySelector(".timer-border");
 const totalTime = 10 * 60; // 30 minutes
 let totalSeconds = 10 * 60; // 30 minutes
 
-const timer = setInterval(timeDown, 1000);
+if (btnStart) {
+  btnStart.addEventListener("click", function () {
+    var timer = setInterval(timeDown, 1000);
+  });
+}
 
 function timeDown() {
   //**  get the minutes and remaining seconds from the minutes
@@ -515,7 +521,6 @@ function closeDialog() {
 
 let users = JSON.parse(localStorage.getItem("users")) || {};
 function confirmExamHandler() {
-  // Unlock the exam page before navigating
   window.unlockExam();
 
   saveExamDetails();
@@ -523,6 +528,7 @@ function confirmExamHandler() {
   finishOverlay.classList.replace("flex", "hidden");
   location.replace("/pages/result.html");
 }
+window.confirmExamHandler = confirmExamHandler;
 
 function saveExamDetails() {
   FullscreenExamGuard.disable();
